@@ -14,19 +14,22 @@ export default function HomePage() {
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
+        {/* Logo with soft backdrop */}
         <motion.div 
           className="flex justify-center mb-8"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          <Image 
-            src="/logo.png" 
-            alt="Montebay Logo" 
-            width={300} 
-            height={300} 
-            priority
-          />
+          <div className="bg-white shadow-xl rounded-full p-4">
+            <Image 
+              src="/logo.png" 
+              alt="Montebay Logo" 
+              width={280} 
+              height={280} 
+              priority
+            />
+          </div>
         </motion.div>
 
         <h1 className="text-4xl md:text-5xl font-extrabold text-blue-700 mb-6 tracking-tight uppercase">
