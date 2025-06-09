@@ -23,8 +23,8 @@ export default function HomePage() {
           <Image 
             src="/logo.png" 
             alt="Montebay Logo" 
-            width={500} 
-            height={500} 
+            width={400} 
+            height={400} 
             priority
           />
         </motion.div>
