@@ -15,22 +15,24 @@ export default function HomePage() {
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         {/* Logo with soft backdrop */}
-        <motion.div 
-          className="flex justify-center mb-8"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          <div className="bg-white shadow-xl rounded-full p-4">
-            <Image 
-              src="/logo.png" 
-              alt="Montebay Logo" 
-              width={280} 
-              height={280} 
-              priority
-            />
-          </div>
-        </motion.div>
+     <motion.div 
+  className="relative flex justify-center mb-8"
+  initial={{ scale: 0.8, opacity: 0 }}
+  animate={{ scale: 1, opacity: 1 }}
+  transition={{ duration: 0.8, ease: 'easeOut' }}
+>
+  {/* Subtle radial gradient behind logo */}
+  <div className="absolute w-[280px] h-[280px] bg-gradient-to-br from-black/10 via-gray-700/10 to-transparent rounded-full blur-2xl z-[-1]"></div>
+  
+  <Image 
+    src="/logo.png" 
+    alt="Montebay Logo" 
+    width={260} 
+    height={260} 
+    priority
+  />
+</motion.div>
+
 
         <h1 className="text-4xl md:text-5xl font-extrabold text-blue-700 mb-6 tracking-tight uppercase">
           Innovation for what’s next.
