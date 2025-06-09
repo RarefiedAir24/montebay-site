@@ -7,13 +7,18 @@ export const metadata = {
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-gray-100 text-gray-900 px-6 py-20">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-gray-100 text-gray-900 px-6 py-20 relative overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <div className="absolute -top-24 -left-40 w-96 h-96 bg-blue-200 rounded-full filter blur-3xl opacity-30"></div>
+        <div className="absolute -bottom-32 right-0 w-96 h-96 bg-purple-200 rounded-full filter blur-2xl opacity-30"></div>
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-6xl font-extrabold bg-gradient-to-r from-sky-700 to-blue-500 bg-clip-text text-transparent drop-shadow mb-4">
             What We Offer
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
             Montebay delivers quiet innovation through audits, tools, and focused product development.
           </p>
         </div>
@@ -63,4 +68,5 @@ export default function ServicesPage() {
     </div>
   );
 }
+
 
