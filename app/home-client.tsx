@@ -4,11 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-export const metadata = {
-  title: 'Montebay | Innovation for what’s next',
-  description: 'Montebay builds digital tools, audits, and apps — quietly and purposefully.',
-};
-
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-gray-100 text-gray-900 px-6 py-24 relative overflow-hidden">
@@ -34,17 +29,18 @@ export default function HomePage() {
           />
         </motion.div>
 
-        <h1 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-sky-700 to-blue-500 bg-clip-text text-transparent mb-6">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-blue-700 mb-6 tracking-tight">
           Innovation for what’s next.
         </h1>
-        <p className="text-xl text-gray-700 max-w-xl mx-auto mb-8">
+        <p className="text-lg text-gray-700 max-w-xl mx-auto mb-10 leading-relaxed">
           Montebay builds streamlined digital tools, audits, and apps — quietly and purposefully.
         </p>
 
-        <Link href="/services" className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold px-6 py-3 rounded-full shadow transition">
+        <Link href="/services" className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold px-6 py-3 rounded-full shadow-lg transition">
           Explore Our Services
         </Link>
       </div>
     </div>
   );
 }
+
