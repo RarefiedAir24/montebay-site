@@ -46,5 +46,102 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
         }
     });
+    
+    // Contact form handling
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Basic validation
+            if (!name || !email || !subject || !message) {
+                showFormMessage('Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showFormMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // TODO: Replace with your form submission endpoint
+            // For now, simulate form submission
+            // You can integrate with services like:
+            // - Formspree: https://formspree.io
+            // - Netlify Forms: add netlify attribute to form
+            // - Your own backend API
+            
+            // Simulate API call (replace with actual submission)
+            setTimeout(() => {
+                // Example: Using Formspree (uncomment and add your Formspree endpoint)
+                /*
+                fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        showFormMessage('Thank you! Your message has been sent successfully.', 'success');
+                        contactForm.reset();
+                    } else {
+                        showFormMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+                    }
+                })
+                .catch(error => {
+                    showFormMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+                })
+                .finally(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+                */
+                
+                // Temporary success message (remove when implementing actual submission)
+                showFormMessage('Thank you! Your message has been received. We\'ll get back to you soon.', 'success');
+                contactForm.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1000);
+        });
+    }
+    
+    function showFormMessage(message, type) {
+        if (formMessage) {
+            formMessage.textContent = message;
+            formMessage.className = 'form-message ' + type;
+            formMessage.style.display = 'block';
+            
+            // Scroll to message
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Auto-hide after 5 seconds for success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 5000);
+            }
+        }
+    }
 });
 
