@@ -1164,6 +1164,40 @@ main {
     font-weight: 600;
 }
 
+.service-note a.service-inline-link {
+    color: #5a8ab0;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.service-note a.service-inline-link:hover {
+    border-bottom-color: #5a8ab0;
+}
+
+.service-cta-link {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.service-link {
+    color: #5a8ab0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.service-link:hover {
+    color: #7ab8e0;
+    transform: translateX(4px);
+}
+
 .service-details {
     margin-top: 1.5rem;
 }
