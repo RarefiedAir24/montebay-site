@@ -28,24 +28,29 @@ function getRiskClass(riskLevel: string): string {
 function getRiskBadgeStyle(riskLevel: string): React.CSSProperties {
   const level = riskLevel.toLowerCase().trim();
   let bgColor = '#6c757d';
+  let bgColorDark = '#5a6268';
   let textColor = '#ffffff';
   
   if ((level.includes('low') && level.includes('medium')) || level === 'low–medium' || level === 'low-medium') {
     bgColor = '#5a8ab0'; // Blue for Low-Medium
+    bgColorDark = '#4a7a9f';
     textColor = '#ffffff';
   } else if (level.includes('high') || level === 'high') {
     bgColor = '#dc3545'; // Red for High
+    bgColorDark = '#c82333';
     textColor = '#ffffff';
   } else if (level.includes('medium') || level === 'medium') {
     bgColor = '#ffc107'; // Yellow for Medium
+    bgColorDark = '#e0a800';
     textColor = '#856404';
   } else if (level.includes('low') || level === 'low') {
     bgColor = '#28a745'; // Green for Low
+    bgColorDark = '#218838';
     textColor = '#ffffff';
   }
   
   return {
-    background: `linear-gradient(135deg, ${bgColor} 0%, ${bgColor}dd 100%)`,
+    background: `linear-gradient(135deg, ${bgColor} 0%, ${bgColorDark} 100%)`,
     color: textColor,
     border: `1px solid ${bgColor}4d`,
     display: 'inline-block',
@@ -57,7 +62,7 @@ function getRiskBadgeStyle(riskLevel: string): React.CSSProperties {
     letterSpacing: '0.05em',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.15)',
     whiteSpace: 'nowrap' as const,
-  };
+  } as React.CSSProperties;
 }
 
 export default function PriorityOverview({ items }: PriorityOverviewProps) {
