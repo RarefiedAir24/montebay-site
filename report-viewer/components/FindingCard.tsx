@@ -7,6 +7,14 @@ interface FindingCardProps {
   finding: Finding;
 }
 
+function getRiskClass(riskLevel: string): string {
+  const level = riskLevel.toLowerCase();
+  if (level.includes('high')) return 'high';
+  if (level.includes('medium')) return 'medium';
+  if (level.includes('low')) return 'low-medium';
+  return 'low';
+}
+
 export default function FindingCard({ finding }: FindingCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -17,12 +25,14 @@ export default function FindingCard({ finding }: FindingCardProps) {
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex-1">
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-center gap-3 mb-2 flex-wrap">
             <h3 className="text-lg font-semibold text-[var(--montebay-navy)]">
               {finding.title}
             </h3>
-            <span className="text-sm text-gray-500">{finding.category}</span>
-            <span className="risk-badge">{finding.riskLevel}</span>
+            <span className="text-sm text-gray-500 px-2 py-1 bg-gray-100 rounded">{finding.category}</span>
+            <span className={`risk-badge risk-badge-${getRiskClass(finding.riskLevel)}`}>
+              {finding.riskLevel}
+            </span>
           </div>
           <p className="text-gray-700">{finding.summary}</p>
         </div>

@@ -6,6 +6,14 @@ interface PriorityOverviewProps {
   items: PriorityItem[];
 }
 
+function getRiskClass(riskLevel: string): string {
+  const level = riskLevel.toLowerCase();
+  if (level.includes('high')) return 'high';
+  if (level.includes('medium')) return 'medium';
+  if (level.includes('low')) return 'low-medium';
+  return 'low';
+}
+
 export default function PriorityOverview({ items }: PriorityOverviewProps) {
   return (
     <div className="section-spacing">
@@ -27,7 +35,9 @@ export default function PriorityOverview({ items }: PriorityOverviewProps) {
               <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
                 <td className="py-3 px-4 text-gray-800">{item.area}</td>
                 <td className="py-3 px-4">
-                  <span className="risk-badge">{item.riskLevel}</span>
+                  <span className={`risk-badge risk-badge-${getRiskClass(item.riskLevel)}`}>
+                    {item.riskLevel}
+                  </span>
                 </td>
                 <td className="py-3 px-4 text-gray-700">{item.summary}</td>
                 <td className="py-3 px-4 text-gray-600">{item.priority}</td>

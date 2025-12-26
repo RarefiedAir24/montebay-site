@@ -43,6 +43,25 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.3;
   margin-top: 0;
+  color: var(--montebay-navy);
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #495057;
 }
 
 /* Generous spacing */
@@ -52,45 +71,83 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Subtle background tint */
 .executive-summary-bg {
-  background-color: #fafbfc;
+  background: linear-gradient(135deg, #fafbfc 0%, #f8f9fa 100%);
   padding: 2.5rem;
-  border-radius: 4px;
+  border-radius: 8px;
+  border-left: 4px solid var(--montebay-blue);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* Risk badges - neutral colors */
+/* Risk badges - color coded */
 .risk-badge {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  background-color: #e8eaed;
-  color: #3c4043;
+  padding: 0.35rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.risk-badge-high {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: #ffffff;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.risk-badge-medium {
+  background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+  color: #856404;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.risk-badge-low-medium {
+  background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+  color: #ffffff;
+  border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+.risk-badge-low {
+  background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+  color: #ffffff;
+  border: 1px solid rgba(40, 167, 69, 0.3);
 }
 
 /* Finding card */
 .finding-card {
   border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  transition: all 0.3s ease;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .finding-card:hover {
-  border-color: #c0c0c0;
+  border-color: #5a8ab0;
+  box-shadow: 0 4px 12px rgba(90, 138, 176, 0.15);
+  transform: translateY(-2px);
 }
 
 .finding-card-header {
-  padding: 1.25rem;
+  padding: 1.5rem;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  transition: background-color 0.2s ease;
+}
+
+.finding-card-header:hover {
+  background-color: #fafbfc;
 }
 
 .finding-card-content {
-  padding: 0 1.25rem 1.25rem 1.25rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
   border-top: 1px solid #f0f0f0;
+  background: #fafbfc;
+  border-radius: 0 0 8px 8px;
 }
 
 /* Print styles */
