@@ -1208,9 +1208,24 @@ main {
     text-align: center;
 }
 
+.service-cta-prompt {
+    font-size: 1.125rem;
+    color: #1a2a4a;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+}
+
 .service-cta-primary .cta-button {
     display: inline-block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.service-cta-subtext {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0.75rem 0 0.5rem 0;
+    line-height: 1.6;
 }
 
 .service-trust-note {
@@ -1254,6 +1269,154 @@ main {
     color: #5a8ab0;
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+/* Audit Findings Section */
+.audit-findings-section {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.audit-findings-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a2a4a;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.audit-findings-intro {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+}
+
+.audit-findings-intro-secondary {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+}
+
+.audit-findings-tagline {
+    font-size: 1rem;
+    color: #1a2a4a;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.audit-findings-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.finding-card {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.finding-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-color: #d0d7de;
+}
+
+.finding-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1a2a4a;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.finding-risk-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: auto;
+}
+
+.finding-risk-high {
+    background: rgba(220, 53, 69, 0.1);
+    color: #8b2635;
+}
+
+.finding-risk-medium {
+    background: rgba(255, 193, 7, 0.1);
+    color: #856404;
+}
+
+.finding-risk-low-medium {
+    background: rgba(108, 117, 125, 0.1);
+    color: #495057;
+}
+
+.finding-content {
+    margin-top: 1rem;
+}
+
+.finding-summary,
+.finding-recommendation {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.finding-summary:last-child,
+.finding-recommendation:last-child {
+    margin-bottom: 0;
+}
+
+.finding-summary strong,
+.finding-recommendation strong {
+    color: #1a2a4a;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments for findings */
+@media (max-width: 768px) {
+    .audit-findings-section {
+        margin-top: 2rem;
+        padding-top: 2rem;
+    }
+    
+    .audit-findings-header {
+        font-size: 1.25rem;
+    }
+    
+    .finding-card {
+        padding: 1.5rem;
+    }
+    
+    .finding-title {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .finding-risk-badge {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
 }
 
 .services-how {

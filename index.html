@@ -144,9 +144,58 @@
                                 <li>No meetings, no ongoing obligation</li>
                             </ul>
                         </div>
+                        
+                        <!-- What the Findings Look Like Section -->
+                        <div class="audit-findings-section">
+                            <h4 class="audit-findings-header">What the Findings Look Like</h4>
+                            <p class="audit-findings-intro">Every Silent AWS Audit delivers clear, written findings prioritized by risk and impact — not by raw issue count or automated scan output.</p>
+                            <p class="audit-findings-intro-secondary">The examples below are representative of the insights included in a typical audit. All findings are fully anonymized, written in plain language, and focused on practical decisions leadership teams can act on.</p>
+                            <p class="audit-findings-tagline">No dashboards. No noise. Just clarity.</p>
+                            
+                            <div class="audit-findings-examples">
+                                <div class="finding-card">
+                                    <h5 class="finding-title">Overly Permissive IAM Roles</h5>
+                                    <span class="finding-risk-badge finding-risk-high">High</span>
+                                    <div class="finding-content">
+                                        <p class="finding-summary"><strong>Summary</strong><br>Several IAM roles allow broader access than required, increasing blast radius without providing operational benefit.</p>
+                                        <p class="finding-recommendation"><strong>Recommendation</strong><br>Scope permissions to actual usage and separate administrative access from application roles to reduce risk without slowing teams down.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="finding-card">
+                                    <h5 class="finding-title">Underutilized Compute Resources</h5>
+                                    <span class="finding-risk-badge finding-risk-medium">Medium</span>
+                                    <div class="finding-content">
+                                        <p class="finding-summary"><strong>Summary</strong><br>Multiple compute resources consistently operate well below expected utilization, contributing to unnecessary monthly spend.</p>
+                                        <p class="finding-recommendation"><strong>Recommendation</strong><br>Rightsize or consolidate affected resources to reduce baseline cost while maintaining current performance.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="finding-card">
+                                    <h5 class="finding-title">Single Points of Failure in Critical Paths</h5>
+                                    <span class="finding-risk-badge finding-risk-medium">Medium</span>
+                                    <div class="finding-content">
+                                        <p class="finding-summary"><strong>Summary</strong><br>Key components rely on single resources without redundancy, increasing outage risk during failures or maintenance events.</p>
+                                        <p class="finding-recommendation"><strong>Recommendation</strong><br>Introduce minimal redundancy in critical paths to improve resilience without adding architectural complexity.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="finding-card">
+                                    <h5 class="finding-title">Accumulated Architectural Complexity</h5>
+                                    <span class="finding-risk-badge finding-risk-low-medium">Low–Medium</span>
+                                    <div class="finding-content">
+                                        <p class="finding-summary"><strong>Summary</strong><br>Legacy components remain from earlier iterations, increasing cognitive overhead and operational friction.</p>
+                                        <p class="finding-recommendation"><strong>Recommendation</strong><br>Retire unused components and document the current-state architecture to simplify ongoing maintenance and decision-making.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <p class="service-note">This is the fastest way to get an expert assessment of your AWS environment before deciding on next steps.</p>
                         <div class="service-cta-primary">
+                            <p class="service-cta-prompt">Ready for a clear, senior review of your AWS environment?</p>
                             <a href="#silent-aws-audit-form" class="cta-button cta-primary">Request a Silent AWS Audit</a>
+                            <p class="service-cta-subtext">No meetings. Read-only access. Delivered in 5–7 business days.</p>
                             <p class="service-trust-note">Performed by a senior AWS architect. No sales calls. No obligation.</p>
                         </div>
                     </div>
