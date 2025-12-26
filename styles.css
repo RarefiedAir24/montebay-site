@@ -285,6 +285,7 @@ body {
     margin-bottom: 1.5rem;
     line-height: 1.1;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.02em;
 }
 
 .hero-title-line {
@@ -830,8 +831,34 @@ main {
 .product-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 1.5rem;
     margin-bottom: 1.5rem;
+}
+
+.product-icon-wrapper {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover .product-icon-wrapper {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(90, 138, 176, 0.2);
+}
+
+.product-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .product-name {
@@ -841,11 +868,7 @@ main {
     margin: 0;
     line-height: 1.3;
     letter-spacing: -0.01em;
-}
-
-.product-icon {
-    font-size: 3rem;
-    opacity: 0.8;
+    flex: 1;
 }
 
 .product-description {
@@ -915,8 +938,10 @@ main {
         font-size: 1.75rem;
     }
     
-    .product-icon {
-        font-size: 2.5rem;
+    .product-icon-wrapper {
+        width: 70px;
+        height: 70px;
+        padding: 10px;
     }
     
     .product-description {
@@ -959,8 +984,10 @@ main {
         font-size: 1.5rem;
     }
     
-    .product-icon {
-        font-size: 2rem;
+    .product-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        padding: 8px;
     }
 }
 
