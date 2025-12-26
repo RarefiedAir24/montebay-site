@@ -346,24 +346,38 @@ document.addEventListener('DOMContentLoaded', function() {
             emailBody += '=== DELIVERY ACKNOWLEDGMENT ===\n';
             emailBody += `✓ ${formObject['delivery-acknowledgment']}\n`;
             
-            // Send email using mailto
-            const emailSubject = encodeURIComponent('Silent AWS Audit Request');
-            const emailBodyEncoded = encodeURIComponent(emailBody);
-            const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBodyEncoded}`;
+            // Send to AWS Lambda via API Gateway
+            const API_ENDPOINT = 'https://bisrhls8q9.execute-api.us-east-1.amazonaws.com/prod/montebay/silent-aws-audit';
             
-            // Open email client
-            window.location.href = mailtoLink;
-            
-            // Show success message
-            showAuditFormMessage('Request received. If this looks like a good fit, you\'ll receive next steps and read-only access instructions within 1–2 business days. No meetings are required unless you request one.', 'success');
-            auditForm.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-            
-            // Scroll to success message
-            setTimeout(() => {
-                auditFormMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 100);
+            fetch(API_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formObject)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showAuditFormMessage(data.message, 'success');
+                    auditForm.reset();
+                } else {
+                    showAuditFormMessage(data.error || 'Sorry, there was an error submitting your request. Please try again or email contact@montebay.io directly.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAuditFormMessage('Sorry, there was an error submitting your request. Please try again or email contact@montebay.io directly.', 'error');
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Scroll to message
+                setTimeout(() => {
+                    auditFormMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            });
         });
     }
     
