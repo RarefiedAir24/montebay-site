@@ -352,46 +352,74 @@ document.addEventListener('DOMContentLoaded', function() {
             // Send to AWS Lambda via API Gateway
             const API_ENDPOINT = 'https://bisrhls8q9.execute-api.us-east-2.amazonaws.com/prod/montebay/silent-aws-audit';
             
+            // Store emailBody for fallback
+            const emailBodyForFallback = emailBody;
+            
             fetch(API_ENDPOINT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formObject)
+                body: JSON.stringify(formObject),
+                mode: 'cors' // Explicitly request CORS
             })
             .then(async response => {
-                console.log('Response status:', response.status);
-                console.log('Response headers:', response.headers);
+                // Check if response is ok before trying to parse
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(`Server error: ${response.status} - ${text.substring(0, 100)}`);
+                }
                 
                 const text = await response.text();
-                console.log('Response text:', text);
-                
                 let data;
                 try {
                     data = JSON.parse(text);
                 } catch (e) {
-                    console.error('Failed to parse JSON:', e);
                     throw new Error(`Server returned non-JSON response: ${text.substring(0, 100)}`);
-                }
-                
-                if (!response.ok) {
-                    throw new Error(data.error || `Server error: ${response.status}`);
                 }
                 
                 return data;
             })
             .then(data => {
                 if (data.success) {
-                    showAuditFormMessage(data.message, 'success');
+                    showAuditFormMessage(data.message || 'Thank you! Your audit request has been submitted successfully. We\'ll be in touch within 1-2 business days.', 'success');
                     auditForm.reset();
                 } else {
-                    showAuditFormMessage(data.error || 'Sorry, there was an error submitting your request. Please try again or email contact@montebay.io directly.', 'error');
+                    throw new Error(data.error || 'Request was not successful');
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                console.error('Error details:', error.message);
-                showAuditFormMessage('Sorry, there was an error submitting your request. Please try again or email contact@montebay.io directly.', 'error');
+                console.error('API Error:', error);
+                
+                // If CORS error or network failure, fall back to email
+                if (error.message.includes('Failed to fetch') || 
+                    error.message.includes('CORS') || 
+                    error.name === 'TypeError') {
+                    
+                    // Fallback to email submission
+                    const emailSubject = encodeURIComponent('Silent AWS Audit Request');
+                    const emailBodyEncoded = encodeURIComponent(emailBodyForFallback);
+                    const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBodyEncoded}`;
+                    
+                    // Show message with email option
+                    showAuditFormMessage('Unable to submit online due to a connection issue. Please email us directly at contact@montebay.io with your audit request details, or click the button below to open your email client.', 'error');
+                    
+                    // Create a button to open email client
+                    setTimeout(() => {
+                        const formMessage = document.getElementById('auditFormMessage');
+                        if (formMessage && !formMessage.querySelector('.email-fallback-btn')) {
+                            const emailButton = document.createElement('a');
+                            emailButton.href = mailtoLink;
+                            emailButton.className = 'cta-button cta-primary email-fallback-btn';
+                            emailButton.style.marginTop = '1rem';
+                            emailButton.style.display = 'inline-block';
+                            emailButton.textContent = 'Open Email Client';
+                            formMessage.appendChild(emailButton);
+                        }
+                    }, 100);
+                } else {
+                    showAuditFormMessage('Sorry, there was an error submitting your request. Please email contact@montebay.io directly with your audit request details.', 'error');
+                }
             })
             .finally(() => {
                 submitBtn.textContent = originalText;
