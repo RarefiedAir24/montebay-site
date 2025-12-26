@@ -1,7 +1,14 @@
-import { redirect } from 'next/navigation';
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
-  redirect('/silent-aws-audit/sample-report');
-}
+  const router = useRouter();
 
-export const dynamic = 'force-dynamic';
+  useEffect(() => {
+    router.replace('/silent-aws-audit/sample-report');
+  }, [router]);
+
+  return null;
+}
