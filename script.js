@@ -81,48 +81,55 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
             
-            // TODO: Replace with your form submission endpoint
-            // For now, simulate form submission
-            // You can integrate with services like:
-            // - Formspree: https://formspree.io
-            // - Netlify Forms: add netlify attribute to form
-            // - Your own backend API
+            // Send email using mailto (opens user's email client)
+            // For production, integrate with Formspree, EmailJS, or your backend API
+            const emailSubject = encodeURIComponent(subject);
+            const emailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBody}`;
             
-            // Simulate API call (replace with actual submission)
-            setTimeout(() => {
-                // Example: Using Formspree (uncomment and add your Formspree endpoint)
-                /*
-                fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            showFormMessage('Your email client should open. If not, please email us at contact@montebay.io', 'success');
+            contactForm.reset();
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            
+            // Alternative: Use Formspree (uncomment and add your Formspree endpoint)
+            /*
+            fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    subject: subject,
+                    message: message,
+                    _replyto: email,
+                    _to: 'contact@montebay.io'
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.ok) {
-                        showFormMessage('Thank you! Your message has been sent successfully.', 'success');
-                        contactForm.reset();
-                    } else {
-                        showFormMessage('Sorry, there was an error sending your message. Please try again.', 'error');
-                    }
-                })
-                .catch(error => {
-                    showFormMessage('Sorry, there was an error sending your message. Please try again.', 'error');
-                })
-                .finally(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                });
-                */
-                
-                // Temporary success message (remove when implementing actual submission)
-                showFormMessage('Thank you! Your message has been received. We\'ll get back to you soon.', 'success');
-                contactForm.reset();
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok || response.ok) {
+                    showFormMessage('Thank you! Your message has been sent to contact@montebay.io. We\'ll get back to you soon.', 'success');
+                    contactForm.reset();
+                } else {
+                    showFormMessage('Sorry, there was an error sending your message. Please try emailing contact@montebay.io directly.', 'error');
+                }
+            })
+            .catch(error => {
+                showFormMessage('Sorry, there was an error sending your message. Please try emailing contact@montebay.io directly.', 'error');
+            })
+            .finally(() => {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-            }, 1000);
+            });
+            */
         });
     }
     
