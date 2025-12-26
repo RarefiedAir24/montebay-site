@@ -268,5 +268,118 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize smooth scroll
     initSmoothScroll();
+    
+    // Silent AWS Audit Form handling
+    const auditForm = document.getElementById('silentAwsAuditForm');
+    const auditFormMessage = document.getElementById('auditFormMessage');
+    
+    if (auditForm) {
+        auditForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate checkbox groups (at least one required)
+            const concernsCheckboxes = auditForm.querySelectorAll('input[name="audit-concerns"]:checked');
+            if (concernsCheckboxes.length === 0) {
+                showAuditFormMessage('Please select at least one primary concern.', 'error');
+                return;
+            }
+            
+            const confirmationsCheckboxes = auditForm.querySelectorAll('input[name="audit-confirmations"]:checked');
+            if (confirmationsCheckboxes.length !== 3) {
+                showAuditFormMessage('Please confirm all boundary requirements.', 'error');
+                return;
+            }
+            
+            // Get form data
+            const formData = new FormData(auditForm);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                if (formObject[key]) {
+                    // Handle multiple values (checkboxes)
+                    if (Array.isArray(formObject[key])) {
+                        formObject[key].push(value);
+                    } else {
+                        formObject[key] = [formObject[key], value];
+                    }
+                } else {
+                    formObject[key] = value;
+                }
+            });
+            
+            // Show loading state
+            const submitBtn = auditForm.querySelector('.audit-submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Format email body
+            let emailBody = 'SILENT AWS AUDIT REQUEST\n\n';
+            emailBody += '=== CONTACT INFORMATION ===\n';
+            emailBody += `Full Name: ${formObject['full-name']}\n`;
+            emailBody += `Work Email: ${formObject['work-email']}\n`;
+            emailBody += `Company: ${formObject['company-name']}\n`;
+            emailBody += `Role/Title: ${formObject['role-title']}\n\n`;
+            
+            emailBody += '=== AWS ENVIRONMENT ===\n';
+            emailBody += `Environment Type: ${formObject['aws-environment-type']}\n`;
+            emailBody += `Monthly AWS Spend: ${formObject['monthly-aws-spend']}\n\n`;
+            
+            emailBody += '=== AUDIT FOCUS ===\n';
+            const concerns = Array.isArray(formObject['audit-concerns']) ? formObject['audit-concerns'] : [formObject['audit-concerns']];
+            emailBody += `Primary Concerns: ${concerns.join(', ')}\n\n`;
+            
+            emailBody += '=== AUDIT TIER ===\n';
+            emailBody += `Selected Tier: ${formObject['audit-tier']}\n\n`;
+            
+            emailBody += '=== CONFIRMATIONS ===\n';
+            const confirmations = Array.isArray(formObject['audit-confirmations']) ? formObject['audit-confirmations'] : [formObject['audit-confirmations']];
+            confirmations.forEach(conf => {
+                emailBody += `✓ ${conf}\n`;
+            });
+            emailBody += '\n';
+            
+            if (formObject['additional-context']) {
+                emailBody += '=== ADDITIONAL CONTEXT ===\n';
+                emailBody += `${formObject['additional-context']}\n\n`;
+            }
+            
+            emailBody += '=== DELIVERY ACKNOWLEDGMENT ===\n';
+            emailBody += `✓ ${formObject['delivery-acknowledgment']}\n`;
+            
+            // Send email using mailto
+            const emailSubject = encodeURIComponent('Silent AWS Audit Request');
+            const emailBodyEncoded = encodeURIComponent(emailBody);
+            const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBodyEncoded}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            showAuditFormMessage('Request received. If this looks like a good fit, you\'ll receive next steps and read-only access instructions within 1–2 business days. No meetings are required unless you request one.', 'success');
+            auditForm.reset();
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            
+            // Scroll to success message
+            setTimeout(() => {
+                auditFormMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        });
+    }
+    
+    function showAuditFormMessage(message, type) {
+        if (auditFormMessage) {
+            auditFormMessage.textContent = message;
+            auditFormMessage.className = 'form-message ' + type;
+            auditFormMessage.style.display = 'block';
+            
+            // Auto-hide after 10 seconds for success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    auditFormMessage.style.display = 'none';
+                }, 10000);
+            }
+        }
+    }
 });
 
