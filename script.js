@@ -356,7 +356,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(formObject)
             })
-            .then(response => response.json())
+            .then(async response => {
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                
+                const text = await response.text();
+                console.log('Response text:', text);
+                
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    console.error('Failed to parse JSON:', e);
+                    throw new Error(`Server returned non-JSON response: ${text.substring(0, 100)}`);
+                }
+                
+                if (!response.ok) {
+                    throw new Error(data.error || `Server error: ${response.status}`);
+                }
+                
+                return data;
+            })
             .then(data => {
                 if (data.success) {
                     showAuditFormMessage(data.message, 'success');
@@ -367,6 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error:', error);
+                console.error('Error details:', error.message);
                 showAuditFormMessage('Sorry, there was an error submitting your request. Please try again or email contact@montebay.io directly.', 'error');
             })
             .finally(() => {
