@@ -30,12 +30,6 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/silent-aws-audit/(.*)",
-      "destination": "/report-viewer/$1"
-    }
   ]
 }
 
