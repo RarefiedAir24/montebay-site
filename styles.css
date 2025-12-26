@@ -1177,9 +1177,12 @@ main {
 }
 
 .service-cta-link {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid #e9ecef;
+    margin: 1.5rem 0;
+}
+
+.service-cta-secondary {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .service-link {
@@ -1196,6 +1199,26 @@ main {
 .service-link:hover {
     color: #7ab8e0;
     transform: translateX(4px);
+}
+
+.service-cta-primary {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+}
+
+.service-cta-primary .cta-button {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.service-trust-note {
+    font-size: 0.875rem;
+    color: #666;
+    font-style: italic;
+    margin: 0.75rem 0 0 0;
+    line-height: 1.5;
 }
 
 .service-details {
