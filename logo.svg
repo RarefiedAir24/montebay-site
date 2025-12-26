@@ -1,0 +1,26 @@
+<svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="120" fill="#1a2a4a"/>
+  
+  <!-- Water/Waves - bottom two darker blue lines -->
+  <rect x="40" y="95" width="120" height="4" fill="#2a4a6a"/>
+  <rect x="45" y="105" width="110" height="4" fill="#1e3a5a"/>
+  
+  <!-- Water/Waves - top two lighter blue lines -->
+  <rect x="35" y="85" width="130" height="4" fill="#4a7aa0"/>
+  <rect x="30" y="75" width="140" height="4" fill="#5a8ab0"/>
+  
+  <!-- Sun/Moon circle (behind mountains) -->
+  <circle cx="100" cy="50" r="25" fill="white"/>
+  
+  <!-- Mountains -->
+  <!-- Large central peak -->
+  <path d="M 70 60 L 100 20 L 130 60 Z" fill="white"/>
+  
+  <!-- Smaller peak to the right -->
+  <path d="M 130 60 L 155 35 L 180 60 Z" fill="white"/>
+  
+  <!-- Small peak in front of central peak -->
+  <path d="M 85 60 L 100 45 L 115 60 Z" fill="white"/>
+</svg>
+
