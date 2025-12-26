@@ -7,11 +7,12 @@ interface PriorityOverviewProps {
 }
 
 function getRiskClass(riskLevel: string): string {
-  const level = riskLevel.toLowerCase();
+  const level = riskLevel.toLowerCase().trim();
   if (level.includes('high')) return 'high';
-  if (level.includes('medium')) return 'medium';
-  if (level.includes('low')) return 'low-medium';
-  return 'low';
+  if (level === 'medium' || level.includes('medium')) return 'medium';
+  if (level.includes('low-medium') || level.includes('low–medium') || level.includes('low - medium')) return 'low-medium';
+  if (level.includes('low')) return 'low';
+  return 'medium'; // default fallback
 }
 
 export default function PriorityOverview({ items }: PriorityOverviewProps) {

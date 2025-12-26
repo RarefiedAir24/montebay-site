@@ -24,20 +24,26 @@ export default function FindingCard({ finding }: FindingCardProps) {
         className="finding-card-header"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div className="flex-1">
-          <div className="flex items-center gap-3 mb-2 flex-wrap">
-            <h3 className="text-lg font-semibold text-[var(--montebay-navy)]">
-              {finding.title}
-            </h3>
-            <span className="text-sm text-gray-500 px-2 py-1 bg-gray-100 rounded">{finding.category}</span>
-            <span className={`risk-badge risk-badge-${getRiskClass(finding.riskLevel)}`}>
-              {finding.riskLevel}
-            </span>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between gap-4 mb-3">
+            <div className="flex-1 min-w-0">
+              <h3 className="text-xl font-bold text-[var(--montebay-navy)] mb-2 leading-tight">
+                {finding.title}
+              </h3>
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="text-sm font-medium text-gray-600 px-3 py-1 bg-gray-100 rounded-md border border-gray-200">
+                  {finding.category}
+                </span>
+                <span className={`risk-badge risk-badge-${getRiskClass(finding.riskLevel)}`}>
+                  {finding.riskLevel}
+                </span>
+              </div>
+            </div>
+            <div className="flex-shrink-0 text-[var(--montebay-blue)] text-2xl font-light w-10 h-10 flex items-center justify-center rounded-full bg-blue-50 transition-all duration-200 hover:bg-blue-100 cursor-pointer">
+              {isExpanded ? '−' : '+'}
+            </div>
           </div>
-          <p className="text-gray-700">{finding.summary}</p>
-        </div>
-        <div className="ml-4 text-[var(--montebay-blue)] text-2xl font-light w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 transition-all duration-200 hover:bg-blue-100">
-          {isExpanded ? '−' : '+'}
+          <p className="text-gray-700 leading-relaxed text-base">{finding.summary}</p>
         </div>
       </div>
       
