@@ -73,6 +73,14 @@ function initScrollAnimations() {
         item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(item);
     });
+
+    // Observe service cards, how items, and fit sections
+    document.querySelectorAll('.service-card, .how-item, .fit-section, .services-cta').forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(item);
+    });
 }
 
 // Smooth scroll for anchor links
