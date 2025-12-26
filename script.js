@@ -306,6 +306,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
+            // Log form data for debugging
+            console.log('Form data being sent:', formObject);
+            
             // Show loading state
             const submitBtn = auditForm.querySelector('.audit-submit-btn');
             const originalText = submitBtn.textContent;
