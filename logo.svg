@@ -1,26 +1,13 @@
-<svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
-  <rect width="200" height="120" fill="#1a2a4a"/>
+<svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background -->
+  <rect width="200" height="80" fill="white"/>
   
-  <!-- Water/Waves - bottom two darker blue lines -->
-  <rect x="40" y="95" width="120" height="4" fill="#2a4a6a"/>
-  <rect x="45" y="105" width="110" height="4" fill="#1e3a5a"/>
+  <!-- Light blue stripe (top, longest) -->
+  <path d="M 20 50 L 160 50 L 155 55 L 15 55 Z" fill="#5a8ab0"/>
   
-  <!-- Water/Waves - top two lighter blue lines -->
-  <rect x="35" y="85" width="130" height="4" fill="#4a7aa0"/>
-  <rect x="30" y="75" width="140" height="4" fill="#5a8ab0"/>
+  <!-- Medium blue stripe (middle, medium length) -->
+  <path d="M 30 60 L 130 60 L 125 65 L 25 65 Z" fill="#2a4a6a"/>
   
-  <!-- Sun/Moon circle (behind mountains) -->
-  <circle cx="100" cy="50" r="25" fill="white"/>
-  
-  <!-- Mountains -->
-  <!-- Large central peak -->
-  <path d="M 70 60 L 100 20 L 130 60 Z" fill="white"/>
-  
-  <!-- Smaller peak to the right -->
-  <path d="M 130 60 L 155 35 L 180 60 Z" fill="white"/>
-  
-  <!-- Small peak in front of central peak -->
-  <path d="M 85 60 L 100 45 L 115 60 Z" fill="white"/>
+  <!-- Dark blue stripe (bottom, shortest) -->
+  <path d="M 40 70 L 100 70 L 95 75 L 35 75 Z" fill="#1a2a4a"/>
 </svg>
-
