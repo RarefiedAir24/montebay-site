@@ -1,0 +1,148 @@
+{
+  "header": {
+    "title": "Silent AWS Audit",
+    "client": "Confidential",
+    "environment": "AWS · Production",
+    "deliveryMode": "Asynchronous · Read-Only",
+    "auditDate": "December 26, 2025"
+  },
+  "executiveSummary": {
+    "overallAssessment": "This audit reflects a point-in-time review of your AWS environment. The findings are organized by priority and risk level, with actionable recommendations that balance security, cost efficiency, and operational reliability. No critical vulnerabilities were identified, but several areas require attention to reduce risk and optimize spending.",
+    "keyThemes": [
+      "Access controls are broader than necessary, increasing potential blast radius",
+      "Cost inefficiencies stem from underutilized resources and lack of right-sizing",
+      "Reliability risks exist in critical paths due to single points of failure",
+      "Architectural complexity has accumulated organically over time",
+      "Monitoring and alerting coverage is incomplete for production workloads",
+      "Backup and disaster recovery procedures need formalization"
+    ]
+  },
+  "priorityOverview": [
+    {
+      "area": "Identity & Access",
+      "riskLevel": "High",
+      "summary": "Broad IAM permissions increase blast radius",
+      "priority": "Address within 30 days"
+    },
+    {
+      "area": "Cost Optimization",
+      "riskLevel": "Medium",
+      "summary": "Underutilized EC2 instances and unattached EBS volumes",
+      "priority": "Address within 60 days"
+    },
+    {
+      "area": "Reliability",
+      "riskLevel": "Medium",
+      "summary": "Single-AZ RDS instances in production",
+      "priority": "Address within 90 days"
+    },
+    {
+      "area": "Security Groups",
+      "riskLevel": "Low–Medium",
+      "summary": "Overly permissive ingress rules",
+      "priority": "Address within 90 days"
+    },
+    {
+      "area": "Monitoring",
+      "riskLevel": "Low–Medium",
+      "summary": "Incomplete CloudWatch coverage",
+      "priority": "Address within 90 days"
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-001",
+      "title": "Overly Permissive IAM Roles",
+      "category": "Security",
+      "riskLevel": "High",
+      "summary": "Broad permissions increase blast radius without operational benefit.",
+      "observed": "Several IAM roles use wildcard permissions (e.g., s3:*, ec2:*) when specific resource ARNs would suffice. The 'ApplicationServerRole' has full S3 access across all buckets, though it only needs read access to a single bucket for log retrieval.",
+      "whyThisMatters": "If an application using this role is compromised, an attacker gains access to all S3 buckets, including those containing sensitive data. This violates the principle of least privilege and increases the potential impact of a security incident.",
+      "recommendation": "Refactor IAM policies to use specific resource ARNs and minimal required actions. Create separate roles for different application components. Implement regular access reviews to ensure permissions remain aligned with actual needs.",
+      "estimatedEffort": "2-3 days",
+      "businessImpact": "Reduces potential data exposure risk. May require application updates if current broad permissions are being used."
+    },
+    {
+      "id": "finding-002",
+      "title": "Underutilized EC2 Instances",
+      "category": "Cost Optimization",
+      "riskLevel": "Medium",
+      "summary": "Multiple instances running at less than 20% CPU utilization.",
+      "observed": "Five EC2 instances (t3.medium and t3.large) show average CPU utilization below 20% over the past 30 days. These instances are running 24/7 but appear to handle batch workloads that could run on smaller instance types or on a schedule.",
+      "whyThisMatters": "You're paying for compute capacity that isn't being used. Right-sizing these instances could reduce monthly costs by approximately $200-300 without impacting performance.",
+      "recommendation": "Downsize instances to t3.small or t3.micro based on actual usage patterns. Consider using EC2 Auto Scaling or scheduled instances for batch workloads. Monitor for 1-2 weeks after changes to ensure performance remains acceptable.",
+      "estimatedEffort": "1-2 days",
+      "businessImpact": "Reduces monthly AWS costs. Minimal risk if right-sizing is done carefully with monitoring."
+    },
+    {
+      "id": "finding-003",
+      "title": "Single-AZ RDS Instances in Production",
+      "category": "Reliability",
+      "riskLevel": "Medium",
+      "summary": "Production databases lack multi-AZ redundancy.",
+      "observed": "Two RDS instances (PostgreSQL and MySQL) are configured as single-AZ. These databases support customer-facing applications but have no automatic failover capability.",
+      "whyThisMatters": "An Availability Zone outage would result in complete database unavailability, causing application downtime. Recovery time would depend on backup restoration, potentially taking hours.",
+      "recommendation": "Enable Multi-AZ deployment for production RDS instances. This provides automatic failover with minimal downtime (typically under 60 seconds). Plan for a brief maintenance window during the change.",
+      "estimatedEffort": "1 day (mostly waiting for replication)",
+      "businessImpact": "Significantly improves availability. Increases monthly RDS costs by approximately 2x for the Multi-AZ instance."
+    },
+    {
+      "id": "finding-004",
+      "title": "Overly Permissive Security Group Rules",
+      "category": "Security",
+      "riskLevel": "Low–Medium",
+      "summary": "Security groups allow traffic from 0.0.0.0/0 unnecessarily.",
+      "observed": "Three security groups have ingress rules allowing SSH (port 22) or RDP (port 3389) from 0.0.0.0/0. These instances appear to be accessible only from specific office IPs based on application logs.",
+      "whyThisMatters": "Exposing administrative ports to the entire internet increases attack surface. While these instances may not be directly discoverable, they're vulnerable to automated scanning and brute-force attacks.",
+      "recommendation": "Restrict SSH/RDP access to specific IP ranges (office IPs, VPN endpoints). Use AWS Systems Manager Session Manager as an alternative that doesn't require open ports. Implement IP allowlisting at the security group level.",
+      "estimatedEffort": "2-4 hours",
+      "businessImpact": "Reduces attack surface with minimal operational impact. May require VPN setup if remote access is needed."
+    },
+    {
+      "id": "finding-005",
+      "title": "Incomplete CloudWatch Coverage",
+      "category": "Monitoring",
+      "riskLevel": "Low–Medium",
+      "summary": "Several production workloads lack comprehensive monitoring.",
+      "observed": "Three Lambda functions and two ECS services have minimal CloudWatch metrics. Custom application metrics are not being published, making it difficult to detect performance degradation or errors.",
+      "whyThisMatters": "Without adequate monitoring, issues may go undetected until they impact users. Troubleshooting becomes more time-consuming when historical data is unavailable.",
+      "recommendation": "Enable detailed CloudWatch monitoring for all production workloads. Implement custom metrics for business-critical operations. Set up CloudWatch Alarms for error rates and latency thresholds. Consider using AWS X-Ray for distributed tracing.",
+      "estimatedEffort": "3-5 days",
+      "businessImpact": "Improves operational visibility and reduces mean time to detection. May require application code changes to emit custom metrics."
+    },
+    {
+      "id": "finding-006",
+      "title": "Unattached EBS Volumes",
+      "category": "Cost Optimization",
+      "riskLevel": "Low",
+      "summary": "Multiple EBS volumes are not attached to any instance.",
+      "observed": "Seven EBS volumes totaling approximately 500 GB are unattached. These appear to be snapshots of old instances that were never cleaned up. Monthly cost: ~$50.",
+      "whyThisMatters": "You're paying for storage that serves no purpose. These volumes can be safely deleted if the data has been backed up elsewhere or is no longer needed.",
+      "recommendation": "Review each unattached volume to confirm it's not needed. If data is required, create a snapshot first, then delete the volume. Implement a process to regularly identify and clean up unattached resources.",
+      "estimatedEffort": "1-2 hours",
+      "businessImpact": "Reduces monthly storage costs. Low risk if proper backups exist."
+    }
+  ],
+  "recommendations": {
+    "next14Days": [
+      "Review and restrict IAM role permissions to specific resources",
+      "Delete or snapshot unattached EBS volumes",
+      "Restrict SSH/RDP access in security groups to specific IP ranges"
+    ],
+    "next30Days": [
+      "Right-size underutilized EC2 instances",
+      "Enable Multi-AZ for production RDS instances",
+      "Begin implementing CloudWatch monitoring improvements"
+    ],
+    "next90Days": [
+      "Complete CloudWatch coverage for all production workloads",
+      "Establish formal backup and disaster recovery procedures",
+      "Conduct access review of all IAM roles and policies"
+    ]
+  },
+  "footer": {
+    "scopeStatement": "This audit reflects a point-in-time, read-only review of the environment provided. No changes were made to your infrastructure during this assessment.",
+    "optionalNote": "Implementation support is available separately, if desired."
+  }
+}
+
