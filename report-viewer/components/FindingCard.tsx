@@ -9,11 +9,19 @@ interface FindingCardProps {
 
 function getRiskClass(riskLevel: string): string {
   const level = riskLevel.toLowerCase().trim();
-  // Handle "Low–Medium" (en-dash) and "Low-Medium" (hyphen)
-  if (level.includes('low') && level.includes('medium')) return 'low-medium';
-  if (level.includes('high')) return 'high';
-  if (level.includes('medium')) return 'medium';
-  if (level.includes('low')) return 'low';
+  // Handle "Low–Medium" (en-dash), "Low-Medium" (hyphen), and variations
+  if ((level.includes('low') && level.includes('medium')) || level === 'low–medium' || level === 'low-medium') {
+    return 'low-medium';
+  }
+  if (level.includes('high') || level === 'high') {
+    return 'high';
+  }
+  if (level.includes('medium') || level === 'medium') {
+    return 'medium';
+  }
+  if (level.includes('low') || level === 'low') {
+    return 'low';
+  }
   return 'medium'; // default fallback
 }
 
