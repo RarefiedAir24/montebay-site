@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { PriorityItem } from '@/types/report';
 
 interface PriorityOverviewProps {
@@ -24,6 +25,41 @@ function getRiskClass(riskLevel: string): string {
   return 'medium'; // default fallback
 }
 
+function getRiskBadgeStyle(riskLevel: string): React.CSSProperties {
+  const level = riskLevel.toLowerCase().trim();
+  let bgColor = '#6c757d';
+  let textColor = '#ffffff';
+  
+  if ((level.includes('low') && level.includes('medium')) || level === 'low–medium' || level === 'low-medium') {
+    bgColor = '#5a8ab0'; // Blue for Low-Medium
+    textColor = '#ffffff';
+  } else if (level.includes('high') || level === 'high') {
+    bgColor = '#dc3545'; // Red for High
+    textColor = '#ffffff';
+  } else if (level.includes('medium') || level === 'medium') {
+    bgColor = '#ffc107'; // Yellow for Medium
+    textColor = '#856404';
+  } else if (level.includes('low') || level === 'low') {
+    bgColor = '#28a745'; // Green for Low
+    textColor = '#ffffff';
+  }
+  
+  return {
+    background: `linear-gradient(135deg, ${bgColor} 0%, ${bgColor}dd 100%)`,
+    color: textColor,
+    border: `1px solid ${bgColor}4d`,
+    display: 'inline-block',
+    padding: '0.4rem 1rem',
+    borderRadius: '6px',
+    fontSize: '0.8125rem',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.15)',
+    whiteSpace: 'nowrap' as const,
+  };
+}
+
 export default function PriorityOverview({ items }: PriorityOverviewProps) {
   return (
     <div className="section-spacing">
@@ -45,7 +81,7 @@ export default function PriorityOverview({ items }: PriorityOverviewProps) {
               <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
                 <td className="py-3 px-4 text-gray-800">{item.area}</td>
                 <td className="py-3 px-4">
-                  <span className={`risk-badge risk-badge-${getRiskClass(item.riskLevel)}`}>
+                  <span className="risk-badge" style={getRiskBadgeStyle(item.riskLevel)}>
                     {item.riskLevel}
                   </span>
                 </td>
