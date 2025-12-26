@@ -1,93 +1,78 @@
 # Deployment Guide - Report Viewer
 
-## Quick Setup for Vercel
+## Using Existing Vercel Project
 
-The report viewer is a Next.js app that needs to be deployed as a **separate Vercel project**.
+You can use the existing `montebay-site` Vercel project! The configuration has been set up to handle both the static main site and the Next.js report viewer.
 
-### Option 1: Separate Vercel Project (Recommended)
+### Current Setup
+
+The project is configured as a **monorepo** where:
+- **Root**: Static HTML site (main Montebay site)
+- **Subdirectory**: Next.js report viewer at `report-viewer/`
+
+### Vercel Configuration
+
+The `vercel.json` at the root includes:
+- Static site configuration for the main site
+- Rewrite rules to route `/silent-aws-audit/*` to the report viewer
+
+The `report-viewer/next.config.ts` is configured with:
+- `basePath: '/silent-aws-audit'` - so it serves at the correct path
+
+### Deployment Steps
 
 1. **Go to Vercel Dashboard**
-   - Visit https://vercel.com/dashboard
-   - Click "Add New..." → "Project"
+   - Open your existing `montebay-site` project
 
-2. **Import Repository**
-   - Select `RarefiedAir24/montebay-site`
-   - Click "Import"
+2. **Update Project Settings** (if needed)
+   - Go to Settings → General
+   - **Root Directory**: Leave empty (or set to `.` for root)
+   - **Framework Preset**: Should be "Other" for the static site
+   - **Build Command**: Leave empty (static site, no build needed)
+   - **Output Directory**: `.` (root)
 
-3. **Configure Project Settings**
-   - **Project Name**: `montebay-report-viewer` (or your preferred name)
-   - **Root Directory**: `report-viewer`
-   - **Framework Preset**: Next.js (should auto-detect)
-   - **Build Command**: `npm run build` (default)
-   - **Output Directory**: `.next` (default)
-   - **Install Command**: `npm install` (default)
+3. **Add Build Configuration for Report Viewer**
+   - Go to Settings → Build & Development Settings
+   - The rewrite rules in `vercel.json` will handle routing
+   - Vercel should auto-detect the Next.js app in `report-viewer/`
 
-4. **Environment Variables** (if needed later)
-   - None required for now (sample report is static)
+4. **Redeploy**
+   - Go to Deployments
+   - Click "Redeploy" on the latest deployment
+   - Or push a new commit to trigger auto-deployment
 
-5. **Deploy**
-   - Click "Deploy"
-   - Wait for build to complete
+### How It Works
 
-6. **Custom Domain** (Optional)
-   - After deployment, go to Settings → Domains
-   - Add custom domain: `reports.montebay.io` (or subdirectory)
+1. **Main Site** (`index.html`, `styles.css`, etc.)
+   - Served from root
+   - No build needed (static files)
 
-### Option 2: Deploy to Subdirectory on Same Domain
+2. **Report Viewer** (`report-viewer/`)
+   - Next.js app builds automatically
+   - Served at `/silent-aws-audit/*` via rewrite rules
+   - Example: `/silent-aws-audit/sample-report`
 
-If you want the report viewer at `montebay.io/silent-aws-audit/sample-report`:
+### Troubleshooting
 
-1. **Update next.config.ts**:
-   ```typescript
-   const nextConfig: NextConfig = {
-     basePath: '/silent-aws-audit',
-     output: 'standalone',
-   };
-   ```
+If the report viewer doesn't work:
 
-2. **Deploy as separate project** with custom domain pointing to main domain
+1. **Check Build Logs**
+   - Go to Deployments → Latest → Build Logs
+   - Look for Next.js build output
 
-3. **Update link in index.html** to match the deployment path
+2. **Verify Next.js Detection**
+   - Vercel should auto-detect Next.js in `report-viewer/`
+   - If not, you may need to configure it manually
 
-### Current Link Configuration
+3. **Alternative: Separate Project**
+   - If monorepo doesn't work, create a new Vercel project
+   - Set Root Directory to `report-viewer`
+   - Deploy separately
 
-The main site (`index.html`) links to:
-```html
-<a href="/silent-aws-audit/sample-report" ...>
-```
+### Testing
 
-This assumes:
-- **Option A**: Report viewer deployed to same domain at `/silent-aws-audit/*`
-- **Option B**: Report viewer on subdomain, update link to `https://reports.montebay.io/sample-report`
+After deployment:
+- Main site: `https://montebay.io` (or your domain)
+- Sample report: `https://montebay.io/silent-aws-audit/sample-report`
 
-### Recommended Approach
-
-**Deploy as separate project with subdomain:**
-- Main site: `montebay.io` (static HTML)
-- Report viewer: `reports.montebay.io` (Next.js)
-
-Then update the link in `index.html`:
-```html
-<a href="https://reports.montebay.io/silent-aws-audit/sample-report" ...>
-```
-
-### Testing Locally
-
-```bash
-cd report-viewer
-npm install
-npm run dev
-```
-
-Visit: `http://localhost:3000/silent-aws-audit/sample-report`
-
-### Build Verification
-
-```bash
-cd report-viewer
-npm run build
-npm start
-```
-
-This ensures the production build works before deploying.
-
+The link in `index.html` should work automatically!

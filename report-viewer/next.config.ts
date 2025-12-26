@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Deploying as separate project, so no basePath needed
-  // If you want to deploy to same domain as subdirectory, uncomment:
-  // basePath: '/silent-aws-audit',
+  // Configured to work with main site at /silent-aws-audit/*
+  basePath: '/silent-aws-audit',
   output: 'standalone',
 };
 
