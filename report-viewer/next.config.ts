@@ -1,9 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // If deploying to a subdirectory, uncomment:
+  // Deploying as separate project, so no basePath needed
+  // If you want to deploy to same domain as subdirectory, uncomment:
   // basePath: '/silent-aws-audit',
-  // If deploying to same domain as main site, keep basePath commented
+  output: 'standalone',
 };
 
 export default nextConfig;
