@@ -144,10 +144,22 @@ h4 {
 }
 
 .finding-card-content {
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  padding: 1.5rem;
   border-top: 1px solid #f0f0f0;
-  background: #fafbfc;
+  background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
   border-radius: 0 0 8px 8px;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Print styles */

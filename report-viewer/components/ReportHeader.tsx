@@ -44,13 +44,13 @@ export default function ReportHeader({ header }: ReportHeaderProps) {
         <div className="flex gap-3 no-print">
           <button
             onClick={handleExportPDF}
-            className="px-4 py-2 text-sm border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+            className="px-5 py-2.5 text-sm font-medium bg-white border-2 border-[var(--montebay-blue)] text-[var(--montebay-blue)] rounded-lg hover:bg-[var(--montebay-blue)] hover:text-white transition-all duration-200 shadow-sm hover:shadow-md"
           >
             Export PDF
           </button>
           <button
             onClick={handlePrint}
-            className="px-4 py-2 text-sm border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+            className="px-5 py-2.5 text-sm font-medium bg-[var(--montebay-blue)] text-white rounded-lg hover:bg-[#4a7a9f] transition-all duration-200 shadow-sm hover:shadow-md"
           >
             Print
           </button>
