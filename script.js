@@ -390,21 +390,71 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('API Error:', error);
+                console.error('Error name:', error.name);
+                console.error('Error message:', error.message);
                 
-                // If CORS error or network failure, fall back to email
-                if (error.message.includes('Failed to fetch') || 
-                    error.message.includes('CORS') || 
-                    error.name === 'TypeError') {
-                    
+                // CORS errors and network failures - always fall back to email
+                // TypeError with "Failed to fetch" typically indicates CORS or network issues
+                const isCorsOrNetworkError = 
+                    error.name === 'TypeError' ||
+                    error.message.includes('Failed to fetch') ||
+                    error.message.includes('CORS') ||
+                    error.message.includes('NetworkError') ||
+                    error.message.includes('Network request failed');
+                
+                if (isCorsOrNetworkError) {
                     // Fallback to email submission
                     const emailSubject = encodeURIComponent('Silent AWS Audit Request');
                     const emailBodyEncoded = encodeURIComponent(emailBodyForFallback);
                     const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBodyEncoded}`;
                     
                     // Show message with email option
-                    showAuditFormMessage('Unable to submit online due to a connection issue. Please email us directly at contact@montebay.io with your audit request details, or click the button below to open your email client.', 'error');
+                    const errorMsg = 'Unable to submit online due to a connection issue. Your form data has been prepared. Please click the button below to open your email client, or copy the information and email us at contact@montebay.io.';
+                    showAuditFormMessage(errorMsg, 'error');
                     
                     // Create a button to open email client
+                    setTimeout(() => {
+                        const formMessage = document.getElementById('auditFormMessage');
+                        if (formMessage) {
+                            // Remove any existing button
+                            const existingBtn = formMessage.querySelector('.email-fallback-btn');
+                            if (existingBtn) existingBtn.remove();
+                            
+                            const emailButton = document.createElement('a');
+                            emailButton.href = mailtoLink;
+                            emailButton.className = 'cta-button cta-primary email-fallback-btn';
+                            emailButton.style.marginTop = '1rem';
+                            emailButton.style.display = 'inline-block';
+                            emailButton.textContent = 'Open Email Client';
+                            emailButton.target = '_blank';
+                            formMessage.appendChild(emailButton);
+                            
+                            // Also add a copy button for the email body
+                            const copyButton = document.createElement('button');
+                            copyButton.type = 'button';
+                            copyButton.className = 'cta-button cta-secondary email-fallback-btn';
+                            copyButton.style.marginTop = '0.5rem';
+                            copyButton.style.marginLeft = '0.5rem';
+                            copyButton.textContent = 'Copy Email Content';
+                            copyButton.onclick = function() {
+                                navigator.clipboard.writeText(emailBodyForFallback).then(() => {
+                                    copyButton.textContent = 'Copied!';
+                                    setTimeout(() => {
+                                        copyButton.textContent = 'Copy Email Content';
+                                    }, 2000);
+                                });
+                            };
+                            formMessage.appendChild(copyButton);
+                        }
+                    }, 100);
+                } else {
+                    // Other errors - still provide email fallback
+                    const emailSubject = encodeURIComponent('Silent AWS Audit Request');
+                    const emailBodyEncoded = encodeURIComponent(emailBodyForFallback);
+                    const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBodyEncoded}`;
+                    
+                    showAuditFormMessage('Sorry, there was an error submitting your request. Please click below to email us directly with your audit request details.', 'error');
+                    
                     setTimeout(() => {
                         const formMessage = document.getElementById('auditFormMessage');
                         if (formMessage && !formMessage.querySelector('.email-fallback-btn')) {
@@ -414,11 +464,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             emailButton.style.marginTop = '1rem';
                             emailButton.style.display = 'inline-block';
                             emailButton.textContent = 'Open Email Client';
+                            emailButton.target = '_blank';
                             formMessage.appendChild(emailButton);
                         }
                     }, 100);
-                } else {
-                    showAuditFormMessage('Sorry, there was an error submitting your request. Please email contact@montebay.io directly with your audit request details.', 'error');
                 }
             })
             .finally(() => {
