@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
             emailBody += `✓ ${formObject['delivery-acknowledgment']}\n`;
             
             // Send to AWS Lambda via API Gateway
-            const API_ENDPOINT = 'https://bisrhls8q9.execute-api.us-east-1.amazonaws.com/prod/montebay/silent-aws-audit';
+            const API_ENDPOINT = 'https://bisrhls8q9.execute-api.us-east-2.amazonaws.com/prod/montebay/silent-aws-audit';
             
             fetch(API_ENDPOINT, {
                 method: 'POST',
