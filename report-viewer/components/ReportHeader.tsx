@@ -4,9 +4,10 @@ import { ReportHeader as HeaderType } from '@/types/report';
 
 interface ReportHeaderProps {
   header: HeaderType;
+  variant?: 'aws-audit' | 'cyber-advisory';
 }
 
-export default function ReportHeader({ header }: ReportHeaderProps) {
+export default function ReportHeader({ header, variant = 'aws-audit' }: ReportHeaderProps) {
   const handleExportPDF = () => {
     window.print();
   };
@@ -14,6 +15,8 @@ export default function ReportHeader({ header }: ReportHeaderProps) {
   const handlePrint = () => {
     window.print();
   };
+
+  const isCyberAdvisory = variant === 'cyber-advisory';
 
   return (
     <div className="section-spacing border-b-2 border-gray-300 pb-8 mb-8">
@@ -27,16 +30,31 @@ export default function ReportHeader({ header }: ReportHeaderProps) {
               <span className="font-semibold text-gray-900 min-w-[120px]">Client:</span>
               <span>{header.client}</span>
             </p>
+            {isCyberAdvisory ? (
+              <>
+                <p className="flex items-center gap-2">
+                  <span className="font-semibold text-gray-900 min-w-[120px]">Delivery:</span>
+                  <span className="px-2 py-1 bg-blue-50 text-blue-700 rounded text-sm font-medium">{header.environment}</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="font-semibold text-gray-900 min-w-[120px]">Scope:</span>
+                  <span>{header.deliveryMode}</span>
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="flex items-center gap-2">
+                  <span className="font-semibold text-gray-900 min-w-[120px]">Environment:</span>
+                  <span className="px-2 py-1 bg-blue-50 text-blue-700 rounded text-sm font-medium">{header.environment}</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="font-semibold text-gray-900 min-w-[120px]">Delivery Mode:</span>
+                  <span>{header.deliveryMode}</span>
+                </p>
+              </>
+            )}
             <p className="flex items-center gap-2">
-              <span className="font-semibold text-gray-900 min-w-[120px]">Environment:</span>
-              <span className="px-2 py-1 bg-blue-50 text-blue-700 rounded text-sm font-medium">{header.environment}</span>
-            </p>
-            <p className="flex items-center gap-2">
-              <span className="font-semibold text-gray-900 min-w-[120px]">Delivery Mode:</span>
-              <span>{header.deliveryMode}</span>
-            </p>
-            <p className="flex items-center gap-2">
-              <span className="font-semibold text-gray-900 min-w-[120px]">Audit Date:</span>
+              <span className="font-semibold text-gray-900 min-w-[120px]">{isCyberAdvisory ? 'Advisory Date:' : 'Audit Date:'}</span>
               <span>{header.auditDate}</span>
             </p>
           </div>
@@ -56,6 +74,11 @@ export default function ReportHeader({ header }: ReportHeaderProps) {
           </button>
         </div>
       </div>
+      {isCyberAdvisory && (
+        <p className="text-sm text-gray-600 mt-4 italic">
+          This is a representative example. All client reports are private and customized.
+        </p>
+      )}
     </div>
   );
 }

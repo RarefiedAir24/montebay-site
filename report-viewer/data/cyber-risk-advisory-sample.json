@@ -1,0 +1,100 @@
+{
+  "header": {
+    "title": "Sample Strategic Cyber Risk Advisory",
+    "client": "Confidential",
+    "environment": "Remote · Asynchronous",
+    "deliveryMode": "Strategic Cyber & Privacy Risk Advisory",
+    "auditDate": "December 26, 2025"
+  },
+  "executiveSummary": {
+    "overallAssessment": "The organization's current cyber and privacy posture presents moderate but manageable risk, driven primarily by access concentration, vendor dependency, and informal data-handling practices. No immediate emergency issues were identified. However, several areas warrant prioritization to reduce exposure as the organization grows.",
+    "keyThemes": [
+      "Access permissions are broader than necessary in several areas",
+      "Third-party vendors introduce unmonitored dependency risk",
+      "Data handling practices rely on assumptions rather than visibility",
+      "Ownership and accountability are inconsistently defined"
+    ]
+  },
+  "priorityOverview": [
+    {
+      "area": "Access & Permissions",
+      "riskLevel": "High",
+      "summary": "Broad access increases blast radius",
+      "priority": "Address within 30 days"
+    },
+    {
+      "area": "Vendor Dependency",
+      "riskLevel": "Medium",
+      "summary": "Key operations rely on single vendors",
+      "priority": "Address within 60 days"
+    },
+    {
+      "area": "Data Handling",
+      "riskLevel": "Medium",
+      "summary": "Informal privacy controls",
+      "priority": "Address within 60 days"
+    },
+    {
+      "area": "Ownership Clarity",
+      "riskLevel": "Low–Medium",
+      "summary": "Unclear responsibility in key systems",
+      "priority": "Address within 90 days"
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-001",
+      "title": "Concentrated Access Permissions",
+      "category": "Access & Identity",
+      "riskLevel": "High",
+      "summary": "Several platforms rely on a small number of high-privilege accounts with limited documentation around usage or recovery.",
+      "observed": "Several platforms rely on a small number of high-privilege accounts with limited documentation around usage or recovery.",
+      "whyThisMatters": "Concentrated access increases operational and security risk if credentials are misused, lost, or tied to individuals.",
+      "recommendation": "Reduce access scope where possible and clarify ownership and recovery procedures for critical accounts.",
+      "estimatedEffort": "1-2 weeks",
+      "businessImpact": "Reduces operational risk and improves recovery capabilities. May require coordination across teams."
+    },
+    {
+      "id": "finding-002",
+      "title": "Vendor Dependency Without Visibility",
+      "category": "Third-Party Risk",
+      "riskLevel": "Medium",
+      "summary": "Core business functions rely on external vendors without documented contingency planning or dependency mapping.",
+      "observed": "Core business functions rely on external vendors without documented contingency planning or dependency mapping.",
+      "whyThisMatters": "Vendor outages or changes could disrupt operations with little warning or mitigation.",
+      "recommendation": "Identify critical vendor dependencies and document fallback or escalation paths.",
+      "estimatedEffort": "2-3 weeks",
+      "businessImpact": "Improves resilience and reduces disruption risk. Helps prioritize vendor relationships."
+    },
+    {
+      "id": "finding-003",
+      "title": "Informal Data Handling Practices",
+      "category": "Privacy & Data Flow",
+      "riskLevel": "Medium",
+      "summary": "Sensitive data flows across multiple platforms without consistent documentation or review.",
+      "observed": "Sensitive data flows across multiple platforms without consistent documentation or review.",
+      "whyThisMatters": "Lack of visibility increases exposure to privacy issues and regulatory risk as the organization grows.",
+      "recommendation": "Map high-risk data flows and define ownership and review expectations.",
+      "estimatedEffort": "3-4 weeks",
+      "businessImpact": "Reduces privacy and regulatory risk. Supports compliance readiness as organization scales."
+    }
+  ],
+  "recommendations": {
+    "next14Days": [],
+    "next30Days": [
+      "Clarify ownership of high-privilege access",
+      "Identify top 3 vendor dependencies"
+    ],
+    "next90Days": [
+      "Document data handling assumptions",
+      "Reduce unnecessary access where feasible",
+      "Establish recurring review cadence",
+      "Re-assess risk as systems evolve"
+    ]
+  },
+  "footer": {
+    "scopeStatement": "This advisory provides strategic guidance only. It does not include technical testing, compliance certification, or implementation services.",
+    "optionalNote": "Interested in a private advisory tailored to your organization? Request a Strategic Cyber Risk Advisory."
+  }
+}
+

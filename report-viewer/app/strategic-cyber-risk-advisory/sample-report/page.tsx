@@ -8,7 +8,7 @@ import FindingsSection from '@/components/FindingsSection';
 import RecommendationsRoadmap from '@/components/RecommendationsRoadmap';
 import ReportFooter from '@/components/ReportFooter';
 import { AuditReport } from '@/types/report';
-import sampleReport from '@/data/sample-report.json';
+import sampleReport from '@/data/cyber-risk-advisory-sample.json';
 
 function SampleReportContent() {
   const report = sampleReport as AuditReport;
@@ -19,18 +19,18 @@ function SampleReportContent() {
       <div className="bg-[var(--montebay-light-bg)] border-b border-gray-200 py-3">
         <div className="report-container">
           <p className="text-sm text-gray-600 text-center">
-            <strong>Sample Report</strong> — This is a representative example of the structure, tone, and depth of a Silent AWS Audit report. All reports are custom-written and tailored to each environment.
+            <strong>Sample Report</strong> — This is a representative example of the structure, tone, and depth of a Strategic Cyber Risk Advisory report. All reports are custom-written and tailored to each organization.
           </p>
         </div>
       </div>
       
       <div className="report-container">
-        <ReportHeader header={report.header} variant="aws-audit" />
+        <ReportHeader header={report.header} variant="cyber-advisory" />
         <ExecutiveSummary summary={report.executiveSummary} />
         <PriorityOverview items={report.priorityOverview} />
         <FindingsSection findings={report.findings} />
         <RecommendationsRoadmap recommendations={report.recommendations} />
-        <ReportFooter footer={report.footer} variant="aws-audit" />
+        <ReportFooter footer={report.footer} variant="cyber-advisory" />
       </div>
     </div>
   );
