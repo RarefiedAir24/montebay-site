@@ -1342,6 +1342,66 @@ main {
     margin-bottom: 0.75rem;
 }
 
+/* Pricing Tiers in Service Cards */
+.pricing-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.pricing-tier {
+    padding: 1.25rem;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.pricing-tier:hover {
+    border-color: #5a8ab0;
+    box-shadow: 0 2px 8px rgba(90, 138, 176, 0.1);
+}
+
+.pricing-tier-recommended {
+    border-color: #5a8ab0;
+    background: rgba(90, 138, 176, 0.05);
+    position: relative;
+}
+
+.pricing-tier-recommended::before {
+    content: 'Recommended';
+    position: absolute;
+    top: -12px;
+    left: 1rem;
+    background: #5a8ab0;
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tier-header {
+    margin-bottom: 0.75rem;
+}
+
+.pricing-tier .tier-name {
+    font-weight: 600;
+    color: #1a2a4a;
+    font-size: 1.05rem;
+    display: block;
+}
+
+.pricing-tier .tier-description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
 .details-list {
     list-style: none;
     padding: 0;
@@ -1364,6 +1424,19 @@ main {
     color: #5a8ab0;
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+.details-list-ordered {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+}
+
+.details-list-ordered li {
+    padding-left: 0.5rem;
+}
+
+.details-list-ordered li::before {
+    display: none;
 }
 
 /* Audit Sample Link Section */
