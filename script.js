@@ -496,5 +496,228 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+    
+    // Strategic Cyber Risk Advisory Form handling
+    const cyberAdvisoryForm = document.getElementById('strategicCyberRiskAdvisoryForm');
+    const cyberAdvisoryFormMessage = document.getElementById('cyberAdvisoryFormMessage');
+    
+    if (cyberAdvisoryForm) {
+        cyberAdvisoryForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate checkbox groups (at least one required)
+            const concernsCheckboxes = cyberAdvisoryForm.querySelectorAll('input[name="cyber-concerns"]:checked');
+            if (concernsCheckboxes.length === 0) {
+                showCyberAdvisoryFormMessage('Please select at least one primary concern.', 'error');
+                return;
+            }
+            
+            const confirmationsCheckboxes = cyberAdvisoryForm.querySelectorAll('input[name="cyber-confirmations"]:checked');
+            if (confirmationsCheckboxes.length !== 3) {
+                showCyberAdvisoryFormMessage('Please confirm all scope requirements.', 'error');
+                return;
+            }
+            
+            // Get form data
+            const formData = new FormData(cyberAdvisoryForm);
+            const formObject = {};
+            formData.forEach((value, key) => {
+                if (formObject[key]) {
+                    // Handle multiple values (checkboxes)
+                    if (Array.isArray(formObject[key])) {
+                        formObject[key].push(value);
+                    } else {
+                        formObject[key] = [formObject[key], value];
+                    }
+                } else {
+                    formObject[key] = value;
+                }
+            });
+            
+            // Log form data for debugging
+            console.log('Cyber Advisory Form data being sent:', formObject);
+            
+            // Show loading state
+            const submitBtn = cyberAdvisoryForm.querySelector('.audit-submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Format email body
+            let emailBody = 'STRATEGIC CYBER RISK ADVISORY REQUEST\n\n';
+            emailBody += '=== CONTACT INFORMATION ===\n';
+            emailBody += `Full Name: ${formObject['full-name']}\n`;
+            emailBody += `Work Email: ${formObject['work-email']}\n`;
+            emailBody += `Company: ${formObject['company-name']}\n`;
+            emailBody += `Role/Title: ${formObject['role-title']}\n\n`;
+            
+            emailBody += '=== ORGANIZATION CONTEXT ===\n';
+            emailBody += `Organization Type: ${formObject['organization-type']}\n\n`;
+            
+            emailBody += '=== PRIMARY CONCERNS ===\n';
+            const concerns = Array.isArray(formObject['cyber-concerns']) ? formObject['cyber-concerns'] : [formObject['cyber-concerns']];
+            emailBody += `Concerns: ${concerns.join(', ')}\n\n`;
+            
+            emailBody += '=== ADVISORY TIER ===\n';
+            emailBody += `Selected Tier: ${formObject['advisory-tier']}\n\n`;
+            
+            emailBody += '=== CONFIRMATIONS ===\n';
+            const confirmations = Array.isArray(formObject['cyber-confirmations']) ? formObject['cyber-confirmations'] : [formObject['cyber-confirmations']];
+            confirmations.forEach(conf => {
+                emailBody += `✓ ${conf}\n`;
+            });
+            emailBody += '\n';
+            
+            if (formObject['additional-notes']) {
+                emailBody += '=== ADDITIONAL NOTES ===\n';
+                emailBody += `${formObject['additional-notes']}\n\n`;
+            }
+            
+            // Send to AWS Lambda via API Gateway
+            // Note: This endpoint will need to be created or the existing endpoint can handle both form types
+            const API_ENDPOINT = 'https://bisrhls8q9.execute-api.us-east-2.amazonaws.com/prod/montebay/strategic-cyber-risk-advisory';
+            
+            // Store emailBody for fallback
+            const emailBodyForFallback = emailBody;
+            
+            fetch(API_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formObject),
+                mode: 'cors'
+            })
+            .then(async response => {
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(`Server error: ${response.status} - ${text.substring(0, 100)}`);
+                }
+                
+                const text = await response.text();
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    throw new Error(`Server returned non-JSON response: ${text.substring(0, 100)}`);
+                }
+                
+                return data;
+            })
+            .then(data => {
+                if (data.success) {
+                    showCyberAdvisoryFormMessage(data.message || 'Thank you! Your advisory request has been submitted successfully. We\'ll be in touch within 1-2 business days.', 'success');
+                    cyberAdvisoryForm.reset();
+                } else {
+                    throw new Error(data.error || 'Request was not successful');
+                }
+            })
+            .catch(error => {
+                console.error('API Error:', error);
+                console.error('Error name:', error.name);
+                console.error('Error message:', error.message);
+                
+                // CORS errors and network failures - always fall back to email
+                const isCorsOrNetworkError = 
+                    error.name === 'TypeError' ||
+                    error.message.includes('Failed to fetch') ||
+                    error.message.includes('CORS') ||
+                    error.message.includes('NetworkError') ||
+                    error.message.includes('Network request failed');
+                
+                if (isCorsOrNetworkError) {
+                    // Fallback to email submission
+                    const emailSubject = encodeURIComponent('Strategic Cyber Risk Advisory Request');
+                    const emailBodyEncoded = encodeURIComponent(emailBodyForFallback);
+                    const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBodyEncoded}`;
+                    
+                    // Show message with email option
+                    const errorMsg = 'Unable to submit online due to a connection issue. Your form data has been prepared. Please click the button below to open your email client, or copy the information and email us at contact@montebay.io.';
+                    showCyberAdvisoryFormMessage(errorMsg, 'error');
+                    
+                    // Create a button to open email client
+                    setTimeout(() => {
+                        const formMessage = document.getElementById('cyberAdvisoryFormMessage');
+                        if (formMessage) {
+                            // Remove any existing button
+                            const existingBtn = formMessage.querySelector('.email-fallback-btn');
+                            if (existingBtn) existingBtn.remove();
+                            
+                            const emailButton = document.createElement('a');
+                            emailButton.href = mailtoLink;
+                            emailButton.className = 'cta-button cta-primary email-fallback-btn';
+                            emailButton.style.marginTop = '1rem';
+                            emailButton.style.display = 'inline-block';
+                            emailButton.textContent = 'Open Email Client';
+                            emailButton.target = '_blank';
+                            formMessage.appendChild(emailButton);
+                            
+                            // Also add a copy button for the email body
+                            const copyButton = document.createElement('button');
+                            copyButton.type = 'button';
+                            copyButton.className = 'cta-button cta-secondary email-fallback-btn';
+                            copyButton.style.marginTop = '0.5rem';
+                            copyButton.style.marginLeft = '0.5rem';
+                            copyButton.textContent = 'Copy Email Content';
+                            copyButton.onclick = function() {
+                                navigator.clipboard.writeText(emailBodyForFallback).then(() => {
+                                    copyButton.textContent = 'Copied!';
+                                    setTimeout(() => {
+                                        copyButton.textContent = 'Copy Email Content';
+                                    }, 2000);
+                                });
+                            };
+                            formMessage.appendChild(copyButton);
+                        }
+                    }, 100);
+                } else {
+                    // Other errors - still provide email fallback
+                    const emailSubject = encodeURIComponent('Strategic Cyber Risk Advisory Request');
+                    const emailBodyEncoded = encodeURIComponent(emailBodyForFallback);
+                    const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBodyEncoded}`;
+                    
+                    showCyberAdvisoryFormMessage('Sorry, there was an error submitting your request. Please click below to email us directly with your advisory request details.', 'error');
+                    
+                    setTimeout(() => {
+                        const formMessage = document.getElementById('cyberAdvisoryFormMessage');
+                        if (formMessage && !formMessage.querySelector('.email-fallback-btn')) {
+                            const emailButton = document.createElement('a');
+                            emailButton.href = mailtoLink;
+                            emailButton.className = 'cta-button cta-primary email-fallback-btn';
+                            emailButton.style.marginTop = '1rem';
+                            emailButton.style.display = 'inline-block';
+                            emailButton.textContent = 'Open Email Client';
+                            emailButton.target = '_blank';
+                            formMessage.appendChild(emailButton);
+                        }
+                    }, 100);
+                }
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Scroll to message
+                setTimeout(() => {
+                    cyberAdvisoryFormMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            });
+        });
+    }
+    
+    function showCyberAdvisoryFormMessage(message, type) {
+        if (cyberAdvisoryFormMessage) {
+            cyberAdvisoryFormMessage.textContent = message;
+            cyberAdvisoryFormMessage.className = 'form-message ' + type;
+            cyberAdvisoryFormMessage.style.display = 'block';
+            
+            // Auto-hide after 10 seconds for success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    cyberAdvisoryFormMessage.style.display = 'none';
+                }, 10000);
+            }
+        }
+    }
 });
 
