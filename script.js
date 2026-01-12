@@ -1,3 +1,25 @@
+// Google Analytics 4 Helper Functions
+function trackEvent(eventName, eventParams = {}) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, eventParams);
+    }
+}
+
+function trackFormSubmission(formName, formData = {}) {
+    trackEvent('form_submit', {
+        'form_name': formName,
+        'form_location': window.location.pathname,
+        ...formData
+    });
+}
+
+function trackCTAClick(ctaText, ctaLocation) {
+    trackEvent('cta_click', {
+        'cta_text': ctaText,
+        'cta_location': ctaLocation,
+        'page_path': window.location.pathname
+    });
+}
 
 // Animated statistics counter
 function animateCounter(element, target, duration = 2000) {
@@ -112,6 +134,12 @@ function initSmoothScroll() {
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
+                
+                // Track CTA clicks to contact form
+                if (href === '#contact') {
+                    const ctaText = this.textContent.trim() || this.innerText.trim();
+                    trackCTAClick(ctaText, this.closest('section')?.id || 'unknown');
+                }
             }
         });
     });
@@ -286,6 +314,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const emailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
             const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBody}`;
             
+            // Track form submission
+            trackFormSubmission('contact_form', {
+                'interest_type': interest,
+                'form_method': 'mailto'
+            });
+            
             // Open email client
             window.location.href = mailtoLink;
             
@@ -411,6 +445,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     formObject[key] = value;
                 }
+            });
+            
+            // Track form submission
+            trackFormSubmission('silent_aws_audit', {
+                'concerns_count': concernsCheckboxes.length
             });
             
             // Log form data for debugging
@@ -643,6 +682,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Log form data for debugging
             console.log('Cyber Advisory Form data being sent:', formObject);
+            
+            // Track form submission
+            trackFormSubmission('strategic_cyber_risk_advisory', {
+                'concerns_count': concernsCheckboxes.length
+            });
             
             // Show loading state
             const submitBtn = cyberAdvisoryForm.querySelector('.audit-submit-btn');
@@ -947,6 +991,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get form data
             const email = newsletterForm.querySelector('#newsletter-email').value;
             
+            // Track form submission
+            trackFormSubmission('newsletter_signup', {
+                'has_name': !!newsletterForm.querySelector('input[name="name"]')?.value
+            });
+            
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
@@ -1145,6 +1194,12 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 if (data.success) {
+                    // Track form submission
+                    trackFormSubmission('ai_diagnostic', {
+                        'company_size': formObject['company-size'] || 'unknown',
+                        'has_ai_systems': formObject['has-ai-systems'] || 'unknown'
+                    });
+                    
                     // Show success message
                     const resultsSection = document.getElementById('diagnostic-results');
                     const resultsContent = document.getElementById('results-content');

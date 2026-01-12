@@ -90,6 +90,17 @@
       }
     }
     </script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
     <script src="script.js" defer></script>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
@@ -1088,7 +1099,10 @@
                         <div class="product-content">
                             <div class="product-header">
                                 <div class="product-icon-wrapper">
-                                    <img src="assets/images/soteria_app.png" alt="Soteria - A behavioral finance app designed to help users pause, reflect, and make better financial decisions" class="product-icon" loading="lazy" width="120" height="120">
+                                    <picture>
+                                        <source srcset="assets/images/optimized/soteria_app.webp" type="image/webp">
+                                        <img src="assets/images/soteria_app.png" alt="Soteria - A behavioral finance app designed to help users pause, reflect, and make better financial decisions" class="product-icon" loading="lazy" width="120" height="120">
+                                    </picture>
                                 </div>
                                 <h3 class="product-name">Soteria</h3>
                             </div>
