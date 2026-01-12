@@ -211,8 +211,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 const interest = this.value;
                 if (interest && interest !== 'Other') {
                     subjectInput.value = interest;
+                    // Announce to screen readers
+                    subjectInput.setAttribute('aria-describedby', 'subject-auto-filled');
+                    if (!document.getElementById('subject-auto-filled')) {
+                        const announcement = document.createElement('span');
+                        announcement.id = 'subject-auto-filled';
+                        announcement.className = 'sr-only';
+                        announcement.textContent = 'Subject field auto-filled';
+                        subjectInput.parentNode.appendChild(announcement);
+                    }
                 } else if (interest === 'Other') {
                     subjectInput.value = '';
+                    subjectInput.removeAttribute('aria-describedby');
                     subjectInput.focus();
                 }
             });
@@ -249,6 +259,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
+            submitBtn.setAttribute('aria-busy', 'true');
+            
+            // Create loading spinner
+            if (!submitBtn.querySelector('.spinner')) {
+                const spinner = document.createElement('span');
+                spinner.className = 'spinner';
+                spinner.setAttribute('aria-hidden', 'true');
+                spinner.innerHTML = ' ⏳';
+                submitBtn.appendChild(spinner);
+            }
             
             // Send email using mailto (opens user's email client)
             // For production, integrate with Formspree, EmailJS, or your backend API
@@ -261,9 +281,29 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Show success message
             showFormMessage('Your email client should open. If not, please email us at contact@montebay.io', 'success');
+            
+            // Announce success to screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('role', 'status');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.className = 'sr-only';
+            announcement.textContent = 'Form submitted successfully. Your email client should open.';
+            document.body.appendChild(announcement);
+            setTimeout(() => announcement.remove(), 5000);
+            
             contactForm.reset();
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
+            submitBtn.removeAttribute('aria-busy');
+            const spinner = submitBtn.querySelector('.spinner');
+            if (spinner) spinner.remove();
+            
+            // Focus management - move focus to success message
+            const formMessage = document.getElementById('formMessage');
+            if (formMessage) {
+                formMessage.setAttribute('tabindex', '-1');
+                formMessage.focus();
+            }
             
             // Alternative: Use Formspree (uncomment and add your Formspree endpoint)
             /*

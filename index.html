@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://montebay.io/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="description" content="Montebay Innovations provides strategic technical advisory, AI-enhanced systems, and LLM automation for operations. Senior expertise in cloud architecture, cyber risk advisory, and intelligent automation.">
@@ -24,6 +26,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="montebay_logo.png">
     <link rel="apple-touch-icon" href="montebay_logo.png">
+    
+    <!-- Resource hints for performance -->
+    <link rel="preconnect" href="https://embed.tawk.to">
+    <link rel="dns-prefetch" href="https://embed.tawk.to">
     
     <link rel="stylesheet" href="styles.css">
     <!-- Structured Data -->
@@ -99,14 +105,31 @@
     <!--End of Tawk.to Script-->
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-to-main" style="position: absolute; left: -9999px; z-index: 9999; padding: 1rem; background: #1a2a4a; color: white; text-decoration: none; font-weight: 600;">Skip to main content</a>
+    <a href="#main-content" class="skip-to-main" style="position: absolute; top: 0; left: 0; z-index: 9999; padding: 1rem; background: #1a2a4a; color: white; text-decoration: none; font-weight: 600; transform: translateY(-100%); transition: transform 0.3s;">Skip to main content</a>
+    <script>
+        // Show skip link on focus
+        document.addEventListener('DOMContentLoaded', function() {
+            const skipLink = document.querySelector('.skip-to-main');
+            if (skipLink) {
+                skipLink.addEventListener('focus', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+                skipLink.addEventListener('blur', function() {
+                    this.style.transform = 'translateY(-100%)';
+                });
+            }
+        });
+    </script>
     <header class="header">
         <div class="header-container">
             <div class="logo-container">
-                <img src="montebay_logo.png" alt="Montebay Innovations Logo - Strategic Technical Advisory and AI-Enhanced Systems" class="logo">
+                <img src="montebay_logo.png" alt="Montebay Innovations Logo - Strategic Technical Advisory and AI-Enhanced Systems" class="logo" loading="eager" width="40" height="40">
                 <span class="company-name">MONTEBAY INNOVATIONS</span>
             </div>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
-            <nav class="nav-menu">
+            <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">☰</button>
+            <nav class="nav-menu" id="nav-menu" role="navigation" aria-label="Main navigation">
                 <a href="#home" class="nav-link">Home</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#services" class="nav-link">Services</a>
@@ -154,7 +177,7 @@
         </div>
     </section>
     
-    <main>
+    <main id="main-content" role="main">
         <!-- Hero Messaging Below Graphic -->
         <section class="hero-messaging">
             <div class="hero-messaging-container">
@@ -1049,7 +1072,7 @@
                         <div class="product-content">
                             <div class="product-header">
                                 <div class="product-icon-wrapper">
-                                    <img src="assets/images/wordflect_app.png" alt="Wordflect - A minimalist word puzzle game focused on clarity and thoughtful design" class="product-icon">
+                                    <img src="assets/images/wordflect_app.png" alt="Wordflect - A minimalist word puzzle game focused on clarity and thoughtful design" class="product-icon" loading="lazy" width="120" height="120">
                                 </div>
                                 <h3 class="product-name">Wordflect</h3>
                             </div>
@@ -1064,7 +1087,7 @@
                         <div class="product-content">
                             <div class="product-header">
                                 <div class="product-icon-wrapper">
-                                    <img src="assets/images/soteria_app.png" alt="Soteria - A behavioral finance app designed to help users pause, reflect, and make better financial decisions" class="product-icon">
+                                    <img src="assets/images/soteria_app.png" alt="Soteria - A behavioral finance app designed to help users pause, reflect, and make better financial decisions" class="product-icon" loading="lazy" width="120" height="120">
                                 </div>
                                 <h3 class="product-name">Soteria</h3>
                             </div>
