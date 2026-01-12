@@ -155,11 +155,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdowns = document.querySelectorAll('.nav-dropdown');
     
     // Handle mobile menu toggle
-    if (mobileMenuToggle) {
+    if (mobileMenuToggle && navMenu) {
         mobileMenuToggle.addEventListener('click', function(e) {
             e.stopPropagation();
+            const isActive = navMenu.classList.contains('active');
             navMenu.classList.toggle('active');
-            mobileMenuToggle.innerHTML = navMenu.classList.contains('active') ? '✕' : '☰';
+            mobileMenuToggle.innerHTML = !isActive ? '✕' : '☰';
+            mobileMenuToggle.setAttribute('aria-expanded', !isActive ? 'true' : 'false');
+            // Announce to screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('role', 'status');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.className = 'sr-only';
+            announcement.textContent = !isActive ? 'Navigation menu opened' : 'Navigation menu closed';
+            document.body.appendChild(announcement);
+            setTimeout(() => announcement.remove(), 1000);
         });
     }
     
