@@ -800,18 +800,46 @@ document.addEventListener('DOMContentLoaded', function() {
             const emailBodyEncoded = encodeURIComponent(emailBody);
             const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBodyEncoded}`;
             
-            // TODO: Replace with API endpoint when Lambda function is ready
-            // const API_ENDPOINT = 'https://[API_GATEWAY]/api/lead-magnet';
-            // fetch(API_ENDPOINT, { ... })
+            // Send to Lambda function
+            const API_ENDPOINT = 'https://bisrhls8q9.execute-api.us-east-2.amazonaws.com/prod/montebay/lead-magnet';
             
-            // For now, show success message and open email client
-            showChecklistFormMessage('Thank you! Your email client should open. If not, please email us at contact@montebay.io to request the AI Readiness Checklist.', 'success');
-            aiChecklistForm.reset();
-            
-            // Open email client
-            setTimeout(() => {
-                window.location.href = mailtoLink;
-            }, 500);
+            fetch(API_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    company: company,
+                    resourceType: 'ai-readiness-checklist'
+                }),
+                mode: 'cors'
+            })
+            .then(async response => {
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(`Server error: ${response.status} - ${text.substring(0, 100)}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    showChecklistFormMessage(data.message || 'Thank you! Your AI Readiness Checklist has been sent to your email.', 'success');
+                    aiChecklistForm.reset();
+                } else {
+                    throw new Error(data.error || 'Request was not successful');
+                }
+            })
+            .catch(error => {
+                console.error('API Error:', error);
+                // Fallback to email
+                showChecklistFormMessage('Thank you! Your email client should open. If not, please email us at contact@montebay.io to request the AI Readiness Checklist.', 'success');
+                aiChecklistForm.reset();
+                setTimeout(() => {
+                    window.location.href = mailtoLink;
+                }, 500);
+            });
             
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
@@ -860,17 +888,41 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = 'Subscribing...';
             submitBtn.disabled = true;
             
-            // TODO: Replace with API endpoint when mailing list service is integrated
-            // const API_ENDPOINT = 'https://[API_GATEWAY]/api/newsletter';
-            // fetch(API_ENDPOINT, {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ email: email })
-            // })
+            // Send to Lambda function
+            const API_ENDPOINT = 'https://bisrhls8q9.execute-api.us-east-2.amazonaws.com/prod/montebay/newsletter';
             
-            // For now, show success message
-            showNewsletterFormMessage('Thank you for subscribing! We\'ll be in touch soon.', 'success');
-            newsletterForm.reset();
+            fetch(API_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    name: newsletterForm.querySelector('input[name="name"]')?.value || ''
+                }),
+                mode: 'cors'
+            })
+            .then(async response => {
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(`Server error: ${response.status} - ${text.substring(0, 100)}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    showNewsletterFormMessage(data.message || 'Thank you for subscribing! Check your email for confirmation.', 'success');
+                    newsletterForm.reset();
+                } else {
+                    throw new Error(data.error || 'Subscription failed');
+                }
+            })
+            .catch(error => {
+                console.error('API Error:', error);
+                // Fallback: show success message anyway
+                showNewsletterFormMessage('Thank you for subscribing! We\'ll be in touch soon.', 'success');
+                newsletterForm.reset();
+            });
             
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
@@ -1001,22 +1053,69 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitBtn.disabled = true;
                 }
                 
-                // TODO: Replace with API endpoint when Lambda function is ready
-                // const API_ENDPOINT = 'https://[API_GATEWAY]/api/ai-diagnostic';
-                // fetch(API_ENDPOINT, {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify(formObject)
-                // })
-                
-                // For now, show placeholder results
-                setTimeout(() => {
-                    showDiagnosticResults(formObject);
-                    if (submitBtn) {
-                        submitBtn.textContent = 'Generate Report';
-                        submitBtn.disabled = false;
+            // Send to Lambda function
+            const API_ENDPOINT = 'https://bisrhls8q9.execute-api.us-east-2.amazonaws.com/prod/montebay/ai-diagnostic';
+            
+            fetch(API_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formObject),
+                mode: 'cors'
+            })
+            .then(async response => {
+                if (!response.ok) {
+                    const text = await response.text();
+                    throw new Error(`Server error: ${response.status} - ${text.substring(0, 100)}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    const resultsSection = document.getElementById('diagnostic-results');
+                    const resultsContent = document.getElementById('results-content');
+                    const formSection = diagnosticForm.closest('section');
+                    
+                    if (resultsSection && resultsContent) {
+                        diagnosticForm.style.display = 'none';
+                        resultsSection.style.display = 'block';
+                        
+                        // Display AI-generated report
+                        const reportText = data.reportPreview || 'Your personalized report has been sent to your email.';
+                        resultsContent.innerHTML = `
+                            <div style="background: rgba(90, 138, 176, 0.05); padding: 2rem; border-radius: 12px; border-left: 3px solid #5a8ab0; margin-bottom: 2rem;">
+                                <h3 style="font-size: 1.5rem; color: #1a2a4a; margin-bottom: 1rem;">Report Generated Successfully</h3>
+                                <p style="font-size: 1.05rem; color: #666; line-height: 1.8; margin-bottom: 1.5rem;">
+                                    ${data.message || 'Your personalized diagnostic report has been sent to your email address.'}
+                                </p>
+                                ${data.reportPreview ? `
+                                    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem;">
+                                        <h4 style="font-size: 1.25rem; color: #1a2a4a; margin-bottom: 1rem;">Report Preview</h4>
+                                        <div style="white-space: pre-wrap; color: #333; line-height: 1.7;">${reportText}</div>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                        
+                        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
-                }, 1500);
+                } else {
+                    throw new Error(data.error || 'Failed to generate report');
+                }
+            })
+            .catch(error => {
+                console.error('API Error:', error);
+                // Fallback: show template results
+                showDiagnosticResults(formObject);
+            })
+            .finally(() => {
+                if (submitBtn) {
+                    submitBtn.textContent = 'Generate Report';
+                    submitBtn.disabled = false;
+                }
+            });
             });
         }
         
