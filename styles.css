@@ -940,10 +940,8 @@ main {
 .ai-capabilities-container,
 .services-container {
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    margin: 0 auto;
+    padding: 0 2rem;
     box-sizing: border-box;
 }
 
@@ -1369,10 +1367,6 @@ main {
     background: linear-gradient(90deg, transparent, #5a8ab0, transparent);
 }
 
-.services-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
 .section-header {
     text-align: center;
