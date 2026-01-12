@@ -73,8 +73,32 @@ Replace:
 
 ### Customize Chat Messages
 1. Go to **Administration** → **Chat Widget** → **Chat Widget Settings**
-2. Set **Offline Message**: "We're currently offline. Leave a message and we'll get back to you within 24 hours."
-3. Set **Welcome Message**: "Hi! I'm here to help you find the right Montebay service. What's your biggest tech challenge?"
+
+2. **Welcome Message** (when chat opens):
+   ```
+   👋 Hi! I'm here to help you find the right Montebay solution. What's your biggest technical challenge?
+   ```
+   Or more concise:
+   ```
+   Hi! How can we help you today?
+   ```
+
+3. **Suggested Messages** (quick reply buttons):
+   - **Option 1:** "I have a question about your services"
+   - **Option 2:** "Tell me about AI capabilities"
+   - **Option 3:** "I need help with AWS/cloud architecture"
+   - **Option 4:** "Schedule a consultation"
+   
+   You can add 2-4 suggested messages. Choose the ones most relevant to your common inquiries.
+
+4. **Offline Message** (when team is unavailable):
+   ```
+   We're currently offline. Leave a message and we'll get back to you within 24 hours.
+   ```
+   Or more personalized:
+   ```
+   Thanks for reaching out! We're currently offline, but we'll respond to your message within 24 hours. For urgent matters, email us at contact@montebay.io
+   ```
 
 ### Set Up Chat Routing
 1. Go to **Administration** → **Chat Widget** → **Routing**
