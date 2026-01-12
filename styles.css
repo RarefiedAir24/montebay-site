@@ -1221,7 +1221,7 @@ main {
     font-size: 1.125rem;
     color: #666;
     line-height: 1.8;
-    margin: 0;
+    margin: 0 0 1.5rem 0;
 }
 
 @media (max-width: 1024px) {
@@ -3351,5 +3351,69 @@ main {
     
     .checklist-form {
         padding: 1.5rem;
+    }
+}
+
+/* Product Page Styles */
+.product-hero-image {
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.product-hero-img {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.product-hero-img:hover {
+    transform: translateY(-5px);
+}
+
+.product-features {
+    margin: 1.5rem 0;
+}
+
+.product-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+.product-features-list li {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.product-features-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #5a8ab0;
+    font-weight: bold;
+}
+
+.product-cta {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
+}
+
+@media (max-width: 768px) {
+    .product-hero-img {
+        max-width: 300px;
+    }
+    
+    .product-features-list {
+        grid-template-columns: 1fr;
     }
 }
