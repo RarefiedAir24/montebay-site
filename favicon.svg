@@ -1,8 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <!-- Background with brand color -->
   <rect width="32" height="32" fill="#1a2a4a" rx="3"/>
-  <!-- Stylized M letter -->
-  <path d="M 8 24 L 8 10 L 12 10 L 12 18 L 16 14 L 20 18 L 20 10 L 24 10 L 24 24 L 20 24 L 20 16 L 16 20 L 12 16 L 12 24 Z" fill="#ffffff"/>
-  <!-- Accent accent -->
-  <circle cx="16" cy="8" r="1.5" fill="#5a8ab0"/>
+  
+  <!-- Three angled blue stripes at bottom -->
+  <!-- Light blue stripe (top, longest) -->
+  <path d="M 2 22 L 30 18 L 30 20 L 2 24 Z" fill="#87CEEB"/>
+  
+  <!-- Medium blue stripe (middle, medium length) -->
+  <path d="M 4 24 L 28 20.5 L 28 22 L 4 25.5 Z" fill="#5a8ab0"/>
+  
+  <!-- Dark blue stripe (bottom, shortest) -->
+  <path d="M 6 25.5 L 26 22 L 26 23.5 L 6 27 Z" fill="#2a4a6a"/>
 </svg>
