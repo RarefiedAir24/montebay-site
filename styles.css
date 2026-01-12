@@ -4280,3 +4280,185 @@ main {
         padding: 2rem 1.5rem;
     }
 }
+
+/* Hero Messaging Section - Modern Typography */
+.hero-messaging {
+    background: linear-gradient(135deg, #1a2a4a 0%, #2a3a5a 100%);
+    color: white;
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-messaging::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(90, 138, 176, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-messaging-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-messaging-content {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.hero-messaging-lead {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-messaging-lead:first-of-type {
+    margin-bottom: 1rem;
+}
+
+.hero-messaging-body {
+    font-size: 1.375rem;
+    font-weight: 400;
+    line-height: 1.7;
+    margin: 2.5rem 0;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: -0.01em;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-messaging-emphasis {
+    font-weight: 600;
+    color: #b8e0ff;
+    text-shadow: 0 0 10px rgba(184, 224, 255, 0.3);
+    position: relative;
+}
+
+.hero-messaging-detail {
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.75;
+    margin: 2.5rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.01em;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-messaging-highlight {
+    font-weight: 500;
+    color: #b8e0ff;
+    background: rgba(184, 224, 255, 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.hero-messaging-tagline {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-messaging-tagline-line {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+}
+
+.hero-messaging-tagline-final {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+    .hero-messaging {
+        padding: 5rem 0;
+    }
+    
+    .hero-messaging-lead {
+        font-size: 1.75rem;
+    }
+    
+    .hero-messaging-body {
+        font-size: 1.25rem;
+    }
+    
+    .hero-messaging-detail {
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-messaging {
+        padding: 4rem 0;
+    }
+    
+    .hero-messaging-container {
+        padding: 0 1.5rem;
+    }
+    
+    .hero-messaging-lead {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-messaging-body {
+        font-size: 1.125rem;
+        margin: 2rem 0;
+    }
+    
+    .hero-messaging-detail {
+        font-size: 1rem;
+        margin: 2rem 0;
+    }
+    
+    .hero-messaging-tagline {
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+    }
+    
+    .hero-messaging-tagline-final {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-messaging-lead {
+        font-size: 1.375rem;
+    }
+    
+    .hero-messaging-body {
+        font-size: 1rem;
+    }
+    
+    .hero-messaging-detail {
+        font-size: 0.95rem;
+    }
+}
