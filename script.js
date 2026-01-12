@@ -117,8 +117,39 @@ function initSmoothScroll() {
     });
 }
 
+// FAQ Accordion Functionality
+function initFAQ() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            const faqItem = this.closest('.faq-item');
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = this.querySelector('.faq-icon');
+            const isOpen = answer.style.display === 'block';
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.style.display = 'none';
+            });
+            document.querySelectorAll('.faq-icon').forEach(ic => {
+                ic.textContent = '+';
+                ic.style.transform = 'rotate(0deg)';
+            });
+            
+            // Toggle current item
+            if (!isOpen) {
+                answer.style.display = 'block';
+                icon.textContent = '−';
+                icon.style.transform = 'rotate(0deg)';
+            }
+        });
+    });
+}
+
 // Mobile menu toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
+    initFAQ();
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const dropdowns = document.querySelectorAll('.nav-dropdown');
