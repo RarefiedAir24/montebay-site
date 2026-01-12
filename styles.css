@@ -923,28 +923,21 @@ main {
     max-width: 100%;
 }
 
-.ai-capabilities-cta {
+.ai-capabilities-cta-wrapper {
     text-align: center;
     margin-top: 4rem;
     width: 100%;
-    padding: 0;
+}
+
+.ai-capabilities-cta {
+    display: inline-block;
+    text-align: center;
 }
 
 .ai-capabilities-cta .cta-button {
     display: inline-block;
     margin: 0 0.5rem;
     vertical-align: middle;
-}
-
-/* Match the services CTA simple styling for visual consistency */
-.ai-capabilities-cta-wrapper {
-    text-align: center;
-    margin-top: 4rem;
-    padding: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 /* Ensure AI capabilities section matches services section container width exactly */
