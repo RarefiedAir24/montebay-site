@@ -923,14 +923,7 @@ main {
     max-width: 100%;
 }
 
-.ai-capabilities-cta-wrapper {
-    text-align: center;
-    margin-top: 4rem;
-    width: 100%;
-}
-
 .ai-capabilities-cta {
-    display: inline-block;
     text-align: center;
 }
 
