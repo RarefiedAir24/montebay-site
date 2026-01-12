@@ -4518,3 +4518,30 @@ main {
         font-size: 1.125rem;
     }
 }
+
+/* Services Grid Responsive Layout */
+@media (min-width: 1024px) {
+    .services-grid-responsive {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .services-grid-responsive > .service-overview-card:nth-child(1),
+    .services-grid-responsive > .service-overview-card:nth-child(2) {
+        grid-column: span 1;
+    }
+    
+    .services-grid-responsive > .services-quote-section {
+        grid-column: 1 / -1;
+    }
+    
+    .services-grid-responsive > .service-overview-card:nth-child(4),
+    .services-grid-responsive > .service-overview-card:nth-child(5) {
+        grid-column: span 1;
+    }
+}
+
+@media (min-width: 1200px) {
+    .services-grid-responsive {
+        max-width: 1200px !important;
+    }
+}
