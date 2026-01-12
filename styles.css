@@ -801,9 +801,6 @@ main {
     margin: 0 auto;
     padding: 0 2rem;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .ai-capabilities-title {
