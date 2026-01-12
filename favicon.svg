@@ -1,14 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Background with brand color -->
-  <rect width="32" height="32" fill="#1a2a4a" rx="3"/>
+  <!-- Dark background -->
+  <rect width="32" height="32" fill="#1a1a1a" rx="3"/>
   
-  <!-- Three angled blue stripes at bottom -->
-  <!-- Light blue stripe (top, longest) -->
-  <path d="M 2 22 L 30 18 L 30 20 L 2 24 Z" fill="#87CEEB"/>
+  <!-- Sun/Moon circle -->
+  <circle cx="10" cy="10" r="4" fill="#ffffff"/>
   
-  <!-- Medium blue stripe (middle, medium length) -->
-  <path d="M 4 24 L 28 20.5 L 28 22 L 4 25.5 Z" fill="#5a8ab0"/>
+  <!-- Left mountain (taller, wider) -->
+  <path d="M 6 20 L 6 12 L 10 8 L 14 12 L 14 20 Z" fill="#ffffff"/>
   
-  <!-- Dark blue stripe (bottom, shortest) -->
-  <path d="M 6 25.5 L 26 22 L 26 23.5 L 6 27 Z" fill="#2a4a6a"/>
+  <!-- Right mountain (shorter, narrower) -->
+  <path d="M 14 20 L 14 14 L 17 11 L 20 14 L 20 20 Z" fill="#ffffff"/>
+  
+  <!-- Water lines (three horizontal blue lines) -->
+  <!-- Top water line (thickest, longest, medium blue) -->
+  <rect x="4" y="20" width="24" height="2.5" fill="#5a8ab0"/>
+  
+  <!-- Middle water line (medium thickness, lighter blue) -->
+  <rect x="6" y="23" width="20" height="2" fill="#87CEEB"/>
+  
+  <!-- Bottom water line (thinnest, shortest, lightest blue) -->
+  <rect x="8" y="25.5" width="16" height="1.5" fill="#B0E0E6"/>
 </svg>
