@@ -49,6 +49,22 @@ function initScrollAnimations() {
         observer.observe(card);
     });
 
+    // Observe AI capability cards
+    document.querySelectorAll('.ai-capability-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+    });
+
+    // Observe use case cards
+    document.querySelectorAll('.use-case-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+    });
+
     // Observe hero stats
     const heroStats = document.querySelector('.hero-stats');
     if (heroStats) {
@@ -715,6 +731,87 @@ document.addEventListener('DOMContentLoaded', function() {
             if (type === 'success') {
                 setTimeout(() => {
                     cyberAdvisoryFormMessage.style.display = 'none';
+                }, 10000);
+            }
+        }
+    }
+    
+    // AI Readiness Checklist Form handling
+    const aiChecklistForm = document.getElementById('aiChecklistForm');
+    const checklistFormMessage = document.getElementById('checklistFormMessage');
+    
+    if (aiChecklistForm) {
+        aiChecklistForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(aiChecklistForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const company = formData.get('company') || 'Not provided';
+            
+            // Basic validation
+            if (!name || !email) {
+                showChecklistFormMessage('Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showChecklistFormMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = aiChecklistForm.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Processing...';
+            submitBtn.disabled = true;
+            
+            // Format email body for fallback
+            let emailBody = 'AI READINESS CHECKLIST REQUEST\n\n';
+            emailBody += `Name: ${name}\n`;
+            emailBody += `Email: ${email}\n`;
+            emailBody += `Company: ${company}\n\n`;
+            emailBody += 'Please send the AI Readiness Checklist PDF to this email address.';
+            
+            // For now, use email fallback (can be replaced with API endpoint later)
+            const emailSubject = encodeURIComponent('AI Readiness Checklist Request');
+            const emailBodyEncoded = encodeURIComponent(emailBody);
+            const mailtoLink = `mailto:contact@montebay.io?subject=${emailSubject}&body=${emailBodyEncoded}`;
+            
+            // TODO: Replace with API endpoint when Lambda function is ready
+            // const API_ENDPOINT = 'https://[API_GATEWAY]/api/lead-magnet';
+            // fetch(API_ENDPOINT, { ... })
+            
+            // For now, show success message and open email client
+            showChecklistFormMessage('Thank you! Your email client should open. If not, please email us at contact@montebay.io to request the AI Readiness Checklist.', 'success');
+            aiChecklistForm.reset();
+            
+            // Open email client
+            setTimeout(() => {
+                window.location.href = mailtoLink;
+            }, 500);
+            
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
+    }
+    
+    function showChecklistFormMessage(message, type) {
+        if (checklistFormMessage) {
+            checklistFormMessage.textContent = message;
+            checklistFormMessage.className = 'form-message ' + type;
+            checklistFormMessage.style.display = 'block';
+            
+            // Scroll to message
+            checklistFormMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Auto-hide after 10 seconds for success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    checklistFormMessage.style.display = 'none';
                 }, 10000);
             }
         }
