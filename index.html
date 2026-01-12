@@ -956,8 +956,22 @@
                     </div>
                     
                     <div class="form-group">
+                        <label for="interest">I'm interested in... *</label>
+                        <select id="interest" name="interest" required>
+                            <option value="">Select an option</option>
+                            <option value="General Consultation">General Consultation</option>
+                            <option value="AI Strategy Session">AI Strategy Session</option>
+                            <option value="Silent AWS Audit">Silent AWS Audit</option>
+                            <option value="Strategic Cyber Risk Advisory">Strategic Cyber Risk Advisory</option>
+                            <option value="Product Inquiry (Wordflect or Soteria)">Product Inquiry (Wordflect or Soteria)</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="subject">Subject *</label>
                         <input type="text" id="subject" name="subject" required>
+                        <small class="form-helper-text" style="display: block; margin-top: 0.5rem; font-size: 0.875rem; color: #666;">Subject will be auto-filled based on your selection above</small>
                     </div>
                     
                     <div class="form-group">

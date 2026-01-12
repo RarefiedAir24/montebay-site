@@ -179,6 +179,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
     
+    // Auto-fill subject based on interest selection
+    if (contactForm) {
+        const interestSelect = contactForm.querySelector('#interest');
+        const subjectInput = contactForm.querySelector('#subject');
+        
+        if (interestSelect && subjectInput) {
+            interestSelect.addEventListener('change', function() {
+                const interest = this.value;
+                if (interest && interest !== 'Other') {
+                    subjectInput.value = interest;
+                } else if (interest === 'Other') {
+                    subjectInput.value = '';
+                    subjectInput.focus();
+                }
+            });
+        }
+    }
+    
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -187,11 +205,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(contactForm);
             const name = formData.get('name');
             const email = formData.get('email');
+            const interest = formData.get('interest');
             const subject = formData.get('subject');
             const message = formData.get('message');
             
             // Basic validation
-            if (!name || !email || !subject || !message) {
+            if (!name || !email || !interest || !subject || !message) {
                 showFormMessage('Please fill in all required fields.', 'error');
                 return;
             }
