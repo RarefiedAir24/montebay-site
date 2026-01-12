@@ -796,12 +796,6 @@ main {
     position: relative;
 }
 
-.ai-capabilities-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    box-sizing: border-box;
-}
 
 .ai-capabilities-title {
     font-size: 3rem;
@@ -933,12 +927,24 @@ main {
     text-align: center;
     margin-top: 3rem;
     width: 100%;
+    padding: 0;
 }
 
 .ai-capabilities-cta .cta-button {
     display: inline-block;
     margin: 0 0.5rem;
     vertical-align: middle;
+}
+
+/* Ensure AI capabilities section matches services section container width exactly */
+.ai-capabilities-container,
+.services-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-sizing: border-box;
 }
 
 @media (max-width: 1024px) {
