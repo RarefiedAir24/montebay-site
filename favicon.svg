@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background with brand color -->
+  <rect width="32" height="32" fill="#1a2a4a" rx="3"/>
+  <!-- Stylized M letter -->
+  <path d="M 8 24 L 8 10 L 12 10 L 12 18 L 16 14 L 20 18 L 20 10 L 24 10 L 24 24 L 20 24 L 20 16 L 16 20 L 12 16 L 12 24 Z" fill="#ffffff"/>
+  <!-- Accent accent -->
+  <circle cx="16" cy="8" r="1.5" fill="#5a8ab0"/>
+</svg>
