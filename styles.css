@@ -925,7 +925,7 @@ main {
 
 .ai-capabilities-cta {
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 4rem;
     width: 100%;
     padding: 0;
 }
@@ -934,6 +934,17 @@ main {
     display: inline-block;
     margin: 0 0.5rem;
     vertical-align: middle;
+}
+
+/* Match the services CTA simple styling for visual consistency */
+.ai-capabilities-cta-wrapper {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Ensure AI capabilities section matches services section container width exactly */
