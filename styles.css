@@ -946,6 +946,12 @@ main {
     max-width: 100%;
 }
 
+.ai-capabilities-cta .cta-button {
+    min-width: 200px;
+    text-align: center;
+    white-space: nowrap;
+}
+
 @media (max-width: 1024px) {
     .ai-capabilities {
         padding: 5rem 1.5rem;
