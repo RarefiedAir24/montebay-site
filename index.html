@@ -3,8 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Montebay Innovations LLC - Home of Soteria app</title>
+    <meta name="description" content="Montebay Innovations provides strategic technical advisory, AI-enhanced systems, and LLM automation for operations. Senior expertise in cloud architecture, cyber risk advisory, and intelligent automation.">
+    <meta name="keywords" content="technical consulting, AI automation, LLM workflows, AWS audit, cyber risk advisory, cloud architecture, operational clarity">
+    <title>Montebay Innovations | Strategic Technical Advisory & AI-Enhanced Systems</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Montebay Innovations",
+      "description": "Strategic technical advisory and AI-enhanced systems consulting for modern organizations",
+      "url": "https://montebay.io",
+      "logo": "https://montebay.io/montebay_logo.png",
+      "serviceType": [
+        "Strategic Technical Advisory",
+        "Cloud Architecture Consulting",
+        "Cyber Risk Advisory",
+        "AI and LLM Automation",
+        "AWS Audit Services"
+      ],
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Montebay Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Strategic Technical Advisory",
+              "description": "Architecture reviews, technology decision support, and priority roadmaps"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Silent AWS Audit",
+              "description": "Senior AWS review delivered quietly, without meetings"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Strategic Cyber Risk Advisory",
+              "description": "Executive-level cyber and privacy risk assessments"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "LLM Automation for Ops Workflows",
+              "description": "AI-augmented operational workflows that reduce manual effort"
+            }
+          }
+        ]
+      }
+    }
+    </script>
     <script src="script.js" defer></script>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
@@ -24,7 +83,7 @@
     <header class="header">
         <div class="header-container">
             <div class="logo-container">
-                <img src="montebay_logo.png" alt="Montebay Logo" class="logo">
+                <img src="montebay_logo.png" alt="Montebay Innovations Logo - Strategic Technical Advisory and AI-Enhanced Systems" class="logo">
                 <span class="company-name">MONTEBAY INNOVATIONS</span>
             </div>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
@@ -48,7 +107,7 @@
     
     <section class="hero">
         <div class="video-container">
-            <video autoplay muted loop playsinline preload="auto" class="hero-video">
+            <video autoplay muted loop playsinline preload="metadata" class="hero-video" poster="montebay_logo.png">
                 <source src="assets/videos/montebay_site.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -103,7 +162,7 @@
                     <p class="services-intro">We help leaders understand where their systems are fragile, inefficient, or misaligned — and what to do first.</p>
                 </div>
                 
-                <div class="services-overview-grid" style="grid-template-columns: 1fr; gap: 3rem; max-width: 900px; margin: 0 auto;">
+                <div class="services-overview-grid services-grid-responsive" style="grid-template-columns: 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto;">
                     <div class="service-overview-card" style="text-align: left; padding: 2.5rem;">
                         <h3 class="service-overview-title" style="margin-bottom: 1rem;">Strategic Technical Advisory</h3>
                         <p class="service-overview-description" style="margin-bottom: 1.5rem;">We help leaders understand where their systems are fragile, inefficient, or misaligned — and what to do first.</p>
@@ -216,12 +275,16 @@
             </div>
         </section>
         
-        <!-- How Montebay Is Different -->
-        <section class="about" style="background: #f8f9fa; padding: 5rem 0;">
+        <!-- About Section -->
+        <section id="about" class="about" style="background: #f8f9fa; padding: 5rem 0;">
             <div class="about-container">
                 <div class="section-header">
-                    <span class="section-label">How Montebay Is Different</span>
-                    <h2 class="about-title">Judgment-Led, Not Tool-Led</h2>
+                    <span class="section-label">About Montebay</span>
+                    <h2 class="about-title">How Montebay Is Different</h2>
+                    <p class="services-intro" style="max-width: 800px; margin: 0 auto 2rem;">Montebay is a consulting and technology studio focused on solving complex problems with clear, practical systems. We combine senior technical judgment with modern automation to help leadership teams see clearly, decide confidently, and act deliberately.</p>
+                </div>
+                <div class="section-header" style="margin-top: 3rem;">
+                    <h3 class="about-title" style="font-size: 1.75rem;">Judgment-Led, Not Tool-Led</h3>
                 </div>
                 <div class="about-content" style="max-width: 800px; margin: 0 auto;">
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
@@ -295,6 +358,32 @@
                             <li style="padding: 0.5rem 0;">• Unsure which technical decisions matter most</li>
                         </ul>
                         <p style="margin-top: 1.5rem; font-weight: 600; color: #5a8ab0;">We're likely a fit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Case Study / Example Engagement -->
+        <section class="services" style="padding: 5rem 0; background: white;">
+            <div class="services-container">
+                <div class="section-header">
+                    <span class="section-label">Example Engagement</span>
+                    <h2 class="services-title">Real Results</h2>
+                </div>
+                <div class="service-overview-card" style="max-width: 800px; margin: 0 auto; text-align: left; padding: 3rem;">
+                    <h3 class="service-overview-title" style="margin-bottom: 1.5rem;">Infrastructure Cost Optimization</h3>
+                    <p class="service-overview-description" style="margin-bottom: 1.5rem;">A fintech company scaling aggressively was experiencing unexpected cloud cost overruns and lacked visibility into their AWS environment.</p>
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="font-size: 1.1rem; font-weight: 600; color: #1a2a4a; margin-bottom: 1rem;">What We Did</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid #e9ecef;">Conducted a Silent AWS Audit with read-only access</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid #e9ecef;">Identified cost leakage from unused resources and inefficient configurations</li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid #e9ecef;">Delivered prioritized action plan in 7 days</li>
+                            <li style="padding: 0.5rem 0;">Provided 30-, 60-, and 90-day implementation roadmaps</li>
+                        </ul>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(90, 138, 176, 0.05); border-radius: 8px; border-left: 3px solid #5a8ab0;">
+                        <p style="font-weight: 600; color: #5a8ab0; margin: 0; font-size: 1.125rem;"><strong>Result:</strong> Reduced infrastructure spend by 22% in under 60 days, with clear visibility into cost drivers and optimization opportunities.</p>
                     </div>
                 </div>
             </div>
@@ -847,7 +936,7 @@
                         <div class="product-content">
                             <div class="product-header">
                                 <div class="product-icon-wrapper">
-                                    <img src="assets/images/wordflect_app.png" alt="Wordflect Icon" class="product-icon">
+                                    <img src="assets/images/wordflect_app.png" alt="Wordflect - A minimalist word puzzle game focused on clarity and thoughtful design" class="product-icon">
                                 </div>
                                 <h3 class="product-name">Wordflect</h3>
                             </div>
@@ -862,7 +951,7 @@
                         <div class="product-content">
                             <div class="product-header">
                                 <div class="product-icon-wrapper">
-                                    <img src="assets/images/soteria_app.png" alt="Soteria Icon" class="product-icon">
+                                    <img src="assets/images/soteria_app.png" alt="Soteria - A behavioral finance app designed to help users pause, reflect, and make better financial decisions" class="product-icon">
                                 </div>
                                 <h3 class="product-name">Soteria</h3>
                             </div>
