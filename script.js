@@ -891,5 +891,188 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+    
+    // AI Diagnostic Tool - Multi-step form handling
+    const diagnosticForm = document.getElementById('diagnosticForm');
+    if (diagnosticForm) {
+        const steps = diagnosticForm.querySelectorAll('.diagnostic-step');
+        const totalSteps = steps.length;
+        let currentStep = 1;
+        
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentStepSpan = document.getElementById('currentStep');
+        const totalStepsSpan = document.getElementById('totalSteps');
+        
+        if (totalStepsSpan) totalStepsSpan.textContent = totalSteps;
+        
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            if (progressFill) progressFill.style.width = progress + '%';
+            if (currentStepSpan) currentStepSpan.textContent = currentStep;
+        }
+        
+        function showStep(step) {
+            steps.forEach((s, index) => {
+                if (index + 1 === step) {
+                    s.style.display = 'block';
+                } else {
+                    s.style.display = 'none';
+                }
+            });
+            
+            // Update navigation buttons
+            if (prevBtn) prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
+            if (nextBtn) nextBtn.style.display = currentStep < totalSteps ? 'block' : 'none';
+            if (submitBtn) submitBtn.style.display = currentStep === totalSteps ? 'block' : 'none';
+            
+            updateProgress();
+        }
+        
+        function validateStep(step) {
+            const stepElement = steps[step - 1];
+            const requiredInputs = stepElement.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredInputs.forEach(input => {
+                if (input.type === 'radio') {
+                    const radioGroup = stepElement.querySelectorAll(`input[name="${input.name}"]`);
+                    const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+                    if (!isChecked) isValid = false;
+                } else if (input.type === 'checkbox') {
+                    const checkboxGroup = stepElement.querySelectorAll(`input[name="${input.name}"]`);
+                    const isChecked = Array.from(checkboxGroup).some(cb => cb.checked);
+                    if (!isChecked) isValid = false;
+                } else {
+                    if (!input.value.trim()) isValid = false;
+                }
+            });
+            
+            return isValid;
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function() {
+                if (validateStep(currentStep)) {
+                    currentStep++;
+                    showStep(currentStep);
+                } else {
+                    alert('Please complete all required fields before continuing.');
+                }
+            });
+        }
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function() {
+                currentStep--;
+                showStep(currentStep);
+            });
+        }
+        
+        if (diagnosticForm) {
+            diagnosticForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!validateStep(currentStep)) {
+                    alert('Please complete all required fields.');
+                    return;
+                }
+                
+                // Get form data
+                const formData = new FormData(diagnosticForm);
+                const formObject = {};
+                formData.forEach((value, key) => {
+                    if (formObject[key]) {
+                        if (Array.isArray(formObject[key])) {
+                            formObject[key].push(value);
+                        } else {
+                            formObject[key] = [formObject[key], value];
+                        }
+                    } else {
+                        formObject[key] = value;
+                    }
+                });
+                
+                // Show loading state
+                if (submitBtn) {
+                    submitBtn.textContent = 'Generating Report...';
+                    submitBtn.disabled = true;
+                }
+                
+                // TODO: Replace with API endpoint when Lambda function is ready
+                // const API_ENDPOINT = 'https://[API_GATEWAY]/api/ai-diagnostic';
+                // fetch(API_ENDPOINT, {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(formObject)
+                // })
+                
+                // For now, show placeholder results
+                setTimeout(() => {
+                    showDiagnosticResults(formObject);
+                    if (submitBtn) {
+                        submitBtn.textContent = 'Generate Report';
+                        submitBtn.disabled = false;
+                    }
+                }, 1500);
+            });
+        }
+        
+        function showDiagnosticResults(data) {
+            const resultsSection = document.getElementById('diagnostic-results');
+            const resultsContent = document.getElementById('results-content');
+            const formSection = diagnosticForm.closest('section');
+            
+            if (resultsSection && resultsContent) {
+                // Hide form, show results
+                diagnosticForm.style.display = 'none';
+                resultsSection.style.display = 'block';
+                
+                // Generate simple report (can be replaced with AI-generated content)
+                const challenge = Array.isArray(data['primary-challenge']) ? data['primary-challenge'][0] : data['primary-challenge'];
+                const painPoints = Array.isArray(data['pain-points']) ? data['pain-points'] : [data['pain-points']];
+                const goals = Array.isArray(data['goals']) ? data['goals'] : [data['goals']];
+                
+                let reportHTML = `
+                    <h3 style="font-size: 1.5rem; color: #1a2a4a; margin-bottom: 1.5rem;">Assessment Summary</h3>
+                    <p style="font-size: 1.05rem; color: #666; line-height: 1.8; margin-bottom: 2rem;">
+                        Based on your responses, we've identified your primary challenge as <strong>${challenge}</strong>.
+                    </p>
+                    
+                    <h4 style="font-size: 1.25rem; color: #1a2a4a; margin-bottom: 1rem; margin-top: 2rem;">Key Pain Points Identified</h4>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                        ${painPoints.filter(p => p).map(p => `<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #5a8ab0;">•</span> ${p}
+                        </li>`).join('')}
+                    </ul>
+                    
+                    <h4 style="font-size: 1.25rem; color: #1a2a4a; margin-bottom: 1rem; margin-top: 2rem;">Your Goals</h4>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 2rem;">
+                        ${goals.filter(g => g).map(g => `<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #5a8ab0;">✓</span> ${g}
+                        </li>`).join('')}
+                    </ul>
+                    
+                    <div style="background: rgba(90, 138, 176, 0.05); padding: 1.5rem; border-radius: 12px; border-left: 3px solid #5a8ab0; margin-top: 2rem;">
+                        <p style="margin: 0; color: #1a2a4a; line-height: 1.7;">
+                            <strong>Next Steps:</strong> A detailed personalized report has been sent to ${data.email}. 
+                            This report includes specific recommendations based on your responses. 
+                            For a deeper assessment, consider scheduling a consultation with our team.
+                        </p>
+                    </div>
+                `;
+                
+                resultsContent.innerHTML = reportHTML;
+                
+                // Scroll to results
+                resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        // Initialize first step
+        showStep(1);
+    }
 });
 

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>AI System Diagnostic - Montebay Innovations LLC</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="montebay_logo.png" alt="Montebay Logo" class="logo">
+                </a>
+                <span class="company-name">MONTEBAY INNOVATIONS</span>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <nav class="nav-menu">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="ai-intelligent-systems.html" class="nav-link">AI + Intelligent Systems</a>
+                <div class="nav-dropdown">
+                    <a href="index.html#products" class="nav-link dropdown-toggle">Products <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="wordflect.html" class="dropdown-item">Wordflect</a>
+                        <a href="soteria.html" class="dropdown-item">Soteria</a>
+                    </div>
+                </div>
+                <a href="insights.html" class="nav-link">Insights</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="video-container">
+            <video autoplay muted loop playsinline preload="auto" class="hero-video">
+                <source src="assets/videos/montebay_site.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-title-line hero-title-accent">AI SYSTEM DIAGNOSTIC</span>
+            </h1>
+            <p class="hero-subtitle">Get a personalized assessment of your system challenges and receive AI-generated recommendations.</p>
+        </div>
+    </section>
+    
+    <main>
+        <section id="diagnostic-tool" class="ai-page-section">
+            <div class="ai-page-container">
+                <div class="section-header">
+                    <span class="section-label">Free Assessment</span>
+                    <h2 class="section-title">AI-Powered System Diagnostic</h2>
+                    <p class="section-intro">Answer a few questions about your system challenges, and our AI will generate a personalized improvement report with recommendations tailored to your needs.</p>
+                </div>
+                
+                <form class="diagnostic-form" id="diagnosticForm">
+                    <!-- Progress Indicator -->
+                    <div class="diagnostic-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span id="currentStep">1</span> of <span id="totalSteps">6</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 1: Primary Challenge -->
+                    <div class="diagnostic-step" data-step="1">
+                        <h3 class="step-title">What's your primary technical challenge?</h3>
+                        <div class="form-group">
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="primary-challenge" value="System complexity" required>
+                                    <span>System complexity</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="primary-challenge" value="Cost optimization">
+                                    <span>Cost optimization</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="primary-challenge" value="Security concerns">
+                                    <span>Security concerns</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="primary-challenge" value="Scalability issues">
+                                    <span>Scalability issues</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="primary-challenge" value="Reliability problems">
+                                    <span>Reliability problems</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="primary-challenge" value="Other">
+                                    <span>Other</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Current Infrastructure -->
+                    <div class="diagnostic-step" data-step="2" style="display: none;">
+                        <h3 class="step-title">How would you describe your current infrastructure?</h3>
+                        <div class="form-group">
+                            <textarea name="current-infrastructure" rows="4" placeholder="Describe your current tech stack, cloud provider, and key systems..." required></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Pain Points -->
+                    <div class="diagnostic-step" data-step="3" style="display: none;">
+                        <h3 class="step-title">What's your biggest operational pain point? (Select all that apply)</h3>
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="pain-points" value="Manual processes">
+                                    <span>Manual processes</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="pain-points" value="Lack of visibility">
+                                    <span>Lack of visibility</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="pain-points" value="Reliability issues">
+                                    <span>Reliability issues</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="pain-points" value="Team bandwidth">
+                                    <span>Team bandwidth</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="pain-points" value="Cost management">
+                                    <span>Cost management</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="pain-points" value="Security concerns">
+                                    <span>Security concerns</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Goals -->
+                    <div class="diagnostic-step" data-step="4" style="display: none;">
+                        <h3 class="step-title">What are your primary goals? (Select all that apply)</h3>
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="goals" value="Reduce costs">
+                                    <span>Reduce costs</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="goals" value="Improve reliability">
+                                    <span>Improve reliability</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="goals" value="Scale operations">
+                                    <span>Scale operations</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="goals" value="Modernize systems">
+                                    <span>Modernize systems</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="goals" value="Improve security">
+                                    <span>Improve security</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="goals" value="Automate processes">
+                                    <span>Automate processes</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5: Company Size -->
+                    <div class="diagnostic-step" data-step="5" style="display: none;">
+                        <h3 class="step-title">What's your company size?</h3>
+                        <div class="form-group">
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="company-size" value="1-10 employees" required>
+                                    <span>1-10 employees</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="company-size" value="11-50 employees">
+                                    <span>11-50 employees</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="company-size" value="51-200 employees">
+                                    <span>51-200 employees</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="company-size" value="200+ employees">
+                                    <span>200+ employees</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 6: Contact Info -->
+                    <div class="diagnostic-step" data-step="6" style="display: none;">
+                        <h3 class="step-title">Where should we send your personalized report?</h3>
+                        <div class="form-group">
+                            <label for="diagnostic-name">Name *</label>
+                            <input type="text" id="diagnostic-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="diagnostic-email">Email *</label>
+                            <input type="email" id="diagnostic-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="diagnostic-company">Company (optional)</label>
+                            <input type="text" id="diagnostic-company" name="company">
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Buttons -->
+                    <div class="diagnostic-navigation">
+                        <button type="button" class="diagnostic-btn diagnostic-btn-secondary" id="prevBtn" style="display: none;">Previous</button>
+                        <button type="button" class="diagnostic-btn diagnostic-btn-primary" id="nextBtn">Next</button>
+                        <button type="submit" class="diagnostic-btn diagnostic-btn-primary" id="submitBtn" style="display: none;">Generate Report</button>
+                    </div>
+                    
+                    <div class="form-message" id="diagnosticFormMessage"></div>
+                </form>
+                
+                <!-- Results Section (hidden initially) -->
+                <div id="diagnostic-results" class="diagnostic-results" style="display: none;">
+                    <div class="section-header">
+                        <span class="section-label">Your Report</span>
+                        <h2 class="section-title">Personalized System Assessment</h2>
+                    </div>
+                    <div id="results-content" class="results-content"></div>
+                    <div class="results-cta">
+                        <a href="index.html#contact" class="cta-button cta-primary">Schedule a Consultation</a>
+                        <a href="ai-intelligent-systems.html" class="cta-button cta-secondary">Learn More About AI Solutions</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Montebay Innovations LLC</h3>
+                    <p>Solving complex problems with clear, practical systems.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="ai-intelligent-systems.html">AI + Intelligent Systems</a></li>
+                        <li><a href="ai-diagnostic.html">AI Diagnostic</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="insights.html">Insights</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: <a href="mailto:contact@montebay.io">contact@montebay.io</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Montebay Innovations LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
