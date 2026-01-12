@@ -27,16 +27,7 @@ function initScrollAnimations() {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
                 
-                // Animate statistics if visible
-                if (entry.target.classList.contains('hero-stats')) {
-                    const statNumbers = entry.target.querySelectorAll('.stat-number');
-                    statNumbers.forEach(stat => {
-                        const target = parseInt(stat.getAttribute('data-target'));
-                        if (target && stat.textContent === '0') {
-                            animateCounter(stat, target);
-                        }
-                    });
-                }
+                // Statistics are now static, no animation needed
             }
         });
     }, observerOptions);
