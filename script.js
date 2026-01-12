@@ -835,5 +835,61 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+    
+    // Newsletter Signup Form handling
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterFormMessage = document.getElementById('newsletterFormMessage');
+    
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const email = newsletterForm.querySelector('#newsletter-email').value;
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNewsletterFormMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = newsletterForm.querySelector('.newsletter-submit');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Subscribing...';
+            submitBtn.disabled = true;
+            
+            // TODO: Replace with API endpoint when mailing list service is integrated
+            // const API_ENDPOINT = 'https://[API_GATEWAY]/api/newsletter';
+            // fetch(API_ENDPOINT, {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ email: email })
+            // })
+            
+            // For now, show success message
+            showNewsletterFormMessage('Thank you for subscribing! We\'ll be in touch soon.', 'success');
+            newsletterForm.reset();
+            
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
+    }
+    
+    function showNewsletterFormMessage(message, type) {
+        if (newsletterFormMessage) {
+            newsletterFormMessage.textContent = message;
+            newsletterFormMessage.className = 'form-message ' + type;
+            newsletterFormMessage.style.display = 'block';
+            
+            // Auto-hide after 5 seconds for success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    newsletterFormMessage.style.display = 'none';
+                }, 5000);
+            }
+        }
+    }
 });
 

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Insights & Blog - Montebay Innovations LLC</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="montebay_logo.png" alt="Montebay Logo" class="logo">
+                </a>
+                <span class="company-name">MONTEBAY INNOVATIONS</span>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <nav class="nav-menu">
+                <a href="index.html#home" class="nav-link">Home</a>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#services" class="nav-link">Services</a>
+                <a href="ai-intelligent-systems.html" class="nav-link">AI + Intelligent Systems</a>
+                <div class="nav-dropdown">
+                    <a href="index.html#products" class="nav-link dropdown-toggle">Products <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="wordflect.html" class="dropdown-item">Wordflect</a>
+                        <a href="soteria.html" class="dropdown-item">Soteria</a>
+                    </div>
+                </div>
+                <a href="insights.html" class="nav-link">Insights</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="video-container">
+            <video autoplay muted loop playsinline preload="auto" class="hero-video">
+                <source src="assets/videos/montebay_site.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-title-line hero-title-accent">INSIGHTS & THOUGHT LEADERSHIP</span>
+            </h1>
+            <p class="hero-subtitle">Practical perspectives on AI, cloud architecture, automation, and building systems that work.</p>
+        </div>
+    </section>
+    
+    <main>
+        <section id="insights-listing" class="ai-page-section">
+            <div class="ai-page-container">
+                <div class="section-header">
+                    <span class="section-label">Articles & Insights</span>
+                    <h2 class="section-title">Latest Insights</h2>
+                    <p class="section-intro">Thoughts on AI, cloud architecture, automation, and the practical side of building systems that deliver real value.</p>
+                </div>
+                
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <div class="blog-card-header">
+                            <span class="blog-category">AI Insights</span>
+                            <span class="blog-date">Coming Soon</span>
+                        </div>
+                        <h3 class="blog-title">AI for Cloud Cost Saving</h3>
+                        <p class="blog-excerpt">How machine learning can help predict and optimize cloud spending, moving beyond reactive cost management to proactive optimization.</p>
+                        <a href="#" class="blog-read-more">Read More →</a>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="blog-card-header">
+                            <span class="blog-category">Automation</span>
+                            <span class="blog-date">Coming Soon</span>
+                        </div>
+                        <h3 class="blog-title">Automating Manual Processes with LLMs</h3>
+                        <p class="blog-excerpt">Practical approaches to using large language models for workflow automation, with real examples of what works and what doesn't.</p>
+                        <a href="#" class="blog-read-more">Read More →</a>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="blog-card-header">
+                            <span class="blog-category">AI Strategy</span>
+                            <span class="blog-date">Coming Soon</span>
+                        </div>
+                        <h3 class="blog-title">Strategic AI Adoption vs. Hype</h3>
+                        <p class="blog-excerpt">How to evaluate AI opportunities with a focus on practical value rather than following trends. When AI makes sense, and when it doesn't.</p>
+                        <a href="#" class="blog-read-more">Read More →</a>
+                    </article>
+                    
+                    <article class="blog-card">
+                        <div class="blog-card-header">
+                            <span class="blog-category">DevOps</span>
+                            <span class="blog-date">Coming Soon</span>
+                        </div>
+                        <h3 class="blog-title">How Generative AI is Transforming DevOps Insights</h3>
+                        <p class="blog-excerpt">Exploring how LLMs can help teams understand system behavior, generate documentation, and extract insights from operational data.</p>
+                        <a href="#" class="blog-read-more">Read More →</a>
+                    </article>
+                </div>
+                
+                <div class="newsletter-section">
+                    <div class="newsletter-container">
+                        <h3 class="newsletter-title">Stay Updated</h3>
+                        <p class="newsletter-text">Get insights on AI, cloud architecture, and building better systems delivered to your inbox.</p>
+                        <form class="newsletter-form" id="newsletterForm">
+                            <div class="newsletter-form-group">
+                                <input type="email" id="newsletter-email" name="email" placeholder="Enter your email" required>
+                                <button type="submit" class="newsletter-submit">Subscribe</button>
+                            </div>
+                            <p class="newsletter-privacy">We respect your privacy. Unsubscribe at any time.</p>
+                            <div class="form-message" id="newsletterFormMessage"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Montebay Innovations LLC</h3>
+                    <p>Solving complex problems with clear, practical systems.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#home">Home</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="ai-intelligent-systems.html">AI + Intelligent Systems</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="insights.html">Insights</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: <a href="mailto:contact@montebay.io">contact@montebay.io</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Montebay Innovations LLC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
