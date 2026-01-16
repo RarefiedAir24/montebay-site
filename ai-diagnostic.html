@@ -46,9 +46,14 @@
             </div>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
             <nav class="nav-menu">
-                <a href="index.html#home" class="nav-link">Home</a>
-                <a href="index.html#about" class="nav-link">About</a>
-                <a href="index.html#services" class="nav-link">Services</a>
+                <div class="nav-dropdown">
+                    <a href="index.html#home" class="nav-link dropdown-toggle">Home <span class="dropdown-arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="index.html#home" class="dropdown-item">Home</a>
+                        <a href="index.html#about" class="dropdown-item">About</a>
+                        <a href="index.html#services" class="dropdown-item">Services</a>
+                    </div>
+                </div>
                 <a href="ai-intelligent-systems.html" class="nav-link">AI + Intelligent Systems</a>
                 <div class="nav-dropdown">
                     <a href="index.html#products" class="nav-link dropdown-toggle">Products <span class="dropdown-arrow">▼</span></a>
@@ -58,6 +63,7 @@
                     </div>
                 </div>
                 <a href="insights.html" class="nav-link">Insights</a>
+                <a href="index.html#faq" class="nav-link">FAQ</a>
                 <a href="index.html#contact" class="nav-link">Contact</a>
             </nav>
         </div>
