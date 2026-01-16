@@ -5134,6 +5134,399 @@ select:focus {
     to { transform: rotate(360deg); }
 }
 
+/* New Homepage Sections */
+
+/* Section 1: Clarity Paths */
+.clarity-paths-section {
+    padding: 6rem 2rem;
+    background: #fff;
+    color: #1a2a4a;
+}
+
+.clarity-paths-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.clarity-paths-headline {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #1a2a4a;
+    letter-spacing: -0.02em;
+}
+
+.clarity-paths-subtext {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+.clarity-paths-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.clarity-path-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem 2rem;
+    background: #fff;
+    border: 2px solid #e9ecef;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #1a2a4a;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.clarity-path-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-color: #5a8ab0;
+}
+
+.clarity-path-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.clarity-path-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.clarity-path-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Section 2: Path Explainers */
+.path-explainers-section {
+    padding: 5rem 2rem;
+    background: #f8f9fa;
+}
+
+.path-explainers-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.path-explainer-column {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.path-explainer-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1a2a4a;
+}
+
+.path-explainer-oneliner {
+    font-size: 1.125rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.path-explainer-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.path-explainer-bullets li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e9ecef;
+    color: #333;
+    line-height: 1.6;
+}
+
+.path-explainer-bullets li:last-child {
+    border-bottom: none;
+}
+
+.path-explainer-cta {
+    display: inline-block;
+    font-weight: 600;
+    color: #5a8ab0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.path-explainer-cta:hover {
+    color: #1a2a4a;
+    transform: translateX(4px);
+}
+
+/* Section 3: Why Montebay */
+.why-montebay-section {
+    padding: 5rem 2rem;
+    background: #fff;
+}
+
+.why-montebay-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.why-montebay-headline {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    color: #1a2a4a;
+    letter-spacing: -0.02em;
+}
+
+.why-montebay-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    text-align: left;
+}
+
+.why-montebay-column-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1a2a4a;
+}
+
+.why-montebay-column-text {
+    font-size: 1.125rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.why-montebay-outcomes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.why-montebay-outcomes li {
+    padding: 0.75rem 0;
+    color: #333;
+    line-height: 1.6;
+    font-size: 1.125rem;
+}
+
+/* Section 4: How It Works */
+.how-it-works-section {
+    padding: 5rem 2rem;
+    background: #f8f9fa;
+}
+
+.how-it-works-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.how-it-works-headline {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    color: #1a2a4a;
+    letter-spacing: -0.02em;
+}
+
+.how-it-works-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.how-it-works-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.how-it-works-step-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5a8ab0 0%, #7ab8e0 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.how-it-works-step-text {
+    font-size: 1.125rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.how-it-works-supporting {
+    font-size: 1.125rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Section 5: Primary Conversion */
+.primary-conversion-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, #1a2a4a 0%, #2a3a5a 100%);
+    color: #fff;
+    text-align: center;
+}
+
+.primary-conversion-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.primary-conversion-headline {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.primary-conversion-subtext {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+.primary-conversion-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 3rem;
+    background: #fff;
+    color: #1a2a4a;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
+}
+
+.primary-conversion-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.primary-conversion-cta-icon {
+    font-size: 1.5rem;
+}
+
+.primary-conversion-secondary {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.primary-conversion-link {
+    color: #fff;
+    text-decoration: underline;
+    transition: all 0.3s ease;
+}
+
+.primary-conversion-link:hover {
+    color: #5a8ab0;
+}
+
+/* Responsive Styles for New Sections */
+@media (max-width: 1024px) {
+    .clarity-paths-buttons {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .path-explainers-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .why-montebay-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .how-it-works-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .clarity-paths-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .clarity-paths-headline {
+        font-size: 2rem;
+    }
+    
+    .clarity-paths-subtext {
+        font-size: 1.125rem;
+    }
+    
+    .clarity-path-button {
+        padding: 2rem 1.5rem;
+    }
+    
+    .path-explainers-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .why-montebay-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .how-it-works-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .how-it-works-steps {
+        grid-template-columns: 1fr;
+    }
+    
+    .primary-conversion-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .primary-conversion-headline {
+        font-size: 2rem;
+    }
+    
+    .primary-conversion-cta {
+        padding: 1rem 2rem;
+        font-size: 1.125rem;
+    }
+}
+
 /* Print styles */
 @media print {
     .header,
