@@ -1312,7 +1312,27 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (!slidesContainer || slides.length === 0) return;
     
+    // Find the current month's blog post
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth(); // 0-11 (0 = January)
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                        'July', 'August', 'September', 'October', 'November', 'December'];
+    const currentMonthName = monthNames[currentMonth];
+    
+    // Find which slide corresponds to the current month
     let currentSlide = 0;
+    slides.forEach((slide, index) => {
+        const dateElement = slide.querySelector('.blog-date');
+        if (dateElement) {
+            const dateText = dateElement.textContent.trim();
+            // Check if this slide matches current month and year
+            if (dateText.includes(currentMonthName) && dateText.includes(currentYear.toString())) {
+                currentSlide = index;
+            }
+        }
+    });
+    
     const totalSlides = slides.length;
     
     // Touch/swipe support for mobile
