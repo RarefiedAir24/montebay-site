@@ -4116,6 +4116,9 @@ main {
     align-items: center;
     gap: 2rem;
     padding: 0 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .blog-carousel {
@@ -4142,7 +4145,8 @@ main {
     flex: 0 0 100%;
     width: 100%;
     min-width: 100%;
-    padding: 0 1rem;
+    max-width: 100%;
+    padding: 0;
     box-sizing: border-box;
     opacity: 0.3;
     transform: scale(0.85);
@@ -4150,6 +4154,7 @@ main {
     pointer-events: none;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .carousel-slide.active {
