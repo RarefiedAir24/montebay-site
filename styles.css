@@ -4101,13 +4101,72 @@ main {
     margin-bottom: 4rem;
 }
 
-/* Blog List Styles */
-.blog-list {
+/* Blog Carousel Styles */
+.blog-carousel-container {
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.blog-carousel-wrapper {
+    position: relative;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 2rem;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
+}
+
+.blog-carousel {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    min-height: 400px;
+}
+
+.carousel-slide {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    width: 100%;
+}
+
+.carousel-slide.active {
+    display: block;
+    opacity: 1;
+}
+
+.carousel-btn {
+    background: #5a8ab0;
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    z-index: 10;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.carousel-btn:hover {
+    background: #4a7a9f;
+    transform: scale(1.1);
+}
+
+.carousel-btn:active {
+    transform: scale(0.95);
+}
+
+.carousel-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .blog-card {
@@ -4329,8 +4388,18 @@ main {
         padding: 2rem;
     }
     
-    .blog-list {
-        gap: 1.5rem;
+    .blog-carousel-wrapper {
+        gap: 1rem;
+    }
+    
+    .carousel-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .blog-carousel {
+        min-height: 350px;
     }
     
     .newsletter-section {
