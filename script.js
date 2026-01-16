@@ -1470,3 +1470,77 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize
     updateCarousel();
 });
+
+// Clarity Path Button Highlighting
+document.addEventListener('DOMContentLoaded', function() {
+    const clarityPathButtons = document.querySelectorAll('.clarity-path-button');
+    const pathExplainerColumns = document.querySelectorAll('.path-explainer-column');
+    
+    // Map button hrefs to column IDs
+    const pathMap = {
+        'risk-blind-spots': 'risk-blind-spots',
+        'ai-automation': 'ai-automation',
+        'cloud-cost': 'cloud-cost'
+    };
+    
+    // Function to highlight a specific card
+    function highlightCard(targetId) {
+        // Remove highlight from all cards
+        pathExplainerColumns.forEach(column => {
+            column.classList.remove('path-explainer-highlighted');
+        });
+        
+        // Add highlight to target card
+        const targetColumn = document.getElementById(targetId);
+        if (targetColumn) {
+            targetColumn.classList.add('path-explainer-highlighted');
+            
+            // Scroll to the card with offset for header
+            setTimeout(() => {
+                const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
+                const elementPosition = targetColumn.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+    }
+    
+    // Handle button clicks
+    clarityPathButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const targetId = href.substring(1); // Remove the #
+                
+                // Check if it's a path explainer section
+                if (pathMap[targetId]) {
+                    e.preventDefault();
+                    highlightCard(targetId);
+                    
+                    // Update URL hash without triggering scroll
+                    history.pushState(null, null, href);
+                }
+            }
+        });
+    });
+    
+    // Handle hash changes (e.g., direct link or browser back/forward)
+    function handleHashChange() {
+        const hash = window.location.hash.substring(1);
+        if (pathMap[hash]) {
+            highlightCard(hash);
+        }
+    }
+    
+    // Check hash on page load
+    if (window.location.hash) {
+        handleHashChange();
+    }
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+});
