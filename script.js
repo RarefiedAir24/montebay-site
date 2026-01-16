@@ -1330,6 +1330,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Make active card clickable (unless it's "coming soon")
+    function handleCardClick(e) {
+        const activeSlide = slides[currentSlide];
+        if (!activeSlide || activeSlide.classList.contains('coming-soon')) {
+            return;
+        }
+        
+        // Don't navigate if clicking on the arrow buttons or links
+        if (e.target.closest('.carousel-btn') || e.target.closest('a')) {
+            return;
+        }
+        
+        // Find the "Read More" link in the active card
+        const readMoreLink = activeSlide.querySelector('.blog-read-more');
+        if (readMoreLink) {
+            window.location.href = readMoreLink.href;
+        }
+    }
+    
+    // Add click handler to slides container
+    if (slidesContainer) {
+        slidesContainer.addEventListener('click', handleCardClick);
+    }
+    
     function nextSlide() {
         currentSlide = (currentSlide + 1) % totalSlides;
         updateCarousel();

@@ -4152,6 +4152,18 @@ main {
     pointer-events: auto;
 }
 
+.carousel-slide.active:not(.coming-soon) {
+    cursor: pointer;
+}
+
+.carousel-slide.active:not(.coming-soon):hover {
+    transform: scale(1.02);
+}
+
+.carousel-slide.coming-soon {
+    cursor: default;
+}
+
 .carousel-btn {
     background: #5a8ab0;
     color: white;
