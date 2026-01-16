@@ -1304,42 +1304,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Blog Carousel Functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.querySelector('.blog-carousel');
+    const slidesContainer = document.querySelector('.carousel-slides-container');
     const slides = document.querySelectorAll('.carousel-slide');
     const prevBtn = document.querySelector('.carousel-prev');
     const nextBtn = document.querySelector('.carousel-next');
     
-    if (!carousel || slides.length === 0) {
-        return;
-    }
+    if (!slidesContainer || slides.length === 0) return;
     
     let currentSlide = 0;
     const totalSlides = slides.length;
     
-    // Initialize: show first slide
-    if (slides[0]) {
-        slides[0].classList.add('active');
-    }
-    
-    function showSlide(index) {
-        // Remove active class from all slides
-        slides.forEach(slide => slide.classList.remove('active'));
+    function updateCarousel() {
+        // Calculate the translateX value to center the current slide
+        // Each slide is 100% width, so we move by -100% * currentSlide
+        const translateX = -currentSlide * 100;
+        slidesContainer.style.transform = `translateX(${translateX}%)`;
         
-        // Add active class to current slide
-        if (slides[index]) {
-            slides[index].classList.add('active');
-            currentSlide = index;
-        }
+        // Update active class for visual effects (opacity, scale)
+        slides.forEach((slide, index) => {
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
     }
     
     function nextSlide() {
-        const next = (currentSlide + 1) % totalSlides;
-        showSlide(next);
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
     }
     
     function prevSlide() {
-        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
-        showSlide(prev);
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
     }
     
     // Event listeners for arrow buttons
@@ -1359,7 +1357,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Keyboard navigation (arrow keys)
     document.addEventListener('keydown', (e) => {
-        const section = carousel?.closest('section');
+        const section = slidesContainer?.closest('section');
         if (section) {
             const rect = section.getBoundingClientRect();
             // Only navigate if the carousel section is visible
@@ -1374,4 +1372,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    // Initialize
+    updateCarousel();
 });
