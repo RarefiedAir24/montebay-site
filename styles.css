@@ -4101,6 +4101,90 @@ main {
     margin-bottom: 4rem;
 }
 
+/* Blog Carousel Styles */
+.blog-carousel-container {
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.blog-carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.blog-carousel {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-slide {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.carousel-slide.active {
+    display: block;
+    opacity: 1;
+}
+
+.carousel-btn {
+    background: #5a8ab0;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background: #4a7a9f;
+    transform: scale(1.1);
+}
+
+.carousel-btn:active {
+    transform: scale(0.95);
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #5a8ab0;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.carousel-dot:hover {
+    background: rgba(90, 138, 176, 0.3);
+    transform: scale(1.2);
+}
+
+.carousel-dot.active {
+    background: #5a8ab0;
+    transform: scale(1.2);
+}
+
 .blog-card {
     background: #ffffff;
     border: 2px solid #e9ecef;
@@ -4318,6 +4402,20 @@ main {
     
     .blog-card {
         padding: 2rem;
+    }
+    
+    .blog-carousel-wrapper {
+        gap: 0.5rem;
+    }
+    
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    .carousel-indicators {
+        margin-top: 1.5rem;
     }
     
     .newsletter-section {
