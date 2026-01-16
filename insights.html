@@ -88,12 +88,12 @@
                     <p class="section-intro">Thoughts on AI, cloud architecture, automation, and the practical side of building systems that deliver real value.</p>
                 </div>
                 
-                <div class="blog-carousel-container">
+                <div class="blog-carousel-container" role="region" aria-label="Blog topics carousel">
                     <div class="blog-carousel-wrapper">
                         <button class="carousel-btn carousel-prev" aria-label="Previous topic">←</button>
                         <div class="blog-carousel">
-                            <div class="carousel-slides-container">
-                                <article class="blog-card carousel-slide active">
+                            <div class="carousel-slides-container" aria-live="polite" aria-atomic="true">
+                                <article class="blog-card carousel-slide active" aria-current="true">
                                     <div class="blog-card-header">
                                         <span class="blog-category">AI Insights</span>
                                         <span class="blog-date">December 2025</span>
@@ -125,6 +125,9 @@
                             </div>
                         </div>
                         <button class="carousel-btn carousel-next" aria-label="Next topic">→</button>
+                    </div>
+                    <div class="carousel-counter" aria-live="polite">
+                        <span class="carousel-counter-text"></span>
                     </div>
                 </div>
                 

@@ -1308,26 +1308,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.carousel-slide');
     const prevBtn = document.querySelector('.carousel-prev');
     const nextBtn = document.querySelector('.carousel-next');
+    const counterText = document.querySelector('.carousel-counter-text');
     
     if (!slidesContainer || slides.length === 0) return;
     
     let currentSlide = 0;
     const totalSlides = slides.length;
     
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isTransitioning = false;
+    
     function updateCarousel() {
         // Calculate the translateX value to center the current slide
-        // Each slide is 100% width, so we move by -100% * currentSlide
+        // Each slide is 100% width of the container, so we move by -100% * currentSlide
+        // This ensures the active slide is always fully visible and centered
         const translateX = -currentSlide * 100;
         slidesContainer.style.transform = `translateX(${translateX}%)`;
         
-        // Update active class for visual effects (opacity, scale)
+        // Update active class for visual effects (opacity, scale) and accessibility
         slides.forEach((slide, index) => {
             if (index === currentSlide) {
                 slide.classList.add('active');
+                slide.setAttribute('aria-current', 'true');
+                // Announce slide change to screen readers
+                const title = slide.querySelector('.blog-title')?.textContent || 'Blog topic';
+                slidesContainer.setAttribute('aria-label', `Showing: ${title}`);
             } else {
                 slide.classList.remove('active');
+                slide.removeAttribute('aria-current');
             }
         });
+        
+        // Update slide counter
+        if (counterText) {
+            counterText.textContent = `${currentSlide + 1} of ${totalSlides}`;
+        }
     }
     
     // Make active card clickable (unless it's "coming soon")
@@ -1355,13 +1372,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function nextSlide() {
+        if (isTransitioning) return;
+        isTransitioning = true;
         currentSlide = (currentSlide + 1) % totalSlides;
         updateCarousel();
+        setTimeout(() => { isTransitioning = false; }, 500);
     }
     
     function prevSlide() {
+        if (isTransitioning) return;
+        isTransitioning = true;
         currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
         updateCarousel();
+        setTimeout(() => { isTransitioning = false; }, 500);
+    }
+    
+    // Touch/swipe handlers for mobile
+    if (slidesContainer) {
+        slidesContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        
+        slidesContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+    }
+    
+    function handleSwipe() {
+        const swipeThreshold = 50; // Minimum distance for swipe
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swiped left - go to next
+                nextSlide();
+            } else {
+                // Swiped right - go to previous
+                prevSlide();
+            }
+        }
     }
     
     // Event listeners for arrow buttons

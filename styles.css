@@ -4209,6 +4209,27 @@ main {
     transform: none;
 }
 
+.carousel-btn:focus-visible {
+    outline: 3px solid #5a8ab0;
+    outline-offset: 2px;
+}
+
+.carousel-counter {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.carousel-counter-text {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(90, 138, 176, 0.1);
+    border-radius: 20px;
+    color: #5a8ab0;
+}
+
 .blog-card {
     background: #ffffff;
     border: 2px solid #e9ecef;
@@ -4440,6 +4461,22 @@ main {
     
     .blog-carousel {
         min-height: 350px;
+    }
+    
+    .carousel-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .carousel-counter {
+        margin-top: 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .blog-carousel-wrapper {
+        padding: 0 1rem;
+        gap: 1rem;
     }
     
     .newsletter-section {
