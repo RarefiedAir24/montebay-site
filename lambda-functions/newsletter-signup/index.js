@@ -1,12 +1,25 @@
 const { SESClient, SendEmailCommand } = require('@aws-sdk/client-ses');
+const { DynamoDBClient, GetItemCommand } = require('@aws-sdk/client-dynamodb');
+const crypto = require('crypto');
 // Optional: Add mailing list service SDK (Mailchimp, ConvertKit, etc.)
 // const mailchimp = require('@mailchimp/mailchimp_marketing');
 
 const sesClient = new SESClient({ region: process.env.AWS_REGION || 'us-east-2' });
+const dynamoClient = new DynamoDBClient({ region: process.env.AWS_REGION || 'us-east-2' });
 
 // Email configuration
 const TO_EMAIL = process.env.TO_EMAIL || 'contact@montebay.io';
 const FROM_EMAIL = process.env.FROM_EMAIL || 'contact@montebay.io';
+const UNSUBSCRIBE_TABLE = process.env.UNSUBSCRIBE_TABLE || 'montebay-unsubscribes';
+const UNSUBSCRIBE_SECRET = process.env.UNSUBSCRIBE_SECRET || 'change-this-secret-key-in-production';
+const UNSUBSCRIBE_BASE_URL = process.env.UNSUBSCRIBE_BASE_URL || 'https://www.montebay.io/unsubscribe.html';
+const API_GATEWAY_URL = process.env.API_GATEWAY_URL || 'https://bisrhls8q9.execute-api.us-east-2.amazonaws.com/prod';
+
+// Generate unsubscribe token from email
+function generateUnsubscribeToken(email) {
+    const hash = crypto.createHmac('sha256', UNSUBSCRIBE_SECRET).update(email.toLowerCase()).digest('hex');
+    return Buffer.from(`${email}:${hash}`).toString('base64url');
+}
 
 // Mailing list configuration (optional)
 const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
@@ -68,8 +81,37 @@ exports.handler = async (event) => {
             };
         }
 
-        const email = formData.email;
+        const email = formData.email.toLowerCase();
         const name = formData.name || '';
+
+        // Check if email is already unsubscribed
+        try {
+            const checkParams = {
+                TableName: UNSUBSCRIBE_TABLE,
+                Key: {
+                    email: { S: email }
+                }
+            };
+            const existing = await dynamoClient.send(new GetItemCommand(checkParams));
+            if (existing.Item) {
+                console.log(`⚠️ [Lambda] Email is unsubscribed: ${email}`);
+                return {
+                    statusCode: 200,
+                    headers,
+                    body: JSON.stringify({
+                        success: false,
+                        error: 'This email address has been unsubscribed. Please contact us if you wish to resubscribe.'
+                    })
+                };
+            }
+        } catch (dynamoError) {
+            console.error('⚠️ [Lambda] Error checking unsubscribe status:', dynamoError);
+            // Continue with signup if DynamoDB check fails (table might not exist yet)
+        }
+
+        // Generate unsubscribe token
+        const unsubscribeToken = generateUnsubscribeToken(email);
+        const unsubscribeUrl = `${UNSUBSCRIBE_BASE_URL}?token=${unsubscribeToken}`;
 
         // Add to mailing list (if configured)
         let mailingListSuccess = false;
@@ -164,7 +206,7 @@ exports.handler = async (event) => {
                     <p>Solving complex problems with clear, practical systems.</p>
                     <p>Questions? Contact us at <a href="mailto:contact@montebay.io">contact@montebay.io</a></p>
                     <p style="margin-top: 20px; font-size: 0.85em;">
-                        <a href="[UNSUBSCRIBE_URL]">Unsubscribe</a> | 
+                        <a href="${unsubscribeUrl}">Unsubscribe</a> | 
                         <a href="https://www.montebay.io">Visit Website</a>
                     </p>
                 </div>
@@ -191,6 +233,8 @@ In the meantime, check out our latest insights at https://www.montebay.io/insigh
 Montebay Innovations
 Solving complex problems with clear, practical systems.
 Questions? Contact us at contact@montebay.io
+
+Unsubscribe: ${unsubscribeUrl}
         `;
 
         const emailParams = {
