@@ -235,6 +235,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Clear field errors on input
+    document.querySelectorAll('input, textarea, select').forEach(field => {
+        field.addEventListener('input', function() {
+            if (this.classList.contains('error')) {
+                clearFieldError(this);
+            }
+        });
+        field.addEventListener('change', function() {
+            if (this.classList.contains('error')) {
+                clearFieldError(this);
+            }
+        });
+    });
+    
     // Contact form handling
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
@@ -279,18 +293,60 @@ document.addEventListener('DOMContentLoaded', function() {
             const subject = formData.get('subject');
             const message = formData.get('message');
             
-            // Basic validation
-            if (!name || !email || !interest || !subject || !message) {
-                showFormMessage('Please fill in all required fields.', 'error');
+            // Clear previous errors
+            clearAllFieldErrors(contactForm);
+            
+            let hasErrors = false;
+            
+            // Field-level validation
+            const nameField = contactForm.querySelector('#name');
+            if (!name || !name.trim()) {
+                showFieldError(nameField, 'Name is required.');
+                hasErrors = true;
+            }
+            
+            const emailField = contactForm.querySelector('#email');
+            if (!email || !email.trim()) {
+                showFieldError(emailField, 'Email is required.');
+                hasErrors = true;
+            } else {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showFieldError(emailField, 'Please enter a valid email address.');
+                    hasErrors = true;
+                }
+            }
+            
+            const interestField = contactForm.querySelector('#interest');
+            if (!interest || interest === '') {
+                showFieldError(interestField, 'Please select an option.');
+                hasErrors = true;
+            }
+            
+            const subjectField = contactForm.querySelector('#subject');
+            if (!subject || !subject.trim()) {
+                showFieldError(subjectField, 'Subject is required.');
+                hasErrors = true;
+            }
+            
+            const messageField = contactForm.querySelector('#message');
+            if (!message || !message.trim()) {
+                showFieldError(messageField, 'Message is required.');
+                hasErrors = true;
+            }
+            
+            if (hasErrors) {
+                // Focus first error field
+                const firstError = contactForm.querySelector('.error');
+                if (firstError) {
+                    firstError.focus();
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
                 return;
             }
             
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showFormMessage('Please enter a valid email address.', 'error');
-                return;
-            }
+            // Clear field errors on successful validation
+            clearAllFieldErrors(contactForm);
             
             // Show loading state
             const submitBtn = contactForm.querySelector('.submit-btn');
@@ -386,6 +442,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Field-level error handling
+    function showFieldError(field, message) {
+        // Remove existing error
+        clearFieldError(field);
+        
+        // Add error class to field
+        field.classList.add('error');
+        field.setAttribute('aria-invalid', 'true');
+        
+        // Create or update error message
+        let errorElement = field.parentElement.querySelector('.field-error');
+        if (!errorElement) {
+            errorElement = document.createElement('div');
+            errorElement.className = 'field-error';
+            errorElement.setAttribute('role', 'alert');
+            field.parentElement.appendChild(errorElement);
+        }
+        errorElement.textContent = message;
+        errorElement.classList.add('show');
+        
+        // Add aria-describedby
+        const errorId = `error-${field.id || field.name}`;
+        errorElement.id = errorId;
+        field.setAttribute('aria-describedby', errorId);
+    }
+    
+    function clearFieldError(field) {
+        field.classList.remove('error');
+        field.removeAttribute('aria-invalid');
+        const errorElement = field.parentElement.querySelector('.field-error');
+        if (errorElement) {
+            errorElement.classList.remove('show');
+            errorElement.textContent = '';
+        }
+        field.removeAttribute('aria-describedby');
+    }
+    
+    function clearAllFieldErrors(form) {
+        const errorFields = form.querySelectorAll('.error');
+        errorFields.forEach(field => clearFieldError(field));
+    }
+    
     function showFormMessage(message, type) {
         if (formMessage) {
             formMessage.textContent = message;
@@ -418,18 +516,91 @@ document.addEventListener('DOMContentLoaded', function() {
         auditForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Clear previous errors
+            clearAllFieldErrors(auditForm);
+            
+            let hasErrors = false;
+            
+            // Validate required text fields
+            const requiredFields = ['full-name', 'work-email', 'company-name', 'role-title'];
+            requiredFields.forEach(fieldName => {
+                const field = auditForm.querySelector(`[name="${fieldName}"]`);
+                if (field && (!field.value || !field.value.trim())) {
+                    showFieldError(field, `${field.previousElementSibling?.textContent?.replace('*', '').trim() || 'This field'} is required.`);
+                    hasErrors = true;
+                }
+            });
+            
+            // Validate email format
+            const emailField = auditForm.querySelector('[name="work-email"]');
+            if (emailField && emailField.value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailField.value)) {
+                    showFieldError(emailField, 'Please enter a valid email address.');
+                    hasErrors = true;
+                }
+            }
+            
+            // Validate radio groups
+            const awsEnvironmentField = auditForm.querySelector('input[name="aws-environment-type"]:checked');
+            if (!awsEnvironmentField) {
+                const radioGroup = auditForm.querySelector('input[name="aws-environment-type"]');
+                if (radioGroup) {
+                    showFieldError(radioGroup.closest('.form-group'), 'Please select an AWS environment type.');
+                    hasErrors = true;
+                }
+            }
+            
+            const monthlySpendField = auditForm.querySelector('input[name="monthly-aws-spend"]:checked');
+            if (!monthlySpendField) {
+                const radioGroup = auditForm.querySelector('input[name="monthly-aws-spend"]');
+                if (radioGroup) {
+                    showFieldError(radioGroup.closest('.form-group'), 'Please select monthly AWS spend range.');
+                    hasErrors = true;
+                }
+            }
+            
+            const auditTierField = auditForm.querySelector('input[name="audit-tier"]:checked');
+            if (!auditTierField) {
+                const radioGroup = auditForm.querySelector('input[name="audit-tier"]');
+                if (radioGroup) {
+                    showFieldError(radioGroup.closest('.form-group'), 'Please select an audit tier.');
+                    hasErrors = true;
+                }
+            }
+            
             // Validate checkbox groups (at least one required)
             const concernsCheckboxes = auditForm.querySelectorAll('input[name="audit-concerns"]:checked');
             if (concernsCheckboxes.length === 0) {
-                showAuditFormMessage('Please select at least one primary concern.', 'error');
-                return;
+                const firstCheckbox = auditForm.querySelector('input[name="audit-concerns"]');
+                if (firstCheckbox) {
+                    showFieldError(firstCheckbox.closest('.form-group'), 'Please select at least one primary concern.');
+                    hasErrors = true;
+                }
             }
             
             const confirmationsCheckboxes = auditForm.querySelectorAll('input[name="audit-confirmations"]:checked');
             if (confirmationsCheckboxes.length !== 3) {
-                showAuditFormMessage('Please confirm all boundary requirements.', 'error');
+                const firstCheckbox = auditForm.querySelector('input[name="audit-confirmations"]');
+                if (firstCheckbox) {
+                    showFieldError(firstCheckbox.closest('.form-group'), 'Please confirm all boundary requirements.');
+                    hasErrors = true;
+                }
+            }
+            
+            if (hasErrors) {
+                // Focus first error field
+                const firstError = auditForm.querySelector('.error, .form-group:has(.error)');
+                if (firstError) {
+                    const focusableField = firstError.querySelector('input, textarea, select') || firstError;
+                    focusableField.focus();
+                    focusableField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
                 return;
             }
+            
+            // Clear field errors on successful validation
+            clearAllFieldErrors(auditForm);
             
             // Get form data
             const formData = new FormData(auditForm);
@@ -651,18 +822,82 @@ document.addEventListener('DOMContentLoaded', function() {
         cyberAdvisoryForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Clear previous errors
+            clearAllFieldErrors(cyberAdvisoryForm);
+            
+            let hasErrors = false;
+            
+            // Validate required text fields
+            const requiredFields = ['full-name', 'work-email', 'company-name', 'role-title'];
+            requiredFields.forEach(fieldName => {
+                const field = cyberAdvisoryForm.querySelector(`[name="${fieldName}"]`);
+                if (field && (!field.value || !field.value.trim())) {
+                    showFieldError(field, `${field.previousElementSibling?.textContent?.replace('*', '').trim() || 'This field'} is required.`);
+                    hasErrors = true;
+                }
+            });
+            
+            // Validate email format
+            const emailField = cyberAdvisoryForm.querySelector('[name="work-email"]');
+            if (emailField && emailField.value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailField.value)) {
+                    showFieldError(emailField, 'Please enter a valid email address.');
+                    hasErrors = true;
+                }
+            }
+            
+            // Validate radio groups
+            const orgTypeField = cyberAdvisoryForm.querySelector('input[name="organization-type"]:checked');
+            if (!orgTypeField) {
+                const radioGroup = cyberAdvisoryForm.querySelector('input[name="organization-type"]');
+                if (radioGroup) {
+                    showFieldError(radioGroup.closest('.form-group'), 'Please select an organization type.');
+                    hasErrors = true;
+                }
+            }
+            
+            const advisoryTierField = cyberAdvisoryForm.querySelector('input[name="advisory-tier"]:checked');
+            if (!advisoryTierField) {
+                const radioGroup = cyberAdvisoryForm.querySelector('input[name="advisory-tier"]');
+                if (radioGroup) {
+                    showFieldError(radioGroup.closest('.form-group'), 'Please select an advisory tier.');
+                    hasErrors = true;
+                }
+            }
+            
             // Validate checkbox groups (at least one required)
             const concernsCheckboxes = cyberAdvisoryForm.querySelectorAll('input[name="cyber-concerns"]:checked');
             if (concernsCheckboxes.length === 0) {
-                showCyberAdvisoryFormMessage('Please select at least one primary concern.', 'error');
-                return;
+                const firstCheckbox = cyberAdvisoryForm.querySelector('input[name="cyber-concerns"]');
+                if (firstCheckbox) {
+                    showFieldError(firstCheckbox.closest('.form-group'), 'Please select at least one primary concern.');
+                    hasErrors = true;
+                }
             }
             
             const confirmationsCheckboxes = cyberAdvisoryForm.querySelectorAll('input[name="cyber-confirmations"]:checked');
             if (confirmationsCheckboxes.length !== 3) {
-                showCyberAdvisoryFormMessage('Please confirm all scope requirements.', 'error');
+                const firstCheckbox = cyberAdvisoryForm.querySelector('input[name="cyber-confirmations"]');
+                if (firstCheckbox) {
+                    showFieldError(firstCheckbox.closest('.form-group'), 'Please confirm all scope requirements.');
+                    hasErrors = true;
+                }
+            }
+            
+            if (hasErrors) {
+                // Focus first error field
+                const firstError = cyberAdvisoryForm.querySelector('.error, .form-group:has(.error)');
+                if (firstError) {
+                    const focusableField = firstError.querySelector('input, textarea, select') || firstError;
+                    focusableField.focus();
+                    focusableField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
                 return;
             }
+            
+            // Clear field errors on successful validation
+            clearAllFieldErrors(cyberAdvisoryForm);
             
             // Get form data
             const formData = new FormData(cyberAdvisoryForm);
@@ -1543,4 +1778,76 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange);
+});
+
+// Back to Top Button
+document.addEventListener('DOMContentLoaded', function() {
+    // Create back to top button
+    const backToTopBtn = document.createElement('button');
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.setAttribute('aria-label', 'Scroll to top');
+    backToTopBtn.innerHTML = '↑';
+    backToTopBtn.setAttribute('title', 'Back to top');
+    document.body.appendChild(backToTopBtn);
+    
+    // Show/hide button based on scroll position
+    function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    }
+    
+    // Scroll to top on click
+    backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        // Announce to screen readers
+        const announcement = document.createElement('div');
+        announcement.setAttribute('role', 'status');
+        announcement.setAttribute('aria-live', 'polite');
+        announcement.className = 'sr-only';
+        announcement.textContent = 'Scrolled to top of page';
+        document.body.appendChild(announcement);
+        setTimeout(() => announcement.remove(), 1000);
+    });
+    
+    // Listen for scroll events
+    window.addEventListener('scroll', toggleBackToTop);
+    toggleBackToTop(); // Check initial state
+});
+
+// Reading Time Calculation
+function calculateReadingTime(contentElement) {
+    if (!contentElement) return null;
+    
+    const text = contentElement.innerText || contentElement.textContent || '';
+    const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+    const wordCount = words.length;
+    
+    // Average reading speed: 200-250 words per minute
+    // Using 225 as a middle ground
+    const wordsPerMinute = 225;
+    const readingTime = Math.ceil(wordCount / wordsPerMinute);
+    
+    return readingTime;
+}
+
+// Add reading time to blog posts
+document.addEventListener('DOMContentLoaded', function() {
+    const blogContent = document.querySelector('.blog-post-content');
+    const blogMeta = document.querySelector('.blog-post-meta');
+    
+    if (blogContent && blogMeta) {
+        const readingTime = calculateReadingTime(blogContent);
+        if (readingTime) {
+            const readingTimeElement = document.createElement('span');
+            readingTimeElement.className = 'reading-time';
+            readingTimeElement.textContent = `${readingTime} min read`;
+            blogMeta.appendChild(readingTimeElement);
+        }
+    }
 });

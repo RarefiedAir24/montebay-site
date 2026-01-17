@@ -55,6 +55,40 @@ if [ -f "montebay_logo.png" ]; then
     echo "✅ Created: montebay_logo.webp"
 fi
 
+# Blog images (JPG)
+if [ -f "assets/images/blog/ai-devops-symbiotic-relationship.jpg" ]; then
+    echo "Converting ai-devops-symbiotic-relationship.jpg..."
+    cwebp -q 85 -m 6 "assets/images/blog/ai-devops-symbiotic-relationship.jpg" -o "assets/images/blog/ai-devops-symbiotic-relationship.webp"
+    echo "✅ Created: assets/images/blog/ai-devops-symbiotic-relationship.webp"
+fi
+
+# Optimize existing images further (if imagemagick is available)
+if command -v convert &> /dev/null; then
+    echo ""
+    echo "📉 Further optimizing images with ImageMagick..."
+    
+    # Optimize PNGs (lossless compression)
+    find . -name "*.png" -not -path "./node_modules/*" -not -path "./.git/*" | while read img; do
+        if [ -f "$img" ]; then
+            echo "Optimizing $img..."
+            convert "$img" -strip -quality 95 "$img"
+        fi
+    done
+    
+    # Optimize JPGs
+    find . -name "*.jpg" -o -name "*.jpeg" | while read img; do
+        if [ -f "$img" ]; then
+            echo "Optimizing $img..."
+            convert "$img" -strip -quality 85 "$img"
+        fi
+    done
+else
+    echo ""
+    echo "💡 Tip: Install ImageMagick for further image optimization:"
+    echo "   macOS: brew install imagemagick"
+    echo "   Linux: sudo apt-get install imagemagick"
+fi
+
 echo ""
 echo "✨ Image optimization complete!"
 echo ""
