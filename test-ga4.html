@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA4 Tag Test - Montebay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #007bff; }
+        button {
+            background: #5a8ab0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #4a7a9f;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 GA4 Tag Test Tool</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Check if gtag.js is loaded</h2>
+        <button onclick="testGtagLoaded()">Test gtag.js</button>
+        <div id="gtag-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 2: Check if dataLayer exists</h2>
+        <button onclick="testDataLayer()">Test dataLayer</button>
+        <div id="datalayer-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 3: Check Measurement ID</h2>
+        <button onclick="testMeasurementID()">Test Measurement ID</button>
+        <div id="measurement-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 4: Send Test Event</h2>
+        <button onclick="sendTestEvent()">Send Test Event</button>
+        <div id="event-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Test 5: Check Network Requests</h2>
+        <p>Open browser DevTools (F12) → Network tab → Filter for "gtag" or "analytics"</p>
+        <p>Then visit: <a href="https://montebay.io" target="_blank">https://montebay.io</a></p>
+        <p>You should see requests to <code>googletagmanager.com</code></p>
+    </div>
+    
+    <div id="results"></div>
+    
+    <script>
+        function testGtagLoaded() {
+            const resultDiv = document.getElementById('gtag-test');
+            if (typeof gtag !== 'undefined') {
+                resultDiv.innerHTML = '<p class="success">✅ gtag function is loaded!</p>';
+            } else {
+                resultDiv.innerHTML = '<p class="error">❌ gtag function is NOT loaded. Check if the script tag is present in the HTML.</p>';
+            }
+        }
+        
+        function testDataLayer() {
+            const resultDiv = document.getElementById('datalayer-test');
+            if (typeof dataLayer !== 'undefined' && Array.isArray(dataLayer)) {
+                resultDiv.innerHTML = `<p class="success">✅ dataLayer exists!</p><p>Current dataLayer length: ${dataLayer.length}</p><pre>${JSON.stringify(dataLayer, null, 2)}</pre>`;
+            } else {
+                resultDiv.innerHTML = '<p class="error">❌ dataLayer is NOT defined. The GA4 tag may not be initialized.</p>';
+            }
+        }
+        
+        function testMeasurementID() {
+            const resultDiv = document.getElementById('measurement-test');
+            const scripts = document.querySelectorAll('script[src*="gtag"]');
+            if (scripts.length > 0) {
+                const src = scripts[0].src;
+                const match = src.match(/id=([^&]+)/);
+                if (match && match[1] === 'G-3WEDTE56HH') {
+                    resultDiv.innerHTML = `<p class="success">✅ Measurement ID found: ${match[1]}</p>`;
+                } else {
+                    resultDiv.innerHTML = `<p class="error">❌ Measurement ID mismatch. Found: ${match ? match[1] : 'none'}</p>`;
+                }
+            } else {
+                resultDiv.innerHTML = '<p class="error">❌ No gtag script tag found in the page.</p>';
+            }
+        }
+        
+        function sendTestEvent() {
+            const resultDiv = document.getElementById('event-test');
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'test_event', {
+                    'event_category': 'test',
+                    'event_label': 'Manual test',
+                    'value': 1
+                });
+                resultDiv.innerHTML = '<p class="success">✅ Test event sent! Check GA4 Realtime reports.</p>';
+            } else {
+                resultDiv.innerHTML = '<p class="error">❌ Cannot send event - gtag is not loaded.</p>';
+            }
+        }
+        
+        // Auto-run tests on load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                testGtagLoaded();
+                testDataLayer();
+                testMeasurementID();
+            }, 2000);
+        });
+    </script>
+    
+    <!-- Include the actual GA4 tag from your site -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3WEDTE56HH"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3WEDTE56HH', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+        });
+    </script>
+</body>
+</html>
