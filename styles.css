@@ -5768,6 +5768,14 @@ select:focus {
     font-size: 1rem;
 }
 
+/* Case Studies Grid Responsive */
+@media (max-width: 768px) {
+    .services-container > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+}
+
 /* Print styles */
 @media print {
     .header,
