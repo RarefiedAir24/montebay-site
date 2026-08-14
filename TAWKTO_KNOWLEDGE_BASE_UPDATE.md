@@ -1,3 +1,8 @@
+> **SUPERSEDED - 2026-08-14.** The Tawk.to chat widget was removed from every
+> page of montebay.io and the paid subscription was cancelled. This document is
+> retained for historical reference only; the widget is no longer installed.
+> Removal commit: `0b21302`.
+
 # Tawk.to AI Knowledge Base Update Guide
 
 ## Overview
