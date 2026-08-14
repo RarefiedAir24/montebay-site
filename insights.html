@@ -19,7 +19,11 @@
             'cookie_flags': 'SameSite=None;Secure'
         });
     </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="design-system.css">
     <script src="script.js" defer></script>
     <!-- Tawk.to chat widget disabled 2026-08-14 (subscription cancelled).
          To restore, uncomment this block and confirm the property ID is still valid.
@@ -36,7 +40,7 @@
     </script>
     -->
 </head>
-<body>
+<body class="mb">
     <header class="header">
         <div class="header-container">
             <div class="logo-container">
@@ -48,15 +52,10 @@
                 </a>
                 <span class="company-name">MONTEBAY INNOVATIONS</span>
             </div>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
-            <nav class="nav-menu">
-                <div class="nav-dropdown">
-                    <a href="index.html#home" class="nav-link dropdown-toggle">Home <span class="dropdown-arrow">▼</span></a>
-                    <div class="dropdown-menu">
-                        <a href="index.html#about" class="dropdown-item">About</a>
-                        <a href="index.html#services" class="dropdown-item">Services</a>
-                    </div>
-                </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
+            <nav class="nav-menu" id="nav-menu" role="navigation" aria-label="Main navigation">
+                <a href="index.html#paths" class="nav-link">Services</a>
+                <a href="index.html#pricing" class="nav-link">Pricing</a>
                 <a href="ai-intelligent-systems.html" class="nav-link">AI</a>
                 <div class="nav-dropdown">
                     <a href="index.html#products" class="nav-link dropdown-toggle">Products <span class="dropdown-arrow">▼</span></a>
@@ -99,7 +98,7 @@
                 
                 <div class="blog-carousel-container" role="region" aria-label="Blog topics carousel">
                     <div class="blog-carousel-wrapper">
-                        <button class="carousel-btn carousel-prev" aria-label="Previous topic">←</button>
+                        <button class="carousel-btn carousel-prev" aria-label="Previous topic"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
                         <div class="blog-carousel">
                             <div class="carousel-slides-container" aria-live="polite" aria-atomic="true">
                                 <article class="blog-card carousel-slide">
@@ -109,7 +108,7 @@
                                     </div>
                                     <h3 class="blog-title">AI for Cloud Cost Saving</h3>
                                     <p class="blog-excerpt">How machine learning can help predict and optimize cloud spending, moving beyond reactive cost management to proactive optimization.</p>
-                                    <a href="blog/ai-cloud-cost-saving.html" class="blog-read-more">Read More →</a>
+                                    <a href="blog/ai-cloud-cost-saving.html" class="blog-read-more">Read more <svg class="mb-icon mb-icon--inline" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
                                 </article>
                                 
                                 <article class="blog-card carousel-slide">
@@ -119,7 +118,7 @@
                                     </div>
                                     <h3 class="blog-title">How Generative AI Is Transforming DevOps Insights</h3>
                                     <p class="blog-excerpt">From raw telemetry to real understanding. Exploring how LLMs can help teams understand system behavior, generate documentation, and extract insights from operational data.</p>
-                                    <a href="blog/generative-ai-devops-insights.html" class="blog-read-more">Read More →</a>
+                                    <a href="blog/generative-ai-devops-insights.html" class="blog-read-more">Read more <svg class="mb-icon mb-icon--inline" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
                                 </article>
                                 
                                 <article class="blog-card carousel-slide coming-soon">
@@ -133,7 +132,7 @@
                                 </article>
                             </div>
                         </div>
-                        <button class="carousel-btn carousel-next" aria-label="Next topic">→</button>
+                        <button class="carousel-btn carousel-next" aria-label="Next topic"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
                     </div>
                     <div class="carousel-counter" aria-live="polite">
                         <span class="carousel-counter-text"></span>
@@ -168,9 +167,9 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html#home">Home</a></li>
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#experience">About</a></li>
+                        <li><a href="index.html#paths">Services</a></li>
                         <li><a href="ai-intelligent-systems.html">AI</a></li>
                         <li><a href="index.html#products">Products</a></li>
                         <li><a href="insights.html">Insights</a></li>
@@ -183,7 +182,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Montebay Innovations LLC. All rights reserved.</p>
+                <p>&copy; 2026 Montebay Innovations LLC. All rights reserved.</p>
             </div>
         </div>
     </footer>

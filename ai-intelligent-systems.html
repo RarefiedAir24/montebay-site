@@ -20,7 +20,11 @@
             'cookie_flags': 'SameSite=None;Secure'
         });
     </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="design-system.css">
     <script src="script.js" defer></script>
     <!-- Tawk.to chat widget disabled 2026-08-14 (subscription cancelled).
          To restore, uncomment this block and confirm the property ID is still valid.
@@ -37,7 +41,7 @@
     </script>
     -->
 </head>
-<body>
+<body class="mb">
     <header class="header">
         <div class="header-container">
             <div class="logo-container">
@@ -49,15 +53,10 @@
                 </a>
                 <span class="company-name">MONTEBAY INNOVATIONS</span>
             </div>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
-            <nav class="nav-menu">
-                <div class="nav-dropdown">
-                    <a href="index.html#home" class="nav-link dropdown-toggle">Home <span class="dropdown-arrow">▼</span></a>
-                    <div class="dropdown-menu">
-                        <a href="index.html#about" class="dropdown-item">About</a>
-                        <a href="index.html#services" class="dropdown-item">Services</a>
-                    </div>
-                </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
+            <nav class="nav-menu" id="nav-menu" role="navigation" aria-label="Main navigation">
+                <a href="index.html#paths" class="nav-link">Services</a>
+                <a href="index.html#pricing" class="nav-link">Pricing</a>
                 <a href="ai-intelligent-systems.html" class="nav-link">AI</a>
                 <div class="nav-dropdown">
                     <a href="index.html#products" class="nav-link dropdown-toggle">Products <span class="dropdown-arrow">▼</span></a>
@@ -104,37 +103,37 @@
                 
                 <div class="ai-capabilities-grid">
                     <div class="ai-capability-card">
-                        <div class="ai-capability-icon">🎯</div>
+                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
                         <h3 class="ai-capability-title">AI for System Optimization</h3>
                         <p class="ai-capability-description">Leverage machine learning to identify inefficiencies, predict bottlenecks, and optimize resource allocation across your infrastructure. Move beyond reactive monitoring to proactive optimization.</p>
                     </div>
                     
                     <div class="ai-capability-card">
-                        <div class="ai-capability-icon">⚙️</div>
+                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
                         <h3 class="ai-capability-title">AI-Powered Automation</h3>
                         <p class="ai-capability-description">Reduce manual work with intelligent automation that learns from your workflows and adapts to your team's needs. We build automation that gets smarter over time, not more brittle.</p>
                     </div>
                     
                     <div class="ai-capability-card">
-                        <div class="ai-capability-icon">📊</div>
+                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></div>
                         <h3 class="ai-capability-title">AI-Driven Operational Insights</h3>
                         <p class="ai-capability-description">Move from reactive monitoring to predictive intelligence. Get insights before issues become problems, with AI-driven visibility into systems, costs, and performance.</p>
                     </div>
                     
                     <div class="ai-capability-card">
-                        <div class="ai-capability-icon">🧠</div>
+                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
                         <h3 class="ai-capability-title">Generative AI Support</h3>
                         <p class="ai-capability-description">Expert guidance on prompt engineering, LLM integration, and building AI-powered workflows that deliver real value. We help you navigate the hype and focus on practical applications.</p>
                     </div>
                     
                     <div class="ai-capability-card">
-                        <div class="ai-capability-icon">🔍</div>
+                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
                         <h3 class="ai-capability-title">Intelligent System Monitoring</h3>
                         <p class="ai-capability-description">Predictive AI that identifies patterns and anomalies before they impact operations. Transform your monitoring from alert fatigue to actionable intelligence.</p>
                     </div>
                     
                     <div class="ai-capability-card">
-                        <div class="ai-capability-icon">💰</div>
+                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
                         <h3 class="ai-capability-title">AI-Assisted Forecasting</h3>
                         <p class="ai-capability-description">Use AI to predict cloud costs, resource needs, and capacity requirements. Make data-driven decisions about infrastructure investments and optimizations.</p>
                     </div>
@@ -203,7 +202,7 @@
                         
                         <div class="approach-features">
                             <div class="approach-feature">
-                                <div class="approach-feature-icon">✓</div>
+                                <div class="approach-feature-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
                                 <div class="approach-feature-content">
                                     <h4 class="approach-feature-title">Outcome-Focused</h4>
                                     <p class="approach-feature-text">We measure success by business impact, not model accuracy. Every AI solution is designed to solve a specific problem and deliver measurable results.</p>
@@ -211,7 +210,7 @@
                             </div>
                             
                             <div class="approach-feature">
-                                <div class="approach-feature-icon">✓</div>
+                                <div class="approach-feature-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
                                 <div class="approach-feature-content">
                                     <h4 class="approach-feature-title">Practical Integration</h4>
                                     <p class="approach-feature-text">AI enhances our existing services—it doesn't replace them. We integrate AI tools and insights into workflows you already trust.</p>
@@ -219,7 +218,7 @@
                             </div>
                             
                             <div class="approach-feature">
-                                <div class="approach-feature-icon">✓</div>
+                                <div class="approach-feature-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
                                 <div class="approach-feature-content">
                                     <h4 class="approach-feature-title">No Black Boxes</h4>
                                     <p class="approach-feature-text">We explain how AI systems work and what they're doing. You understand the insights, not just receive recommendations.</p>
@@ -227,7 +226,7 @@
                             </div>
                             
                             <div class="approach-feature">
-                                <div class="approach-feature-icon">✓</div>
+                                <div class="approach-feature-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
                                 <div class="approach-feature-content">
                                     <h4 class="approach-feature-title">Selective Application</h4>
                                     <p class="approach-feature-text">We use AI where it adds value and skip it where simpler solutions work better. Not every problem needs AI, and we're honest about that.</p>
@@ -291,7 +290,7 @@
                         </div>
                         
                         <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e9ecef;">
-                            <p style="font-weight: 600; color: #5a8ab0; font-size: 1.125rem; margin: 0;"><strong>Outcome:</strong> teams that understand their systems, act sooner, and operate with less friction.</p>
+                            <p style="font-weight: 600; color: #2C5F8A; font-size: 1.125rem; margin: 0;"><strong>Outcome:</strong> teams that understand their systems, act sooner, and operate with less friction.</p>
                         </div>
                     </div>
                 </div>
@@ -354,13 +353,13 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html#home">Home</a></li>
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#experience">About</a></li>
+                        <li><a href="index.html#paths">Services</a></li>
                         <li><a href="ai-intelligent-systems.html">AI</a></li>
                         <li><a href="index.html#products">Products</a></li>
-                        <li><a href="index.html#wordflect">Wordflect</a></li>
-                        <li><a href="index.html#soteria">Soteria</a></li>
+                        <li><a href="wordflect.html">Wordflect</a></li>
+                        <li><a href="soteria.html">Soteria</a></li>
                         <li><a href="index.html#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -370,7 +369,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Montebay Innovations LLC. All rights reserved.</p>
+                <p>&copy; 2026 Montebay Innovations LLC. All rights reserved.</p>
             </div>
         </div>
     </footer>

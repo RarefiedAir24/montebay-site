@@ -1,0 +1,606 @@
+/* ==========================================================================
+   Montebay Innovations - Design System
+   Loaded AFTER styles.css on every page so tokens and refreshed components
+   win over the legacy stylesheet. New markup uses the mb- prefix, so legacy
+   rules never collide with it.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
+:root {
+    /* Color. Eight tokens replacing 75 scattered literals.
+       Contrast measured against --paper unless noted. */
+    --ink:      #0E1726;  /* body text, headings          15.9:1 */
+    --navy:     #1A2A4A;  /* dark surfaces, header        existing brand mark */
+    --blue:     #2C5F8A;  /* links and text on light       6.7:1 */
+    --steel:    #5A8AB0;  /* fills, borders, text on navy ONLY - never on paper */
+    --ember:    #B24A21;  /* the single primary CTA        5.3:1, and 4.6:1 white-on-ember */
+    --ember-dk: #8F3A19;  /* ember hover/active */
+    --paper:    #FAF9F7;  /* page canvas, warm */
+    --hairline: #E4E1DB;  /* dividers, card borders */
+    --muted:    #5C6470;  /* secondary text                5.7:1 */
+
+    --white:    #FFFFFF;
+    --navy-dk:  #101B32;  /* deep navy for scrims and footer */
+
+    /* Type */
+    --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+    --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* Eight-step scale. The top three are fluid. */
+    --t-xs:   0.8125rem;  /* 13 */
+    --t-sm:   0.9375rem;  /* 15 */
+    --t-base: 1.0625rem;  /* 17 */
+    --t-md:   1.25rem;    /* 20 */
+    --t-lg:   1.5rem;     /* 24 */
+    --t-xl:   clamp(1.625rem, 1.3rem + 1.6vw, 2rem);      /* 26 -> 32 */
+    --t-2xl:  clamp(2rem, 1.5rem + 2.5vw, 2.75rem);       /* 32 -> 44 */
+    --t-3xl:  clamp(2.25rem, 1.4rem + 4.2vw, 4rem);       /* 36 -> 64 */
+
+    /* Spacing, 4/8 rhythm */
+    --s-1: 0.25rem;  --s-2: 0.5rem;   --s-3: 0.75rem;  --s-4: 1rem;
+    --s-6: 1.5rem;   --s-8: 2rem;     --s-12: 3rem;    --s-16: 4rem;
+    --s-24: 6rem;    --s-32: 8rem;
+
+    /* Section rhythm */
+    --section-y: clamp(3.5rem, 2rem + 6vw, 6rem);
+
+    --radius:    10px;
+    --radius-sm: 6px;
+    --container: 1120px;
+    --measure:   68ch;
+
+    --shadow-1: 0 1px 2px rgba(14, 23, 38, 0.06), 0 1px 3px rgba(14, 23, 38, 0.04);
+    --shadow-2: 0 4px 12px rgba(14, 23, 38, 0.07), 0 2px 4px rgba(14, 23, 38, 0.04);
+
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Base
+   -------------------------------------------------------------------------- */
+body.mb {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--t-base);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* :where() keeps this at 0,1,0 specificity on purpose. A plain
+   `body.mb h1, body.mb h2, body.mb h3` scores 0,1,2 and silently beats every
+   contextual override like `.mb-section--navy h2`, which paints dark headings
+   onto dark panels. Anything more specific than a single class now wins. */
+body.mb :where(h1, h2, h3) {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.011em;
+    line-height: 1.15;
+    color: var(--ink);
+}
+
+body.mb :focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+.mb-container {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--s-6);
+}
+
+.mb-section { padding-block: var(--section-y); }
+.mb-section--paper   { background: var(--paper); }
+.mb-section--white   { background: var(--white); }
+.mb-section--navy    { background: var(--navy); color: #E8EDF5; }
+.mb-section--navy h2,
+.mb-section--navy h3 { color: var(--white); }
+
+.mb-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--blue);
+    display: block;
+    margin-bottom: var(--s-3);
+}
+.mb-section--navy .mb-eyebrow { color: #8FB3D0; }  /* steel is 3.87:1 here, too low for 13px */
+
+.mb-h2 { font-size: var(--t-2xl); margin: 0 0 var(--s-4); }
+.mb-h3 { font-size: var(--t-md); margin: 0 0 var(--s-2); }
+
+.mb-lede {
+    font-size: var(--t-md);
+    color: var(--muted);
+    max-width: var(--measure);
+    margin: 0 0 var(--s-12);
+}
+.mb-section--navy .mb-lede { color: #B9C6D8; }
+
+.mb-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   3. Buttons. One primary per screen.
+   -------------------------------------------------------------------------- */
+.mb-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-2);
+    min-height: 48px;
+    padding: var(--s-3) var(--s-8);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: var(--t-base);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: background-color 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease);
+}
+.mb-btn--primary { background: var(--ember); color: var(--white); }
+.mb-btn--primary:hover { background: var(--ember-dk); color: var(--white); }
+
+.mb-btn--ghost { background: transparent; color: var(--ink); border-color: var(--hairline); }
+.mb-btn--ghost:hover { border-color: var(--blue); color: var(--blue); }
+
+.mb-btn--on-dark { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.45); }
+.mb-btn--on-dark:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+
+.mb-textlink {
+    color: var(--blue);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1.5px solid rgba(44, 95, 138, 0.3);
+    padding-bottom: 1px;
+    transition: border-color 200ms var(--ease);
+}
+.mb-textlink:hover { border-bottom-color: var(--blue); }
+
+/* --------------------------------------------------------------------------
+   4. Icons. Lucide, one stroke width, one size token.
+   -------------------------------------------------------------------------- */
+.mb-icon {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+.mb-icon--lg { width: 28px; height: 28px; }
+.mb-icon--inline { width: 1em; height: 1em; vertical-align: -0.125em; }
+
+/* Legacy icon slots on the product and AI pages used to hold an emoji glyph.
+   They now hold an SVG, so size and color it here rather than by font-size. */
+body.mb .approach-feature-icon,
+body.mb .ai-capability-icon,
+body.mb .about-experience-icon,
+body.mb .about-client-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blue);
+    line-height: 1;
+}
+body.mb .approach-feature-icon .mb-icon,
+body.mb .ai-capability-icon .mb-icon,
+body.mb .about-experience-icon .mb-icon,
+body.mb .about-client-icon .mb-icon { width: 28px; height: 28px; }
+
+body.mb .mobile-menu-toggle {
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    background: none;
+    border: 0;
+}
+@media (max-width: 900px) {
+    body.mb .mobile-menu-toggle { display: inline-flex; }
+}
+body.mb .mobile-menu-toggle .mb-icon { width: 26px; height: 26px; }
+
+/* --------------------------------------------------------------------------
+   5. Hero
+   -------------------------------------------------------------------------- */
+.mb-hero {
+    position: relative;
+    min-height: 88vh;
+    min-height: 88dvh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--navy-dk);
+}
+.mb-hero__media { position: absolute; inset: 0; z-index: 0; }
+.mb-hero__media video,
+.mb-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+/* The scrim. Top-heavy so the headline band stays dark while the lower
+   frame keeps some of the footage visible. Measured: white on this scrim
+   over the brightest sampled frame clears 7:1. */
+.mb-hero__scrim {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg,
+            rgba(16, 27, 50, 0.86) 0%,
+            rgba(16, 27, 50, 0.74) 45%,
+            rgba(16, 27, 50, 0.62) 100%);
+}
+.mb-hero__inner { position: relative; z-index: 1; width: 100%; padding-block: var(--s-24) var(--s-16); }
+.mb-hero__content { max-width: 44rem; }
+
+body.mb .mb-hero h1 {
+    font-size: var(--t-3xl);
+    color: var(--white);
+    max-width: 15ch;
+    margin: 0 0 var(--s-6);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+}
+.mb-hero__sub {
+    font-size: var(--t-md);
+    color: #DCE5F0;
+    max-width: 46ch;
+    margin: 0 0 var(--s-3);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.mb-hero__terms {
+    font-family: var(--font-mono);
+    font-size: var(--t-sm);
+    color: #A9BDD6;
+    margin: 0 0 var(--s-8);
+    letter-spacing: 0.01em;
+}
+.mb-hero__actions { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; }
+
+/* --------------------------------------------------------------------------
+   6. Cards
+   -------------------------------------------------------------------------- */
+.mb-grid { display: grid; gap: var(--s-6); }
+.mb-grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+.mb-grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); }
+.mb-grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+
+.mb-card {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--s-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+}
+.mb-card__icon { color: var(--blue); margin-bottom: var(--s-1); }
+.mb-card p { margin: 0; color: var(--muted); font-size: var(--t-sm); }
+.mb-card h3 { margin: 0; }
+
+/* Triage cards are links, so they need press affordance */
+a.mb-card {
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease);
+}
+a.mb-card:hover { border-color: var(--blue); box-shadow: var(--shadow-2); }
+a.mb-card .mb-card__more {
+    margin-top: auto;
+    padding-top: var(--s-4);
+    color: var(--blue);
+    font-weight: 600;
+    font-size: var(--t-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+}
+
+.mb-card__outcome {
+    margin-top: var(--s-2);
+    padding-top: var(--s-3);
+    border-top: 1px solid var(--hairline);
+    font-size: var(--t-xs) !important;
+    color: var(--muted) !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. Steps
+   -------------------------------------------------------------------------- */
+.mb-steps { counter-reset: step; display: grid; gap: var(--s-8); }
+.mb-step { display: flex; gap: var(--s-4); align-items: flex-start; }
+.mb-step__n {
+    font-family: var(--font-mono);
+    font-size: var(--t-sm);
+    font-weight: 600;
+    color: var(--blue);
+    border: 1.5px solid var(--hairline);
+    border-radius: 50%;
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    background: var(--white);
+}
+.mb-step p { margin: 0; padding-top: var(--s-2); }
+
+/* --------------------------------------------------------------------------
+   8. Proof / case studies
+   -------------------------------------------------------------------------- */
+.mb-case { background: var(--white); border: 1px solid var(--hairline); border-radius: var(--radius); padding: var(--s-8); }
+.mb-case h3 { margin-bottom: var(--s-3); }
+.mb-case__ctx { color: var(--muted); font-size: var(--t-sm); margin: 0 0 var(--s-6); }
+.mb-case__list { list-style: none; padding: 0; margin: 0 0 var(--s-6); }
+.mb-case__list li {
+    display: flex; gap: var(--s-3); align-items: flex-start;
+    padding: var(--s-2) 0;
+    font-size: var(--t-sm);
+    border-bottom: 1px solid var(--hairline);
+}
+.mb-case__list li:last-child { border-bottom: 0; }
+.mb-case__list .mb-icon { width: 18px; height: 18px; color: var(--blue); margin-top: 4px; }
+.mb-case__result {
+    border-left: 3px solid var(--ember);
+    background: rgba(178, 74, 33, 0.05);
+    padding: var(--s-4) var(--s-6);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.mb-case__result p { margin: 0; font-size: var(--t-sm); color: var(--ink); }
+.mb-case__result strong { color: var(--ink); }
+
+/* --------------------------------------------------------------------------
+   9. Experience strip
+   -------------------------------------------------------------------------- */
+.mb-exp { display: flex; gap: var(--s-4); align-items: flex-start; }
+.mb-exp .mb-icon { color: var(--steel); margin-top: 2px; }
+.mb-exp h3 { color: var(--white); font-family: var(--font-body); font-size: var(--t-sm); font-weight: 600; color: var(--white); margin: 0 0 var(--s-1); }
+.mb-exp p { margin: 0; font-size: var(--t-sm); color: #B9C6D8; }
+
+/* --------------------------------------------------------------------------
+   10. Pricing
+   -------------------------------------------------------------------------- */
+.mb-tier {
+    background: var(--white);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: var(--s-8);
+    display: flex; flex-direction: column;
+}
+.mb-tier--featured { border-color: var(--ember); border-width: 1.5px; }
+/* Reserve the badge's height in unbadged tiers so all three cards align. */
+.mb-tier:not(.mb-tier--featured)::before {
+    content: "";
+    display: block;
+    height: 1.65em;
+    font-size: var(--t-xs);
+    margin-bottom: var(--s-2);
+}
+.mb-tier__badge {
+    display: block;
+    line-height: 1.65;
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ember);
+    margin-bottom: var(--s-2);
+}
+.mb-tier__name { font-family: var(--font-body); font-size: var(--t-sm); font-weight: 600; color: var(--muted); margin: 0 0 var(--s-2); text-transform: uppercase; letter-spacing: 0.05em; }
+.mb-tier__price { font-family: var(--font-mono); font-size: var(--t-xl); font-weight: 600; color: var(--ink); margin: 0 0 var(--s-4); font-variant-numeric: tabular-nums; }
+.mb-tier__desc { font-size: var(--t-sm); color: var(--muted); margin: 0 0 var(--s-6); }
+.mb-tier .mb-btn { margin-top: auto; }
+
+/* --------------------------------------------------------------------------
+   11. FAQ
+   -------------------------------------------------------------------------- */
+.mb-faq { max-width: 44rem; }
+.mb-faq__item { border-bottom: 1px solid var(--hairline); }
+.mb-faq__q {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
+    padding: var(--s-6) 0;
+    font-family: var(--font-body);
+    font-size: var(--t-base);
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-4);
+    min-height: 48px;
+}
+.mb-faq__q .mb-icon { color: var(--blue); transition: transform 200ms var(--ease); }
+.mb-faq__q[aria-expanded="true"] .mb-icon { transform: rotate(45deg); }
+.mb-faq__a { padding: 0 0 var(--s-6); color: var(--muted); font-size: var(--t-sm); max-width: var(--measure); }
+.mb-faq__a p { margin: 0; }
+.mb-faq__a[hidden] { display: none; }
+
+/* --------------------------------------------------------------------------
+   12. Contact form
+   -------------------------------------------------------------------------- */
+.mb-form { max-width: 34rem; display: grid; gap: var(--s-4); }
+.mb-field { display: grid; gap: var(--s-2); }
+.mb-field label { font-size: var(--t-sm); font-weight: 600; color: var(--ink); }
+.mb-field input,
+.mb-field select,
+.mb-field textarea {
+    font-family: var(--font-body);
+    font-size: 1rem;            /* 16px floor. Anything smaller triggers iOS focus zoom. */
+    min-height: 48px;
+    padding: var(--s-3) var(--s-4);
+    border: 1.5px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    color: var(--ink);
+    width: 100%;
+}
+.mb-field textarea { min-height: 8rem; resize: vertical; padding-top: var(--s-3); }
+.mb-field input:focus, .mb-field select:focus, .mb-field textarea:focus { border-color: var(--blue); }
+.mb-field__hint { font-size: var(--t-xs); color: var(--muted); }
+
+/* Legacy intake forms (moved to audit.html / advisory.html). They keep their
+   styles.css layout; these rules only fix the sizing defects. */
+body.mb .audit-form input[type="text"],
+body.mb .audit-form input[type="email"],
+body.mb .audit-form input[type="tel"],
+body.mb .audit-form input[type="url"],
+body.mb .audit-form input[type="number"],
+body.mb .audit-form select,
+body.mb .audit-form textarea {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    min-height: 48px;
+}
+body.mb .audit-form textarea { min-height: 7rem; }
+/* Checkbox and radio rows are tap targets, not just decoration. */
+body.mb .audit-form .radio-option,
+body.mb .audit-form .checkbox-option {
+    min-height: 44px;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-3);
+}
+body.mb .audit-form label { font-family: var(--font-body); }
+
+/* --------------------------------------------------------------------------
+   13. Products strip
+   -------------------------------------------------------------------------- */
+.mb-product { display: flex; gap: var(--s-4); align-items: center; text-decoration: none; color: inherit; }
+.mb-product img { width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0; }
+.mb-product h3 { margin: 0 0 2px; font-size: var(--t-base); }
+.mb-product p { margin: 0; font-size: var(--t-sm); color: var(--muted); }
+
+/* --------------------------------------------------------------------------
+   14. Header, nav and footer refresh (overrides legacy styles.css)
+   -------------------------------------------------------------------------- */
+body.mb .header { background: var(--navy); border-bottom: 1px solid rgba(255,255,255,0.09); }
+body.mb .company-name { font-family: var(--font-display); font-weight: 600; letter-spacing: 0.02em; }
+body.mb .nav-link,
+body.mb .dropdown-item { font-family: var(--font-body); font-size: var(--t-sm); font-weight: 500; }
+body.mb .nav-link { min-height: 44px; display: inline-flex; align-items: center; }
+body.mb .mobile-menu-toggle { min-width: 44px; min-height: 44px; font-size: 1.5rem; }
+
+body.mb .footer { background: var(--navy-dk); color: #B9C6D8; }
+body.mb .footer a { color: #DCE5F0; }
+
+.mb-skip {
+    position: absolute;
+    left: -9999px;
+    z-index: 9999;
+    padding: var(--s-3) var(--s-6);
+    background: var(--ember);
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0 0 var(--radius-sm) 0;
+}
+.mb-skip:focus { left: 0; top: 0; }
+
+/* --------------------------------------------------------------------------
+   15. Utilities
+   -------------------------------------------------------------------------- */
+.mb-stack-sm > * + * { margin-top: var(--s-4); }
+.mb-mt-8  { margin-top: var(--s-8); }
+.mb-mt-12 { margin-top: var(--s-12); }
+.mb-center { text-align: center; margin-inline: auto; }
+.mb-sr {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   16. Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    /* The hero video is decorative. Stop it and show the poster instead. */
+    .mb-hero__media video { display: none; }
+    .mb-hero__media .mb-hero__poster { display: block; }
+}
+.mb-hero__media .mb-hero__poster { display: none; }
+
+/* --------------------------------------------------------------------------
+   17. Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+    .mb-hero__content { max-width: 100%; }
+}
+
+@media (max-width: 640px) {
+    :root { --section-y: 3rem; }
+    .mb-hero { min-height: 82vh; min-height: 82dvh; }
+    .mb-hero__inner { padding-block: var(--s-16) var(--s-12); }
+    .mb-hero__actions { flex-direction: column; align-items: stretch; }
+    .mb-hero__actions .mb-btn { width: 100%; }
+    .mb-card, .mb-case, .mb-tier { padding: var(--s-6); }
+
+    /* 16px floor everywhere on mobile. Prevents iOS focus zoom. */
+    body.mb input,
+    body.mb select,
+    body.mb textarea {
+        font-size: 16px !important;
+        min-height: 48px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   18. Legacy component contrast fixes
+   Measured in the browser against the real painted background. Steel (#5A8AB0)
+   is a fill and on-navy color; on white it lands at 3.3-3.5:1 and fails AA.
+   -------------------------------------------------------------------------- */
+body.mb .section-label {
+    color: var(--blue);          /* was #5A8AB0 at 3.31:1 */
+    font-family: var(--font-mono);
+    font-size: var(--t-xs);      /* was 10.5px */
+    letter-spacing: 0.11em;
+}
+body.mb .recommended-badge {
+    color: var(--ember);         /* was #5A8AB0 at 3.49:1 */
+    font-family: var(--font-mono);
+    font-weight: 500;
+}
+/* Any remaining steel-on-light text in the legacy sheet. */
+body.mb .path-explainer-cta,
+body.mb .blog-read-more,
+body.mb .btn-back { color: var(--blue); }
+
+/* The logo lockup is a link on the form pages; give it a real hit area. */
+body.mb .logo-container a { min-height: 44px; }
+
+/* --------------------------------------------------------------------------
+   19. Legacy video hero scrim
+   The original .video-overlay ran rgba(26,42,74,.3) -> .1 -> .4. At the .1 band
+   white headline text measured 1.24:1 over bright surf. Same top-heavy scrim as
+   the homepage hero, which measures 10:1 worst case across the clip.
+   -------------------------------------------------------------------------- */
+body.mb .video-overlay {
+    background: linear-gradient(180deg,
+        rgba(16, 27, 50, 0.86) 0%,
+        rgba(16, 27, 50, 0.74) 45%,
+        rgba(16, 27, 50, 0.62) 100%);
+}
