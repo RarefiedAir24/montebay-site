@@ -1,0 +1,159 @@
+/* Montebay redesign prototypes. Shared tokens and type.
+   Chrome is near-monochrome on purpose: the product screenshots supply the
+   only saturated color on the page. */
+
+:root {
+    --abyss: #08131F;
+    --navy:  #152A45;
+    --ice:   #F5F8FB;
+    --mist:  #E6EDF4;
+    --hair:  #74899E;
+    --slate: #4B6076;
+    --haze:  #9FB4C9;
+    --beam:  #0C6FB0;
+    --lit:   #5CC2F5;
+    --white: #FFFFFF;
+
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem; --s6:1.5rem;
+    --s8:2rem; --s12:3rem; --s16:4rem; --s24:6rem; --s32:8rem;
+
+    --wide: 1240px;
+    --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    background: var(--ice);
+    color: var(--abyss);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--wide); margin-inline: auto; padding-inline: var(--s6); }
+
+/* Display type. The idea is width contrast: very wide headlines against a
+   normal-width body face, rather than the usual serif-vs-sans move. */
+h1, h2, h3 {
+    font-family: var(--display);
+    font-variation-settings: "wdth" 118;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 0.98;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--beam);
+    display: block;
+    margin-bottom: var(--s4);
+}
+.on-dark .eyebrow { color: var(--lit); }
+
+.meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+}
+.on-dark .meta { color: var(--haze); }
+
+p { margin: 0 0 var(--s4); max-width: 62ch; }
+.lede { font-size: 20px; color: var(--slate); }
+.on-dark { background: var(--abyss); color: var(--mist); }
+.on-dark .lede { color: var(--haze); }
+.on-dark h1, .on-dark h2, .on-dark h3 { color: var(--white); }
+
+a { color: var(--beam); }
+.on-dark a { color: var(--lit); }
+
+.band { padding-block: var(--s24); }
+.band--tight { padding-block: var(--s16); }
+
+/* Header */
+.hdr {
+    position: absolute; inset: 0 0 auto 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--s6) var(--s8);
+}
+.hdr img { width: 34px; height: 34px; display: block; }
+.hdr .mark { display: flex; align-items: center; gap: var(--s3); }
+.hdr .name {
+    font-family: var(--display);
+    font-variation-settings: "wdth" 112;
+    font-weight: 600; font-size: 13px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--white);
+}
+.hdr nav { display: flex; gap: var(--s6); }
+.hdr nav a {
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--haze); text-decoration: none;
+    min-height: 44px; display: inline-flex; align-items: center;
+}
+.hdr nav a:hover { color: var(--white); }
+
+/* Buttons */
+.btn {
+    display: inline-flex; align-items: center; gap: var(--s2);
+    font-family: var(--mono); font-size: 13px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    min-height: 48px; padding: 0 var(--s6);
+    text-decoration: none; border: 1px solid var(--hair);
+    color: var(--abyss); background: transparent;
+    transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.btn:hover { background: var(--abyss); color: var(--white); border-color: var(--abyss); }
+.on-dark .btn { color: var(--white); border-color: rgba(255,255,255,.35); }
+.on-dark .btn:hover { background: var(--white); color: var(--abyss); border-color: var(--white); }
+
+:focus-visible { outline: 2px solid var(--lit); outline-offset: 3px; }
+
+/* Product plate */
+.plate { display: grid; grid-template-columns: 1fr 1.15fr; gap: var(--s16); align-items: center; }
+.plate__shots { display: flex; gap: var(--s4); min-width: 0; }
+.plate__shots img {
+    flex: 1 1 0; min-width: 0;
+    width: 100%; max-width: 200px; height: auto; display: block;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 24px 60px rgba(0,0,0,.55);
+}
+.on-light .plate__shots img { border-color: var(--mist); box-shadow: 0 20px 50px rgba(8,19,31,.16); }
+.plate h2 { font-size: clamp(2.4rem, 5vw, 4rem); margin-bottom: var(--s4); }
+.plate .meta { margin-bottom: var(--s6); display: block; }
+
+@media (max-width: 900px) {
+    .plate { grid-template-columns: 1fr; gap: var(--s8); }
+    .plate__shots img { max-width: 160px; }
+    .hdr nav { display: none; }
+    .band { padding-block: var(--s16); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+    html { scroll-behavior: auto; }
+    video { display: none; }
+}
+
+@media (max-width: 560px) {
+    .plate__shots { gap: var(--s2); }
+    .plate__shots img { max-width: none; border-radius: 12px; }
+    .wrap { padding-inline: var(--s4); }
+}

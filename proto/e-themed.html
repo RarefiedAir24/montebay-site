@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montebay Innovations</title>
+
+<!-- Resolve the theme before first paint so there is no flash of the wrong one. -->
+<script>
+(function(){
+  try {
+    var p = localStorage.getItem('montebay-theme') || 'system';
+    var t = (p === 'surf' || p === 'rock') ? p
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'rock' : 'surf');
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'surf');
+  }
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<header class="hdr">
+    <div class="mark">
+        <img src="../montebay_logo.png" alt="">
+        <span class="name">Montebay</span>
+    </div>
+    <nav>
+        <a href="#products">Products</a>
+        <a href="#build">How we build</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="theme-picker" role="radiogroup" aria-label="Colour theme">
+        <button type="button" data-theme="system" role="radio" aria-checked="false" title="Match system" aria-label="Match system">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+        </button>
+        <button type="button" data-theme="surf" role="radio" aria-checked="false" title="Surf, light" aria-label="Surf, light theme">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 4.9-1.4 1.4"/></svg>
+        </button>
+        <button type="button" data-theme="rock" role="radio" aria-checked="false" title="Rock, dark" aria-label="Rock, dark theme">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6.4 6.4 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="wrap">
+        <div class="markframe">
+            <div class="markwin">
+                <video autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                    <source src="../assets/videos/montebay_ocean_loop.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <span class="eyebrow">Independent product studio</span>
+        <h1>We build and operate our own software.</h1>
+        <p class="lede">A small studio. Three products in market on iOS and Android, designed, shipped and maintained in-house.</p>
+    </div>
+</section>
+
+<section class="row" id="products">
+    <div class="wrap">
+        <div class="plate">
+            <div>
+                <span class="eyebrow">Product 01</span>
+                <h2>Svelio</h2>
+                <span class="meta">iOS &middot; Android &middot; live</span>
+                <p class="lede">Point a camera at a nutrition label or a plate of food. Svelio reads it and tells you what is actually in it, with no guessing and no manual entry.</p>
+                <a class="btn" href="https://svelio.io">Visit svelio.io</a>
+            </div>
+            <div class="shots">
+                <img src="../assets/images/svelio/1-analysis.png" alt="Svelio analysis screen">
+                <img src="../assets/images/svelio/5-dashboard.png" alt="Svelio dashboard">
+                <img src="../assets/images/svelio/3-coach.png" alt="Svelio coach">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row">
+    <div class="wrap">
+        <div class="plate">
+            <div class="icon-pair">
+                <img src="../assets/images/wordflect_app.png" alt="Wordflect">
+                <img src="../assets/images/soteria_app.png" alt="Soteria">
+            </div>
+            <div>
+                <span class="eyebrow">Products 02 &amp; 03</span>
+                <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem)">Wordflect &amp; Soteria</h2>
+                <span class="meta">iOS &middot; live</span>
+                <p class="lede">A minimalist word puzzle, and a behavioral finance app that makes you pause before a decision. Both built and run in-house.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row" id="build">
+    <div class="wrap">
+        <span class="eyebrow">How we build</span>
+        <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);max-width:16ch">Simple systems, thoughtful automation</h2>
+        <p class="lede" style="margin-top:var(--s6)">We keep the surface area small, automate what should be automated, and leave the decisions with the person using the product.</p>
+    </div>
+</section>
+
+<section class="row" id="contact">
+    <div class="wrap">
+        <span class="eyebrow">Contact</span>
+        <h2 style="font-size:clamp(1.4rem,2.6vw,2rem)"><a href="mailto:info@montebay.io" style="text-decoration:none">info@montebay.io</a></h2>
+    </div>
+</section>
+
+<script src="theme.js" defer></script>
+</body>
+</html>

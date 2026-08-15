@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C. Type as signature | Montebay prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="proto.css">
+<style>
+    .hero { position: relative; min-height: 100svh; padding-block: clamp(4rem, 10vh, 7rem); display: flex; align-items: center; overflow: hidden; background: var(--abyss); }
+    .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .38; }
+    .hero__scrim { position: absolute; inset: 0; background: linear-gradient(120deg, rgba(8,19,31,.95) 30%, rgba(8,19,31,.55) 100%); }
+    .hero__in { position: relative; z-index: 2; width: 100%; }
+
+    /* The whole idea: one enormous wordmark, edge to edge, tightly tracked.
+       No ornament anywhere near it. */
+    .giant {
+        font-family: var(--display);
+        font-variation-settings: "wdth" 125;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--white);
+        line-height: .84;
+        letter-spacing: -0.045em;
+        font-size: clamp(2.2rem, min(14vw, 19vh), 13rem);
+        margin: 0;
+    }
+    .giant span { display: block; }
+    .giant .thin { font-weight: 400; color: var(--haze); }
+
+    .undertype {
+        display: grid; grid-template-columns: 1fr auto; gap: var(--s8);
+        align-items: end; margin-top: var(--s12);
+        border-top: 1px solid rgba(255,255,255,.2); padding-top: var(--s6);
+    }
+    .undertype p { color: var(--haze); max-width: 46ch; margin: 0; }
+    .idx { font-family: var(--mono); font-size: 12px; letter-spacing:.14em; text-transform: uppercase; color: var(--lit); }
+</style>
+</head>
+<body>
+
+<header class="hdr">
+    <div class="mark">
+        <img src="../montebay_logo.png" alt="Montebay Innovations">
+    </div>
+    <nav>
+        <a href="#products">Products</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <video autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="../assets/videos/montebay_site.mp4" type="video/mp4"></video>
+    <div class="hero__scrim"></div>
+    <div class="hero__in">
+        <div class="wrap">
+            <h1 class="giant">
+                <span>Montebay</span>
+                <span class="thin">Innovations</span>
+            </h1>
+            <div class="undertype">
+                <p>We build and operate our own software. A small studio, three products in market on iOS and Android, designed and maintained in-house.</p>
+                <span class="idx">Est. 2024 &middot; FL, USA</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="band on-dark" id="products">
+    <div class="wrap">
+        <div class="plate">
+            <div>
+                <span class="eyebrow">Product 01</span>
+                <h2>Svelio</h2>
+                <span class="meta">iOS &middot; Android &middot; live</span>
+                <p class="lede">Point a camera at a nutrition label or a plate of food. Svelio reads it and tells you what is actually in it.</p>
+                <a class="btn" href="https://svelio.io">Visit svelio.io</a>
+            </div>
+            <div class="plate__shots">
+                <img src="../assets/images/svelio/1-analysis.png" alt="Svelio analysis screen">
+                <img src="../assets/images/svelio/5-dashboard.png" alt="Svelio dashboard">
+                <img src="../assets/images/svelio/3-coach.png" alt="Svelio coach">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="band band--tight on-dark" id="contact" style="border-top:1px solid rgba(255,255,255,.12)">
+    <div class="wrap">
+        <span class="eyebrow">Contact</span>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.4rem)">info@montebay.io</h2>
+    </div>
+</section>
+
+</body>
+</html>

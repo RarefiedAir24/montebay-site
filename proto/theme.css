@@ -1,0 +1,239 @@
+/* ==========================================================================
+   Montebay theme system.
+
+   Two themes named for what the brand is made of:
+     SURF  (light) - whitewater and foam
+     ROCK  (dark)  - wet basalt
+
+   Colours are grounded in published natural references (basalt #4C4A4A,
+   volcanic rock #6B6965, seafoam #B8C3B5, oceanic teal #2A9D8F) rather than
+   sampled from the old hero clip, which was low resolution, heavily
+   compressed and already colour graded.
+
+   ROCK is deliberately NOT navy. The hero footage averages #1B414C, so a navy
+   field sits at 1.16:1 against the mark and it disappears. Basalt opposes the
+   teal in hue as well as luminance.
+
+   Every pair below is measured. Lowest text pair is 5.22:1, lowest UI border
+   3.14:1.
+   ========================================================================== */
+
+:root,
+:root[data-theme="surf"] {
+    color-scheme: light;
+
+    --canvas:    #F2F5F3;   /* foam white */
+    --surface:   #FFFFFF;   /* cards, 1.10 separation from canvas */
+    --text:      #1A1919;   /* basalt at text weight, 15.98:1 */
+    --muted:     #4C4A4A;   /* basalt, canonical, 8.02:1 */
+    --hair:      #848C88;   /* 3.14:1, meets the UI-component floor */
+    --accent:    #1F7268;   /* oceanic teal, darkened for AA, 5.22:1 */
+    --on-accent: #FFFFFF;   /* 5.73:1 on accent */
+
+    --stroke:    #1A1919;             /* outline around the mark */
+    --video-grade: none;              /* fill reads at 10.03:1 here, untouched */
+    --logo-filter: brightness(0);     /* the logo asset is white, invert it */
+    --shadow: 0 18px 44px rgba(26,25,25,.14), 0 2px 6px rgba(26,25,25,.07);
+}
+
+:root[data-theme="rock"] {
+    color-scheme: dark;
+
+    --canvas:    #1A1919;   /* wet basalt */
+    --surface:   #262525;   /* 1.15 separation */
+    --text:      #F2F5F3;   /* foam white, 15.98:1 */
+    --muted:     #B8C3B5;   /* seafoam, canonical, 9.62:1 */
+    --hair:      #6B6965;   /* volcanic rock, canonical, 3.20:1 */
+    --accent:    #7FD9C9;   /* pale seafoam, 10.59:1 */
+    --on-accent: #1A1919;
+
+    --stroke:    #F2F5F3;
+    /* Lifts the mark fill from #1B414C (1.59:1, invisible) to #227B92 (3.61:1)
+       so the shape separates on its own instead of leaning on the stroke. */
+    --video-grade: brightness(1.8) saturate(1.3);
+    --logo-filter: none;
+    --shadow: 0 18px 44px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.45);
+}
+
+/* Type and spacing, theme independent -------------------------------------- */
+:root {
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem; --s6:1.5rem;
+    --s8:2rem; --s12:3rem; --s16:4rem; --s24:6rem;
+    --wide: 1240px;
+    --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+
+.wrap { max-width: var(--wide); margin-inline: auto; padding-inline: var(--s6); }
+
+h1, h2, h3 {
+    font-family: var(--display);
+    font-variation-settings: "wdth" 118;
+    font-weight: 600;
+    /* One value, optically correct across the whole 22-72px range. Resolves to
+       -0.022em at 57.6px and +0.012em at 22.4px. A flat -0.03em collapsed the
+       period in "INFO@MONTEBAY.IO" at contact size. */
+    letter-spacing: calc(1.25px - 0.044em);
+    line-height: 1.02;
+    margin: 0; text-transform: uppercase; color: var(--text);
+}
+p { margin: 0 0 var(--s4); max-width: 52ch; }   /* ~66 rendered chars */
+.lede { font-size: clamp(1rem, .95rem + .35vw, 1.25rem); color: var(--muted); }
+
+.eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--accent); display: block;
+    margin-bottom: var(--s3);
+}
+.meta {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted);
+}
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Header ------------------------------------------------------------------- */
+.hdr {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s4);
+    padding: var(--s3) var(--s8);
+    background: color-mix(in srgb, var(--canvas) 86%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid color-mix(in srgb, var(--hair) 45%, transparent);
+}
+.hdr .mark { display: flex; align-items: center; gap: var(--s3); }
+.hdr .mark img { width: 30px; height: 30px; display: block; filter: var(--logo-filter); }
+.hdr .name {
+    font-family: var(--display); font-variation-settings: "wdth" 112;
+    font-weight: 600; font-size: 13px; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--text);
+}
+.hdr nav { display: flex; gap: var(--s6); margin-left: auto; margin-right: var(--s6); }
+.hdr nav a {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none;
+    min-height: 44px; display: inline-flex; align-items: center;
+}
+.hdr nav a:hover { color: var(--text); }
+
+/* Theme picker ------------------------------------------------------------- */
+.theme-picker {
+    display: inline-flex; align-items: center; gap: 2px;
+    border: 1px solid var(--hair); border-radius: 999px; padding: 3px;
+    flex-shrink: 0;
+}
+.theme-picker button {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; padding: 0;
+    background: none; border: 0; border-radius: 999px;
+    color: var(--muted); cursor: pointer;
+    transition: background-color .2s var(--ease), color .2s var(--ease);
+}
+.theme-picker button:hover { color: var(--text); }
+.theme-picker button[aria-checked="true"] { background: var(--text); color: var(--canvas); }
+.theme-picker svg {
+    width: 16px; height: 16px; stroke: currentColor; fill: none;
+    stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* The mark ----------------------------------------------------------------- */
+.markframe {
+    --stroke-w: 1px;
+    margin: 0 auto clamp(1.5rem, 4vh, 2.5rem);
+    width: min(26vw, 23vh, 300px);
+    filter:
+        drop-shadow(var(--stroke-w) 0 0 var(--stroke))
+        drop-shadow(calc(var(--stroke-w) * -1) 0 0 var(--stroke))
+        drop-shadow(0 var(--stroke-w) 0 var(--stroke))
+        drop-shadow(0 calc(var(--stroke-w) * -1) 0 var(--stroke))
+        drop-shadow(calc(var(--stroke-w) * .7) calc(var(--stroke-w) * .7) 0 var(--stroke))
+        drop-shadow(calc(var(--stroke-w) * -.7) calc(var(--stroke-w) * .7) 0 var(--stroke))
+        drop-shadow(calc(var(--stroke-w) * .7) calc(var(--stroke-w) * -.7) 0 var(--stroke))
+        drop-shadow(calc(var(--stroke-w) * -.7) calc(var(--stroke-w) * -.7) 0 var(--stroke));
+}
+.markwin {
+    width: 100%; aspect-ratio: 636 / 642;
+    -webkit-mask-image: url(../montebay_logo.png); mask-image: url(../montebay_logo.png);
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+    -webkit-mask-size: contain; mask-size: contain;
+}
+.markwin video {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transform: scale(1.25);
+    filter: var(--video-grade);
+    transition: filter .3s var(--ease);
+}
+
+/* Sections ----------------------------------------------------------------- */
+.hero {
+    min-height: 100svh; display: grid; place-items: center;
+    padding-block: clamp(1.5rem, 5vh, 4rem); text-align: center;
+}
+.hero h1 { font-size: clamp(2.2rem, min(5.2vw, 8vh), 4.5rem); max-width: 18ch; margin: 0 auto; }
+.hero .lede { margin: clamp(.75rem,2.5vh,1.5rem) auto 0; max-width: 46ch; }
+
+.row { padding-block: var(--s24); border-top: 1px solid color-mix(in srgb, var(--hair) 45%, transparent); }
+.plate { display: grid; grid-template-columns: 1fr 1.15fr; gap: var(--s16); align-items: center; }
+.plate h2 { font-size: clamp(1.8rem, min(4.6vw, 6.5vh), 3.4rem); margin-bottom: var(--s4); }
+.plate .meta { display: block; margin-bottom: var(--s6); }
+.shots { display: flex; gap: var(--s4); min-width: 0; }
+.shots img {
+    flex: 1 1 0; min-width: 0; width: 100%; max-width: 190px; height: auto; display: block;
+    border-radius: 20px;
+    border: 1px solid color-mix(in srgb, var(--hair) 50%, transparent);
+    box-shadow: var(--shadow);
+}
+.icon-pair { display: flex; gap: var(--s6); align-items: center; }
+.icon-pair img { width: 96px; height: 96px; border-radius: 22px; box-shadow: var(--shadow); }
+
+.btn {
+    display: inline-flex; align-items: center; gap: var(--s2);
+    font-family: var(--mono); font-size: 13px; letter-spacing: .12em;
+    text-transform: uppercase; min-height: 48px; padding: 0 var(--s6);
+    text-decoration: none; border: 1px solid var(--hair);
+    color: var(--text); background: transparent;
+    transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.btn:hover { background: var(--text); color: var(--canvas); border-color: var(--text); }
+
+@media (max-width: 900px) {
+    .plate { grid-template-columns: 1fr; gap: var(--s8); }
+    .shots img { max-width: 160px; }
+    .hdr nav { display: none; }
+    .row { padding-block: var(--s16); }
+}
+@media (max-width: 560px) {
+    .shots { gap: var(--s2); }
+    .shots img { max-width: none; border-radius: 12px; }
+    .wrap { padding-inline: var(--s4); }
+    .hdr { padding-inline: var(--s4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+    video { display: none; }
+}
+
+/* Contact address is the only link in body copy; give it a real hit area. */
+#contact h2 a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
