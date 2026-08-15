@@ -1,0 +1,386 @@
+/* ==========================================================================
+   Montebay theme system.
+
+   Two themes named for what the brand is made of:
+     SURF  (light) - whitewater and foam
+     ROCK  (dark)  - wet basalt
+
+   Colours are grounded in published natural references (basalt #4C4A4A,
+   volcanic rock #6B6965, seafoam #B8C3B5, oceanic teal #2A9D8F) rather than
+   sampled from the old hero clip, which was low resolution, heavily
+   compressed and already colour graded.
+
+   ROCK is deliberately NOT navy. The hero footage averages #1B414C, so a navy
+   field sits at 1.16:1 against the mark and it disappears. Basalt opposes the
+   teal in hue as well as luminance.
+
+   Every pair below is measured. Lowest text pair is 5.22:1, lowest UI border
+   3.14:1.
+   ========================================================================== */
+
+:root,
+:root[data-theme="surf"] {
+    color-scheme: light;
+
+    --canvas:    #F2F5F3;   /* foam white */
+    --surface:   #FFFFFF;   /* cards, 1.10 separation from canvas */
+    --text:      #1A1919;   /* basalt at text weight, 15.98:1 */
+    --muted:     #4C4A4A;   /* basalt, canonical, 8.02:1 */
+    --hair:      #848C88;   /* 3.14:1, meets the UI-component floor */
+    --accent:    #1F7268;   /* oceanic teal, darkened for AA, 5.22:1 */
+    --on-accent: #FFFFFF;   /* 5.73:1 on accent */
+
+    --stroke:    #1A1919;             /* outline around the mark */
+    --video-grade: none;              /* fill reads at 10.03:1 here, untouched */
+    --logo-ink: #1F7268;              /* accent teal; flat black read as a blob */
+    --shadow: 0 18px 44px rgba(26,25,25,.14), 0 2px 6px rgba(26,25,25,.07);
+}
+
+:root[data-theme="rock"] {
+    color-scheme: dark;
+
+    --canvas:    #1A1919;   /* wet basalt */
+    --surface:   #262525;   /* 1.15 separation */
+    --text:      #F2F5F3;   /* foam white, 15.98:1 */
+    --muted:     #B8C3B5;   /* seafoam, canonical, 9.62:1 */
+    --hair:      #6B6965;   /* volcanic rock, canonical, 3.20:1 */
+    --accent:    #7FD9C9;   /* pale seafoam, 10.59:1 */
+    --on-accent: #1A1919;
+
+    --stroke:    #F2F5F3;
+    /* Lifts the mark fill from #1B414C (1.59:1, invisible) to #227B92 (3.61:1)
+       so the shape separates on its own instead of leaning on the stroke. */
+    --video-grade: brightness(1.8) saturate(1.3);
+    --logo-ink: #F2F5F3;
+    --shadow: 0 18px 44px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.45);
+}
+
+/* Type and spacing, theme independent -------------------------------------- */
+:root {
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body:    "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem; --s6:1.5rem;
+    --s8:2rem; --s12:3rem; --s16:4rem; --s24:6rem;
+    --wide: 1240px;
+    --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+
+.wrap { max-width: var(--wide); margin-inline: auto; padding-inline: var(--s6); }
+
+h1, h2, h3 {
+    font-family: var(--display);
+    font-variation-settings: "wdth" 118;
+    font-weight: 600;
+    /* One value, optically correct across the whole 22-72px range. Resolves to
+       -0.022em at 57.6px and +0.012em at 22.4px. A flat -0.03em collapsed the
+       period in "INFO@MONTEBAY.IO" at contact size. */
+    letter-spacing: calc(1.25px - 0.044em);
+    line-height: 1.02;
+    margin: 0; text-transform: uppercase; color: var(--text);
+}
+p { margin: 0 0 var(--s4); max-width: 52ch; }   /* ~66 rendered chars */
+.lede { font-size: clamp(1rem, .95rem + .35vw, 1.25rem); color: var(--muted); }
+
+.eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--accent); display: block;
+    margin-bottom: var(--s3);
+}
+.meta {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted);
+}
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Header ------------------------------------------------------------------- */
+.hdr {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s4);
+    padding: var(--s3) var(--s8);
+    background: color-mix(in srgb, var(--canvas) 86%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid color-mix(in srgb, var(--hair) 45%, transparent);
+}
+.hdr .mark { display: flex; align-items: center; gap: var(--s3); }
+.hdr .mark .logo {
+    width: 34px; height: 34px; display: block;
+    background: var(--logo-ink);
+    -webkit-mask-image: url(montebay_logo.png); mask-image: url(montebay_logo.png);
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center;  mask-position: center;
+    -webkit-mask-size: contain;     mask-size: contain;
+}
+.hdr .name {
+    font-family: var(--display); font-variation-settings: "wdth" 112;
+    font-weight: 600; font-size: 13px; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--text);
+}
+.hdr nav { display: flex; gap: var(--s6); margin-left: auto; margin-right: var(--s6); }
+.hdr nav a {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none;
+    min-height: 44px; display: inline-flex; align-items: center;
+}
+.hdr nav a:hover { color: var(--text); }
+
+/* Theme picker ------------------------------------------------------------- */
+.theme-picker {
+    display: inline-flex; align-items: center; gap: 2px;
+    border: 1px solid var(--hair); border-radius: 999px; padding: 3px;
+    flex-shrink: 0;
+}
+.theme-picker button {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; padding: 0;
+    background: none; border: 0; border-radius: 999px;
+    color: var(--muted); cursor: pointer;
+    transition: background-color .2s var(--ease), color .2s var(--ease);
+}
+.theme-picker button:hover { color: var(--text); }
+.theme-picker button[aria-checked="true"] { background: var(--text); color: var(--canvas); }
+.theme-picker svg {
+    width: 16px; height: 16px; stroke: currentColor; fill: none;
+    stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* The mark ----------------------------------------------------------------- */
+.markframe {
+    --stroke-w: 1px;
+    margin: 0 auto clamp(1.5rem, 4vh, 2.5rem);
+    width: min(30vw, 30vh, 320px);
+    filter:
+        drop-shadow(var(--stroke-w) 0 0 var(--stroke))
+        drop-shadow(calc(var(--stroke-w) * -1) 0 0 var(--stroke))
+        drop-shadow(0 var(--stroke-w) 0 var(--stroke))
+        drop-shadow(0 calc(var(--stroke-w) * -1) 0 var(--stroke))
+        drop-shadow(calc(var(--stroke-w) * .7) calc(var(--stroke-w) * .7) 0 var(--stroke))
+        drop-shadow(calc(var(--stroke-w) * -.7) calc(var(--stroke-w) * .7) 0 var(--stroke))
+        drop-shadow(calc(var(--stroke-w) * .7) calc(var(--stroke-w) * -.7) 0 var(--stroke))
+        drop-shadow(calc(var(--stroke-w) * -.7) calc(var(--stroke-w) * -.7) 0 var(--stroke));
+}
+.markwin {
+    width: 100%; aspect-ratio: 636 / 642;
+    -webkit-mask-image: url(montebay_logo.png); mask-image: url(montebay_logo.png);
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+    -webkit-mask-size: contain; mask-size: contain;
+}
+.markwin video {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transform: scale(1.25);
+    filter: var(--video-grade);
+    transition: filter .3s var(--ease);
+}
+
+/* Sections ----------------------------------------------------------------- */
+.hero {
+    min-height: 100svh; display: grid; place-items: center;
+    padding-block: clamp(1.5rem, 5vh, 4rem); text-align: center;
+}
+.hero h1 { font-size: clamp(2rem, min(4.6vw, 7vh), 3.75rem); max-width: 24ch; margin: 0 auto; }
+.hero .lede { margin: clamp(.75rem,2.5vh,1.5rem) auto 0; max-width: 46ch; }
+
+.row { padding-block: var(--s24); border-top: 1px solid color-mix(in srgb, var(--hair) 45%, transparent); }
+.plate { display: grid; grid-template-columns: 1fr 1.15fr; gap: var(--s16); align-items: center; }
+.plate h2 { font-size: clamp(1.8rem, min(4.6vw, 6.5vh), 3.4rem); margin-bottom: var(--s4); }
+.plate .meta { display: block; margin-bottom: var(--s6); }
+.shots { display: flex; gap: var(--s4); min-width: 0; }
+.shots img {
+    flex: 1 1 0; min-width: 0; width: 100%; max-width: 190px; height: auto; display: block;
+    border-radius: 20px;
+    border: 1px solid color-mix(in srgb, var(--hair) 50%, transparent);
+    box-shadow: var(--shadow);
+}
+.icon-pair { display: flex; gap: var(--s6); align-items: center; }
+.icon-pair img { width: 96px; height: 96px; border-radius: 22px; box-shadow: var(--shadow); }
+
+.btn {
+    display: inline-flex; align-items: center; gap: var(--s2);
+    font-family: var(--mono); font-size: 13px; letter-spacing: .12em;
+    text-transform: uppercase; min-height: 48px; padding: 0 var(--s6);
+    text-decoration: none; border: 1px solid var(--hair);
+    color: var(--text); background: transparent;
+    transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.btn:hover { background: var(--text); color: var(--canvas); border-color: var(--text); }
+
+@media (max-width: 900px) {
+    .plate { grid-template-columns: 1fr; gap: var(--s8); }
+    .shots img { max-width: 160px; }
+    .hdr nav { display: none; }
+    .row { padding-block: var(--s16); }
+}
+@media (max-width: 560px) {
+    .shots { gap: var(--s2); }
+    .shots img { max-width: none; border-radius: 12px; }
+    .wrap { padding-inline: var(--s4); }
+    .hdr { padding-inline: var(--s4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+    video { display: none; }
+}
+
+/* Contact address is the only link in body copy; give it a real hit area. */
+#contact h2 a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+/* --------------------------------------------------------------------------
+   Flush hero lockup
+
+   Both lines set to the same measure. Done on Archivo's width axis rather than
+   by stretching letter-spacing, so the letterforms widen instead of the gaps
+   between them opening up.
+
+   Measured at 60px: line 1 was 857.9px against line 2 at 778.6px, 10.2% apart.
+   The axis tops out at 125, so widening line 2 alone could not close it and
+   line 1 comes in slightly too. wdth 115 / 125 lands them within 0.4px at
+   60px and 1.5px at 32px, holding across the whole clamp range because both
+   lines scale together.
+
+   Tuned to this exact string. If the headline copy changes, re-measure.
+   -------------------------------------------------------------------------- */
+.hero h1.lockup span { display: block; }
+.hero h1.lockup .l1 { font-variation-settings: "wdth" 115; }
+.hero h1.lockup .l2 { font-variation-settings: "wdth" 125; }
+
+/* Below this the forced first line outruns the viewport (it needs 455px at the
+   32px floor), so release it back to natural wrapping and a single width. */
+@media (max-width: 640px) {
+    .hero h1.lockup span { display: inline; }
+    .hero h1.lockup .l1,
+    .hero h1.lockup .l2 { font-variation-settings: "wdth" 118; }
+}
+
+/* --------------------------------------------------------------------------
+   Utilities used by the real pages (were inline styles in the prototype)
+   -------------------------------------------------------------------------- */
+.skip {
+    position: absolute; left: -9999px; top: 0; z-index: 100;
+    padding: var(--s3) var(--s6);
+    background: var(--accent); color: var(--on-accent);
+    font-family: var(--mono); font-size: 13px; letter-spacing: .1em;
+    text-transform: uppercase; text-decoration: none;
+}
+.skip:focus { left: 0; }
+
+.h2-sm { font-size: clamp(1.6rem, min(3.4vw, 5vh), 2.6rem); }
+.h2-xs { font-size: clamp(1.3rem, min(2.6vw, 4vh), 2rem); }
+.measure-tight { max-width: 16ch; }
+.spaced { margin-top: var(--s6); }
+
+.icon-pair a { display: inline-flex; line-height: 0; border-radius: 22px; }
+.icon-pair a:focus-visible { outline-offset: 4px; }
+
+.foot {
+    border-top: 1px solid color-mix(in srgb, var(--hair) 45%, transparent);
+    padding-block: var(--s8);
+}
+
+/* Contact address is the only link set in display type; give it a hit area. */
+#contact h2 a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+
+/* ==========================================================================
+   Legacy compatibility
+
+   The subpages still use styles.css for layout. These rules carry forward the
+   fixes that lived in the retired design-system.css, and map the legacy
+   chrome onto the theme tokens. Subpages are pinned to Surf until their 36
+   hardcoded light backgrounds are migrated.
+   ========================================================================== */
+
+/* The original .video-overlay ran rgba(26,42,74,.3) -> .1 -> .4. White headline
+   text measured 1.24:1 over bright surf. Same top-heavy scrim as the homepage
+   hero, which measures 7.2:1 worst case across the clip. */
+.video-overlay {
+    background: linear-gradient(180deg,
+        rgba(16, 27, 50, 0.86) 0%,
+        rgba(16, 27, 50, 0.74) 45%,
+        rgba(16, 27, 50, 0.62) 100%) !important;
+}
+
+/* Legacy header onto theme tokens */
+.header {
+    background: var(--canvas) !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--hair) 45%, transparent);
+}
+.header .company-name { color: var(--text); font-family: var(--display); }
+.header .logo { filter: none; }
+.nav-menu .nav-link,
+.nav-menu .dropdown-item {
+    color: var(--muted); font-family: var(--mono); font-size: 12px;
+    letter-spacing: .12em; text-transform: uppercase;
+}
+.nav-menu .nav-link:hover { color: var(--text); }
+.dropdown-menu { background: var(--surface); border: 1px solid var(--hair); }
+
+/* Steel (#5A8AB0) measured 3.3-3.7:1 on light and fails AA as text. */
+.section-label {
+    color: var(--accent) !important;
+    font-family: var(--mono); font-size: 12px; letter-spacing: .16em;
+}
+.path-explainer-cta, .blog-read-more, .btn-back { color: var(--accent) !important; }
+
+/* Legacy icon slots hold inline SVG now, not an emoji glyph. */
+.approach-feature-icon, .ai-capability-icon,
+.about-experience-icon, .about-client-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--accent); line-height: 1;
+}
+.approach-feature-icon .mb-icon, .ai-capability-icon .mb-icon,
+.about-experience-icon .mb-icon, .about-client-icon .mb-icon { width: 28px; height: 28px; }
+.mb-icon {
+    width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.5;
+    fill: none; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0;
+}
+.mb-icon--inline { width: 1em; height: 1em; vertical-align: -.125em; }
+.mobile-menu-toggle { color: var(--text); background: none; border: 0; }
+.mobile-menu-toggle .mb-icon { width: 26px; height: 26px; }
+
+.footer { background: var(--surface); color: var(--muted); }
+.footer a { color: var(--accent); }
+
+/* 16px floor so iOS stops zooming on focus */
+input, select, textarea { font-size: max(1rem, 16px); }
+
+/* Legacy hero titles used a pale gradient via background-clip:text, which is
+   the same construction that measured 2.03:1 on the old homepage. Force solid
+   white over the scrim. */
+.hero-title, .hero-title-accent, .hero-content h1, .hero-content .hero-subtitle {
+    background: none !important;
+    background-image: none !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .55);
+}
+.hero-content .hero-subtitle { color: #E6EDF4 !important; -webkit-text-fill-color: #E6EDF4 !important; }
+
+/* Masked logo in the legacy header, matching the homepage lockup. */
+.logo-container .logo {
+    width: 34px; height: 34px; display: block;
+    background: var(--logo-ink);
+    -webkit-mask-image: url(montebay_logo.png); mask-image: url(montebay_logo.png);
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center;  mask-position: center;
+    -webkit-mask-size: contain;     mask-size: contain;
+}
