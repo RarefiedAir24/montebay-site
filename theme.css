@@ -165,11 +165,11 @@ a { color: var(--accent); }
 
 /* The mark ----------------------------------------------------------------- */
 .markframe {
-    /* 2px, not 1px. At the mark's real rendered size (212-270px) a 1px stroke
-       is present but reads as nothing at 1x; compared side by side at true
-       size, 2px defines the silhouette and the internal gaps without
-       thickening the geometry the way 3px starts to. */
-    --stroke-w: 2px;
+    /* 1.5px. 2px read heavy, 1px read absent at the mark's rendered size.
+       1.5 resolves to 3 device pixels on a 2x display, so it stays crisp;
+       0.5px was rejected because it lands on a sub-pixel boundary and
+       partially drops out on a standard 1x monitor. */
+    --stroke-w: 1.5px;
     margin: 0 auto clamp(1.5rem, 4vh, 2.5rem);
     width: min(30vw, 30vh, 320px);
     filter:
