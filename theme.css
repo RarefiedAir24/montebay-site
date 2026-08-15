@@ -600,3 +600,11 @@ input, select, textarea { font-size: max(1rem, 16px); }
     .cta-actions { flex-direction: column; align-items: stretch; }
     .cta-actions .btn { justify-content: center; }
 }
+
+/* Logo lockup is a link on every page, including home. */
+.mark .mark-link {
+    display: flex; align-items: center; gap: var(--s3);
+    text-decoration: none; color: inherit;
+    min-height: 44px;
+}
+.mark .mark-link:hover .name { color: var(--accent); }
