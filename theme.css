@@ -592,3 +592,11 @@ input, select, textarea { font-size: max(1rem, 16px); }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 .alt-contact { margin-top: var(--s8); color: var(--muted); font-size: 15px; }
+
+/* Closing call to action */
+.cta-actions { display: flex; flex-wrap: wrap; gap: var(--s4); margin-top: var(--s8); }
+.cta-close .lede { margin-top: var(--s4); }
+@media (max-width: 560px) {
+    .cta-actions { flex-direction: column; align-items: stretch; }
+    .cta-actions .btn { justify-content: center; }
+}
