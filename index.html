@@ -102,12 +102,16 @@
         <span class="logo" role="img" aria-label="Montebay Innovations"></span>
         <span class="name">Montebay</span>
     </div>
-    <nav aria-label="Main navigation">
+    <nav id="site-nav" aria-label="Main navigation">
         <a href="#products">Products</a>
         <a href="#build">How we build</a>
         <a href="insights.html">Insights</a>
         <a href="#contact">Contact</a>
     </nav>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+        <svg class="ico-open" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="7" y2="7"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="17" y2="17"/></svg>
+        <svg class="ico-close" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" x2="18" y1="6" y2="18"/><line x1="6" x2="18" y1="18" y2="6"/></svg>
+    </button>
     <div class="theme-picker" role="radiogroup" aria-label="Colour theme">
         <button type="button" data-theme="system" role="radio" aria-checked="false" title="Match system" aria-label="Match system">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>

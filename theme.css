@@ -384,3 +384,62 @@ input, select, textarea { font-size: max(1rem, 16px); }
     -webkit-mask-position: center;  mask-position: center;
     -webkit-mask-size: contain;     mask-size: contain;
 }
+
+/* --------------------------------------------------------------------------
+   Responsive header
+
+   The nav was display:none below 900px with no control to reveal it, so
+   navigation was unreachable on tablet and phone: 0 links at 390px. It now
+   collapses into a panel behind a toggle, and the theme picker stays visible.
+   -------------------------------------------------------------------------- */
+.nav-toggle {
+    display: none;
+    align-items: center; justify-content: center;
+    width: 44px; height: 44px; padding: 0; flex-shrink: 0;
+    background: none; border: 1px solid var(--hair); border-radius: 999px;
+    color: var(--text); cursor: pointer;
+}
+.nav-toggle svg {
+    width: 18px; height: 18px; stroke: currentColor; fill: none;
+    stroke-width: 1.6; stroke-linecap: round;
+}
+.nav-toggle .ico-close { display: none; }
+.nav-toggle[aria-expanded="true"] .ico-open  { display: none; }
+.nav-toggle[aria-expanded="true"] .ico-close { display: block; }
+
+@media (max-width: 900px) {
+    .hdr { gap: var(--s2); }
+    .nav-toggle { display: inline-flex; }
+
+    /* Panel drops from under the header rather than pushing the page around. */
+    .hdr nav {
+        display: flex;
+        position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        margin: 0;
+        padding: var(--s2) var(--s6) var(--s4);
+        background: var(--canvas);
+        border-bottom: 1px solid color-mix(in srgb, var(--hair) 55%, transparent);
+        box-shadow: var(--shadow);
+        /* visibility, not just opacity: an opacity-0 panel keeps its links in
+           the tab order and announced to screen readers. */
+        opacity: 0; transform: translateY(-6px); pointer-events: none;
+        visibility: hidden;
+        transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+    }
+    .hdr nav[data-open="true"] {
+        opacity: 1; transform: none; pointer-events: auto; visibility: visible;
+    }
+    .hdr nav a {
+        width: 100%; min-height: 48px; font-size: 13px;
+        border-bottom: 1px solid color-mix(in srgb, var(--hair) 30%, transparent);
+    }
+    .hdr nav a:last-child { border-bottom: 0; }
+    .hdr .name { font-size: 12px; }
+}
+
+@media (max-width: 420px) {
+    /* Wordmark yields before the controls do. */
+    .hdr .name { display: none; }
+    .hdr { padding-inline: var(--s4); }
+}
