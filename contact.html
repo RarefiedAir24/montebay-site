@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+<script>
+(function(){
+  try {
+    var p = localStorage.getItem('montebay-theme') || 'system';
+    var t = (p === 'surf' || p === 'rock') ? p
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'rock' : 'surf');
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme','surf'); }
+})();
+</script>
+
+<link rel="canonical" href="https://montebay.io/contact.html">
+<title>Contact | Montebay Innovations</title>
+<meta name="description" content="Get in touch with Montebay Innovations. Tell us what you are working on and we will reply.">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://montebay.io/contact.html">
+<meta property="og:title" content="Contact | Montebay Innovations">
+<meta property="og:description" content="Tell us what you are working on and we will reply.">
+<meta property="og:image" content="https://montebay.io/montebay_logo.webp">
+
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to main content</a>
+
+<header class="hdr">
+    <div class="mark">
+        <a href="index.html" style="display:flex;align-items:center;gap:.75rem;text-decoration:none;color:inherit">
+            <span class="logo" role="img" aria-label="Montebay Innovations"></span>
+            <span class="name">Montebay Innovations</span>
+        </a>
+    </div>
+    <nav id="site-nav" aria-label="Main navigation">
+        <a href="index.html#products">Products</a>
+        <a href="ai-intelligent-systems.html">Advisory</a>
+        <a href="contact.html">Contact</a>
+        <div class="theme-row">
+            <span class="label">Theme</span>
+            <div class="theme-picker" role="radiogroup" aria-label="Colour theme">
+                <button type="button" data-theme="system" role="radio" aria-checked="false" title="Match system" aria-label="Match system"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></button>
+                <button type="button" data-theme="surf" role="radio" aria-checked="false" title="Surf, light" aria-label="Surf, light theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 4.9-1.4 1.4"/></svg></button>
+                <button type="button" data-theme="rock" role="radio" aria-checked="false" title="Rock, dark" aria-label="Rock, dark theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6.4 6.4 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+            </div>
+        </div>
+    </nav>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+        <svg class="ico-open" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="7" y2="7"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="17" y2="17"/></svg>
+        <svg class="ico-close" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" x2="18" y1="6" y2="18"/><line x1="6" x2="18" y1="18" y2="6"/></svg>
+    </button>
+    <div class="theme-picker" role="radiogroup" aria-label="Colour theme">
+        <button type="button" data-theme="system" role="radio" aria-checked="false" title="Match system" aria-label="Match system"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></button>
+        <button type="button" data-theme="surf" role="radio" aria-checked="false" title="Surf, light" aria-label="Surf, light theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 4.9-1.4 1.4"/></svg></button>
+        <button type="button" data-theme="rock" role="radio" aria-checked="false" title="Rock, dark" aria-label="Rock, dark theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6.4 6.4 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+    </div>
+</header>
+
+<main id="main">
+
+<section class="page-head">
+    <div class="wrap">
+        <span class="eyebrow">Contact</span>
+        <h1>Tell us what you are working on.</h1>
+        <p class="lede">Product questions, advisory enquiries, or something that does not fit either. A person reads every one of these and replies.</p>
+    </div>
+</section>
+
+<section class="row" style="padding-top:0">
+    <div class="wrap">
+        <form class="form" id="contactForm" novalidate>
+            <div class="field">
+                <label for="cf-name">Name <span aria-hidden="true">*</span></label>
+                <input type="text" id="cf-name" name="name" autocomplete="name" required
+                       aria-describedby="cf-name-err">
+                <span class="err" id="cf-name-err" hidden></span>
+            </div>
+
+            <div class="field">
+                <label for="cf-email">Email <span aria-hidden="true">*</span></label>
+                <input type="email" id="cf-email" name="email" autocomplete="email" required
+                       inputmode="email" aria-describedby="cf-email-err">
+                <span class="err" id="cf-email-err" hidden></span>
+            </div>
+
+            <div class="field">
+                <label for="cf-subject">What is this about?</label>
+                <select id="cf-subject" name="subject">
+                    <option value="General enquiry">General enquiry</option>
+                    <option value="Advisory">Advisory and AI systems</option>
+                    <option value="Svelio">Svelio</option>
+                    <option value="Soteria">Soteria</option>
+                    <option value="Wordflect">Wordflect</option>
+                    <option value="Press or partnership">Press or partnership</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="cf-message">Message <span aria-hidden="true">*</span></label>
+                <textarea id="cf-message" name="message" rows="7" required
+                          aria-describedby="cf-message-err"></textarea>
+                <span class="err" id="cf-message-err" hidden></span>
+                <span class="hint">Rough context is plenty. What you are building, and what you need.</span>
+            </div>
+
+            <!-- Bots fill this; people never see it. -->
+            <div class="hp" aria-hidden="true">
+                <label for="cf-website">Website</label>
+                <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="cf-submit">Send message</button>
+
+            <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="alt-contact">
+            Prefer email? <a href="mailto:contact@montebay.io">contact@montebay.io</a>
+        </p>
+    </div>
+</section>
+
+</main>
+
+<footer class="foot">
+    <div class="wrap">
+        <span class="meta">&copy; 2026 Montebay Innovations LLC</span>
+    </div>
+</footer>
+
+<script src="theme.js" defer></script>
+<script src="contact.js" defer></script>
+</body>
+</html>

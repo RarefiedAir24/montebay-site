@@ -30,7 +30,22 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/insights.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wordflect.html",
+      "destination": "https://wordflect.com",
+      "permanent": true
+    }
   ]
 }
-
-
