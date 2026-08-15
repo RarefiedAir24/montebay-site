@@ -165,7 +165,11 @@ a { color: var(--accent); }
 
 /* The mark ----------------------------------------------------------------- */
 .markframe {
-    --stroke-w: 1px;
+    /* 2px, not 1px. At the mark's real rendered size (212-270px) a 1px stroke
+       is present but reads as nothing at 1x; compared side by side at true
+       size, 2px defines the silhouette and the internal gaps without
+       thickening the geometry the way 3px starts to. */
+    --stroke-w: 2px;
     margin: 0 auto clamp(1.5rem, 4vh, 2.5rem);
     width: min(30vw, 30vh, 320px);
     filter:
