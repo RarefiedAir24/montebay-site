@@ -165,11 +165,14 @@ a { color: var(--accent); }
 
 /* The mark ----------------------------------------------------------------- */
 .markframe {
-    /* 1.5px. 2px read heavy, 1px read absent at the mark's rendered size.
-       1.5 resolves to 3 device pixels on a 2x display, so it stays crisp;
-       0.5px was rejected because it lands on a sub-pixel boundary and
-       partially drops out on a standard 1x monitor. */
-    --stroke-w: 1.5px;
+    /* Proportional to the mark, not fixed. The mark scales with the viewport,
+       so a flat 1.5px was 0.56% of it on desktop and 1.28% on a phone: more
+       than twice as heavy where the mark is smallest. This tracks the same
+       expression that sizes the mark, holding the ratio near 0.55%.
+       Floored at 0.75px and capped at 1.5px. The sub-pixel floor is safe
+       here because it only engages on small viewports, which are effectively
+       all 2x or 3x displays. */
+    --stroke-w: clamp(0.75px, calc(min(30vw, 30vh, 320px) * 0.0055), 1.5px);
     margin: 0 auto clamp(1.5rem, 4vh, 2.5rem);
     width: min(30vw, 30vh, 320px);
     filter:
