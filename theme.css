@@ -69,6 +69,10 @@
 
 * { box-sizing: border-box; }
 
+/* Anchor targets were landing under the 77px sticky header, swallowing the top
+   of every section jumped to. */
+html { scroll-padding-top: 6rem; }
+
 body {
     margin: 0;
     background: var(--canvas);
@@ -476,3 +480,34 @@ input, select, textarea { font-size: max(1rem, 16px); }
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
 }
 .stack-lg > * + * { margin-top: var(--s12); }
+
+/* --------------------------------------------------------------------------
+   Header refinement
+
+   Was five nav items plus a 144px three-button picker, all in wide-tracked
+   mono. Tighter tracking and spacing, and on mobile the picker moves inside
+   the menu panel so the bar carries only the mark and one control.
+   -------------------------------------------------------------------------- */
+.hdr nav { gap: var(--s4); }
+.hdr nav a { letter-spacing: .08em; padding-inline: var(--s2); }
+
+.theme-picker button { width: 38px; height: 38px; }
+.theme-picker svg { width: 15px; height: 15px; }
+
+/* Label the theme row when it sits inside the mobile panel. */
+.theme-row { display: none; }
+
+@media (max-width: 900px) {
+    /* One control in the bar; everything else lives in the panel. */
+    .hdr > .theme-picker { display: none; }
+    .theme-row {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: var(--s4); padding-top: var(--s4); margin-top: var(--s2);
+        border-top: 1px solid color-mix(in srgb, var(--hair) 35%, transparent);
+    }
+    .theme-row .label {
+        font-family: var(--mono); font-size: 12px; letter-spacing: .12em;
+        text-transform: uppercase; color: var(--muted);
+    }
+    .theme-row .theme-picker button { width: 44px; height: 44px; }
+}

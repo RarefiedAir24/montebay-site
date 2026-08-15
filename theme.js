@@ -67,8 +67,10 @@
     function init() {
         applyTheme(stored());
 
-        var picker = document.querySelector('.theme-picker');
-        if (picker) {
+        /* There are two pickers: one in the bar for desktop, one inside the
+           mobile panel. Both must stay in sync. */
+        var pickers = document.querySelectorAll('.theme-picker');
+        Array.prototype.forEach.call(pickers, function (picker) {
             picker.addEventListener('click', function (e) {
                 var btn = e.target.closest('button');
                 if (!btn) return;
@@ -76,7 +78,7 @@
                 try { localStorage.setItem(KEY, pref); } catch (err) {}
                 applyTheme(pref);
             });
-        }
+        });
 
         /* Keep following the OS while the user is on "system". */
         var onChange = function () { if (stored() === 'system') applyTheme('system'); };
