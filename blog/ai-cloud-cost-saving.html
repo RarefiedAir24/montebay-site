@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>document.documentElement.setAttribute('data-theme','surf');</script>
+<script>
+(function(){
+  try {
+    var p = localStorage.getItem('montebay-theme') || 'system';
+    var t = (p === 'surf' || p === 'rock') ? p
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'rock' : 'surf');
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme','surf'); }
+})();
+</script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -26,6 +35,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme-legacy.css">
     <script src="../script.js" defer></script>
     <style>
         .blog-post-container {
@@ -241,6 +251,17 @@
                 <a href="../insights.html" class="nav-link">Insights</a>
                 <a href="../index.html#contact" class="nav-link">Contact</a>
             </nav>
+            <div class="theme-picker" role="radiogroup" aria-label="Colour theme">
+                <button type="button" data-theme="system" role="radio" aria-checked="false" title="Match system" aria-label="Match system">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+                </button>
+                <button type="button" data-theme="surf" role="radio" aria-checked="false" title="Surf, light" aria-label="Surf, light theme">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 4.9-1.4 1.4"/></svg>
+                </button>
+                <button type="button" data-theme="rock" role="radio" aria-checked="false" title="Rock, dark" aria-label="Rock, dark theme">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6.4 6.4 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                </button>
+            </div>
         </div>
     </header>
     
@@ -258,11 +279,11 @@
             <img src="../assets/images/blog/cloud-cost-optimization.svg" alt="Cloud Cost Optimization: A Virtuous Cycle" class="blog-post-image">
 
             <div class="blog-post-content">
-                <p>Cloud platforms were built for speed and flexibility—but that same flexibility often leads to unpredictable costs. Many organizations still manage cloud spend reactively, reviewing invoices after the fact and chasing overruns once the damage is done.</p>
+                <p>Cloud platforms were built for speed and flexibility, but that same flexibility often leads to unpredictable costs. Many organizations still manage cloud spend reactively, reviewing invoices after the fact and chasing overruns once the damage is done.</p>
 
                 <p><strong>Artificial intelligence changes this model entirely.</strong></p>
 
-                <p>AI-driven cloud cost optimization enables organizations to anticipate, prevent, and continuously optimize spending—rather than simply reacting to it.</p>
+                <p>AI-driven cloud cost optimization enables organizations to anticipate, prevent, and continuously optimize spending, rather than simply reacting to it.</p>
 
                 <h2>The Limits of Traditional Cloud Cost Management</h2>
 
@@ -278,7 +299,7 @@
 
                 <h2>How Machine Learning Enables Proactive Optimization</h2>
 
-                <p>Machine learning excels at identifying patterns across large, evolving datasets—making it well suited for cloud cost intelligence.</p>
+                <p>Machine learning excels at identifying patterns across large, evolving datasets, making it well suited for cloud cost intelligence.</p>
 
                 <h3>Predictive Spend Forecasting</h3>
 
@@ -298,7 +319,7 @@
 
                 <h3>Continuous, Real-Time Optimization</h3>
 
-                <p>Advanced AI-driven platforms can recommend—or automatically execute—actions such as:</p>
+                <p>Advanced AI-driven platforms can recommend, or automatically execute, actions such as:</p>
 
                 <ul>
                     <li>Adjusting autoscaling thresholds</li>
@@ -310,7 +331,7 @@
 
                 <h2>From Cost Cutting to Cost Intelligence</h2>
 
-                <p>The true power of AI isn't just reducing spend—it's enabling better decisions.</p>
+                <p>The true power of AI isn't just reducing spend, it's enabling better decisions.</p>
 
                 <p>AI-enhanced cost intelligence helps organizations understand:</p>
 
@@ -333,11 +354,11 @@
                     <li>Greater confidence scaling infrastructure sustainably</li>
                 </ul>
 
-                <p>Organizations that master cloud economics won't simply spend less—they'll understand their spending better than their competitors.</p>
+                <p>Organizations that master cloud economics won't simply spend less, they'll understand their spending better than their competitors.</p>
 
                 <h2>Looking Ahead: Autonomous Cloud Optimization</h2>
 
-                <p>The future of cloud infrastructure is autonomous. Systems will increasingly monitor themselves, learn from usage patterns, and adapt in real time—without waiting for human intervention.</p>
+                <p>The future of cloud infrastructure is autonomous. Systems will increasingly monitor themselves, learn from usage patterns, and adapt in real time, without waiting for human intervention.</p>
 
                 <p>AI-driven cost optimization is one of the first visible steps toward that future.</p>
 
@@ -393,5 +414,6 @@
             </div>
         </div>
     </footer>
+    <script src="../theme.js" defer></script>
 </body>
 </html>

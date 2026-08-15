@@ -1,0 +1,345 @@
+
+/* ==========================================================================
+   Full theme adoption for the legacy pages
+
+   styles.css hardcodes 43 light backgrounds, 127 dark text colours and a set
+   of light borders. Rather than hand-patching each, these overrides map the
+   real selectors onto theme tokens so the subpages follow Surf and Rock like
+   the homepage does. Generated from styles.css, then verified in both themes.
+   ========================================================================== */
+
+/* Surfaces */
+.about,
+.about-different-box,
+.about-fit-box,
+.about-section-alt,
+.about-section:not(.about-section-alt),
+.ai-page-section,
+.case-studies,
+.clarity-paths-section,
+.contact-form,
+.fit-section,
+.how-it-works-section,
+.path-explainers-section,
+.why-montebay-section,
+main { background: var(--canvas) !important; }
+.about-client-item,
+.about-experience-item,
+.about-principle-card,
+.ai-capability-card,
+.audit-form,
+.blog-card,
+.case-study-card,
+.checklist-form,
+.clarity-path-button,
+.diagnostic-form,
+.form-group input, .form-group textarea,
+.form-group input[type="text"], .form-group input[type="email"], .form-group textarea, .form-group select,
+.hero,
+.path-explainer-column,
+.pricing-tier,
+.primary-conversion-cta,
+.product-card,
+.product-icon-wrapper,
+.progress-bar,
+.purpose-item,
+.radio-option, .checkbox-option,
+.results-content,
+.service-card,
+.service-overview-card,
+.testimonial-card,
+.use-case-card,
+.value-item,
+.why-montebay-proof-item,
+body { background: var(--surface) !important; }
+
+/* Text */
+.about-clients-title,
+.about-different-conclusion,
+.about-different-statement,
+.about-fit-item,
+.about-fit-title,
+.about-lead,
+.about-principle-title,
+.about-title,
+.ai-capabilities-title,
+.ai-capability-card:hover .ai-capability-title,
+.ai-capability-title,
+.approach-feature-title,
+.approach-title, .values-title,
+.audit-form-title,
+.blog-title,
+.carousel-counter,
+.case-studies-title,
+.case-study-results-list li,
+.case-study-title,
+.clarity-path-button,
+.clarity-path-button::before,
+.clarity-paths-headline,
+.clarity-paths-section,
+.contact-title,
+.details-list li,
+.details-title,
+.diagnostic-btn-secondary,
+.finding-summary strong, .finding-recommendation strong,
+.fit-list li,
+.fit-title,
+.form-section-title,
+.header,
+.hero,
+.hero-title,
+.how-conclusion,
+.how-it-works-headline,
+.how-it-works-supporting,
+.how-title,
+.newsletter-submit,
+.path-explainer-bullets li,
+.path-explainer-cta:hover,
+.path-explainer-title,
+.pricing-tier .tier-name,
+.primary-conversion-cta,
+.product-features-list li,
+.product-name,
+.products-title,
+.purpose-name,
+.purpose-title,
+.radio-option input[type="radio"]:checked + span, .checkbox-option input[type="checkbox"]:checked + span,
+.reading-time,
+.section-title,
+.service-cta-prompt,
+.service-note strong,
+.service-overview-link-secondary,
+.service-overview-title,
+.service-title,
+.service-trust-note,
+.services-cta .cta-button,
+.services-focus strong,
+.services-title,
+.step-title,
+.testimonial-author-name,
+.testimonial-author-role,
+.testimonials-title,
+.tier-name,
+.use-case-title,
+.value-item:hover .value-name,
+.value-name,
+.why-montebay-column-title,
+.why-montebay-headline,
+.why-montebay-proof-item,
+a,
+a[href^="http"]:after,
+body,
+main { color: var(--text) !important; }
+.about-client-text,
+.about-experience-text,
+.about-intro,
+.about-principle-text,
+.about-products-text,
+.about-subtitle,
+.about-text,
+.ai-capabilities-intro,
+.ai-capability-description,
+.approach-feature-text,
+.approach-subtitle,
+.audit-form-intro,
+.audit-sample-intro,
+.blog-excerpt,
+.case-studies-intro,
+.case-study-subtitle,
+.case-study-text,
+.clarity-path-description,
+.clarity-paths-subtext,
+.contact-intro,
+.fit-subtitle,
+.form-group input, .form-group textarea,
+.form-group input[type="text"], .form-group input[type="email"], .form-group textarea, .form-group select,
+.form-group label,
+.form-group label:not(.radio-option):not(.checkbox-option):not(.radio-group-label):not(.checkbox-group-label),
+.form-helper-text,
+.how-it-works-step-text,
+.how-text,
+.path-explainer-oneliner,
+.pricing-tier .tier-description,
+.product-description,
+.products-intro,
+.progress-text,
+.purpose-description,
+.radio-group-label, .checkbox-group-label,
+.section-intro,
+.service-cta-subtext,
+.service-description,
+.service-overview-description,
+.services-cta-text,
+.services-intro,
+.testimonial-text,
+.testimonials-intro,
+.tier-description,
+.use-case-description,
+.use-case-outcome,
+.use-case-outcome strong,
+.value-description,
+.why-montebay-column-text,
+.why-montebay-outcomes li { color: var(--muted) !important; }
+
+/* Borders and dividers */
+.about-client-item,
+.about-different-conclusion,
+.about-experience-item,
+.about-fit-conclusion,
+.about-fit-item,
+.about-principle-card,
+.ai-capability-card,
+.audit-sample-link-section,
+.blog-card,
+.blog-card.coming-soon:hover,
+.case-study-card,
+.case-study-header,
+.clarity-path-button,
+.diagnostic-btn-secondary,
+.diagnostic-navigation,
+.fit-section,
+.form-group input, .form-group textarea,
+.form-group input[type="text"], .form-group input[type="email"], .form-group textarea, .form-group select,
+.form-section,
+.path-explainer-bullets li,
+.pricing-tier,
+.product-card,
+.product-cta,
+.purpose-item,
+.radio-option, .checkbox-option,
+.radio-tier,
+.results-content,
+.service-card,
+.service-cta-primary,
+.service-overview-card,
+.service-overview-cta,
+.services-cta-simple,
+.services-how,
+.testimonial-author,
+.testimonial-card,
+.use-case-card,
+.value-item { border-color: color-mix(in srgb, var(--hair) 55%, transparent) !important; }
+
+/* --------------------------------------------------------------------------
+   Inverse panels
+
+   These sections were dark gradients with white text in the original design.
+   The generated rules above forced them to a light surface, which left white
+   text on white: measured 1.1:1 on the CTA band and 1.0:1 in the footer.
+
+   They stay dark in Surf and become a raised surface in Rock, so they read as
+   a deliberate band in both rather than inverting into a white slab.
+   -------------------------------------------------------------------------- */
+:root[data-theme="surf"] {
+    --invert-bg:    #1A1919;
+    --invert-text:  #F2F5F3;
+    --invert-muted: #B8C3B5;
+}
+:root[data-theme="rock"] {
+    --invert-bg:    #262525;
+    --invert-text:  #F2F5F3;
+    --invert-muted: #B8C3B5;
+}
+
+.footer,
+.services-cta,
+.newsletter-section,
+.primary-conversion-section {
+    background: var(--invert-bg) !important;
+    color: var(--invert-text) !important;
+}
+.footer h1, .footer h2, .footer h3,
+.services-cta h1, .services-cta h2, .services-cta h3,
+.cta-title,
+.newsletter-section h2,
+.primary-conversion-section h2 { color: var(--invert-text) !important; }
+
+.footer p, .footer a, .footer li, .footer span,
+.footer-section p, .footer-section a, .footer-section h4,
+.cta-text,
+.newsletter-section p,
+.primary-conversion-section p { color: var(--invert-muted) !important; }
+
+.footer a:hover, .footer-section a:hover { color: var(--invert-text) !important; }
+.footer *, .services-cta * { border-color: rgba(255,255,255,.16) !important; }
+
+/* Solid buttons keep their own contrast rather than inheriting the panel. */
+.submit-btn, .audit-submit-btn, .back-to-top {
+    background: var(--accent) !important;
+    color: var(--on-accent) !important;
+    border-color: transparent !important;
+}
+
+/* body was still painting pure white from styles.css; the canvas token should own it. */
+body { background: var(--canvas) !important; color: var(--text); }
+
+/* Legacy gradient-text headings (background-clip:text) hardcode a white
+   gradient. On an inverse panel that is correct; on a light section it renders
+   white-on-white. Force them back to a solid token except inside dark panels. */
+h1[class*="title"], h2[class*="title"], h3[class*="title"], h4[class*="title"] {
+    -webkit-text-fill-color: currentColor;
+}
+.footer h1, .footer h2, .footer h3, .footer h4,
+.services-cta h1, .services-cta h2, .services-cta h3, .cta-title,
+.newsletter-section h2, .primary-conversion-section h2 {
+    -webkit-text-fill-color: var(--invert-text) !important;
+    background-image: none !important;
+}
+
+/* Buttons and copy inside inverse panels. In Rock the panel is only slightly
+   raised, so anything assuming a dark navy behind it loses contrast. */
+.services-cta .cta-button.cta-primary,
+.newsletter-section .cta-button.cta-primary,
+.primary-conversion-section .cta-button,
+.footer .cta-button.cta-primary {
+    background: var(--accent) !important;
+    color: var(--on-accent) !important;
+    border-color: transparent !important;
+}
+.services-cta .cta-button.cta-secondary,
+.newsletter-section .cta-button.cta-secondary,
+.footer .cta-button.cta-secondary {
+    background: transparent !important;
+    color: var(--invert-text) !important;
+    border: 1px solid rgba(255, 255, 255, .45) !important;
+}
+.services-cta p, .services-cta span, .services-cta li,
+.newsletter-section p, .newsletter-section span,
+.primary-conversion-section p, .primary-conversion-section span {
+    color: var(--invert-muted) !important;
+}
+
+/* Unscoped so the shorthand kills any inherited gradient wherever the button
+   appears, not just inside a CTA band. */
+.cta-button.cta-primary {
+    background: var(--accent) !important;
+    color: var(--on-accent) !important;
+    border-color: transparent !important;
+}
+/* Cards the generator missed because their copy carries no class. */
+.checklist-form p, .checklist-form span, .checklist-form li, .checklist-form label,
+.diagnostic-form p, .diagnostic-form span, .diagnostic-form label,
+.results-content p, .results-content li {
+    color: var(--muted) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Baseline text colour
+
+   The generated rules only cover selectors that declared a colour. Text that
+   inherits, or whose rule used a format the generator did not match, kept a
+   dark literal and landed at ~1.16:1 on the Rock canvas. Element-level
+   selectors here are deliberately weak (0,0,2), so any class-based rule above,
+   including the inverse panels and accents, still wins.
+   -------------------------------------------------------------------------- */
+main p, main li, main span, main label, main td, main dt, main dd, main blockquote,
+section p, section li, article p, article li {
+    color: var(--muted) !important;
+}
+main h1, main h2, main h3, main h4, main h5, main h6,
+section h1, section h2, section h3, section h4,
+article h1, article h2, article h3, article h4 {
+    color: var(--text) !important;
+}
+main strong, section strong, article strong { color: var(--text) !important; }
+main a, section a, article a { color: var(--accent) !important; }

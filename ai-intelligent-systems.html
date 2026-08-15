@@ -1,367 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>document.documentElement.setAttribute('data-theme','surf');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="description" content="AI-enhanced systems and LLM automation for operations. Montebay designs intelligent workflows that reduce manual effort, improve signal quality, and accelerate decision-making.">
-    <title>AI + Intelligent Systems | LLM Automation & AI-Enhanced Operations - Montebay</title>
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9J09SFBL2N"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-9J09SFBL2N', {
-            'anonymize_ip': true,
-            'cookie_flags': 'SameSite=None;Secure'
-        });
-    </script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="theme.css">
-    <script src="script.js" defer></script>
-    <!-- Tawk.to chat widget disabled 2026-08-14 (subscription cancelled).
-         To restore, uncomment this block and confirm the property ID is still valid.
-    <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/696453ddaae923197d5074ed/1jenuf6m4';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
-    -->
+<script>
+(function(){
+  try {
+    var p = localStorage.getItem('montebay-theme') || 'system';
+    var t = (p === 'surf' || p === 'rock') ? p
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'rock' : 'surf');
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { document.documentElement.setAttribute('data-theme','surf'); }
+})();
+</script>
+
+<link rel="canonical" href="https://montebay.io/ai-intelligent-systems.html">
+<title>AI &amp; Intelligent Systems | Montebay Innovations</title>
+<meta name="description" content="Applied intelligence for operations. Montebay uses AI where it reduces noise and surfaces what matters, and skips it where a simpler answer works better.">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://montebay.io/ai-intelligent-systems.html">
+<meta property="og:title" content="AI &amp; Intelligent Systems | Montebay Innovations">
+<meta property="og:description" content="Applied intelligence for operations. Used where it improves clarity and consistency, skipped where it does not.">
+<meta property="og:image" content="https://montebay.io/montebay_logo.webp">
+
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="theme.css">
 </head>
 <body>
-    <header class="header">
-        <div class="header-container">
-            <div class="logo-container">
-                <a href="index.html">
-                    <span class="logo" role="img" aria-label="Montebay Innovations"></span>
-                </a>
-                <span class="company-name">MONTEBAY INNOVATIONS</span>
+
+<a href="#main" class="skip">Skip to main content</a>
+
+<header class="hdr">
+    <div class="mark">
+        <a href="index.html" style="display:flex;align-items:center;gap:.75rem;text-decoration:none;color:inherit">
+            <span class="logo" role="img" aria-label="Montebay Innovations"></span>
+            <span class="name">Montebay</span>
+        </a>
+    </div>
+    <nav id="site-nav" aria-label="Main navigation">
+        <a href="index.html#products">Products</a>
+        <a href="ai-intelligent-systems.html">Advisory</a>
+        <a href="insights.html">Insights</a>
+        <a href="index.html#contact">Contact</a>
+    </nav>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+        <svg class="ico-open" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="7" y2="7"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="17" y2="17"/></svg>
+        <svg class="ico-close" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" x2="18" y1="6" y2="18"/><line x1="6" x2="18" y1="18" y2="6"/></svg>
+    </button>
+    <div class="theme-picker" role="radiogroup" aria-label="Colour theme">
+        <button type="button" data-theme="system" role="radio" aria-checked="false" title="Match system" aria-label="Match system">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+        </button>
+        <button type="button" data-theme="surf" role="radio" aria-checked="false" title="Surf, light" aria-label="Surf, light theme">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 4.9-1.4 1.4"/></svg>
+        </button>
+        <button type="button" data-theme="rock" role="radio" aria-checked="false" title="Rock, dark" aria-label="Rock, dark theme">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6.4 6.4 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+    </div>
+</header>
+
+<main id="main">
+
+<section class="page-head">
+    <div class="wrap">
+        <span class="eyebrow">Advisory</span>
+        <h1>Applied intelligence, not experimental AI.</h1>
+        <p class="lede">Most teams are surrounded by data and short on usable insight. Alerts fire, dashboards fill, reports generate, and the people making decisions still cannot tell what matters. We use AI where it reduces that noise, and skip it where a simpler answer works better.</p>
+        <a class="btn" href="index.html#contact" style="margin-top:var(--s8)">Start a conversation</a>
+    </div>
+</section>
+
+<section class="row">
+    <div class="wrap">
+        <div class="grid-2">
+            <div>
+                <span class="eyebrow">What you get</span>
+                <h2 class="h2-sm">Deliverables</h2>
+                <ul class="ticks" style="margin-top:var(--s6)">
+                    <li>System diagnostics that highlight patterns, anomalies and risk indicators</li>
+                    <li>Context-aware insight drawn from operational data, not raw metrics alone</li>
+                    <li>Predictive indicators that let teams act earlier instead of reacting later</li>
+                    <li>Summaries written for the person making the decision, not for a machine</li>
+                </ul>
             </div>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
-            <nav class="nav-menu" id="nav-menu" role="navigation" aria-label="Main navigation">
-                <a href="index.html#products" class="nav-link">Products</a>
-                <a href="index.html#build" class="nav-link">How we build</a>
-                <a href="insights.html" class="nav-link">Insights</a>
-                <a href="index.html#contact" class="nav-link">Contact</a>
-            </nav>
-        </div>
-    </header>
-    
-    <section class="hero">
-        <div class="video-container">
-            <video autoplay muted loop playsinline preload="auto" class="hero-video">
-                <source src="assets/videos/montebay_site.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay"></div>
-        </div>
-        <div class="hero-content">
-            <h1 class="hero-title">
-                <span class="hero-title-line hero-title-accent">AI-ENHANCED SYSTEMS THAT WORK</span>
-            </h1>
-            <p class="hero-subtitle">Intelligent automation, predictive insights, and LLM-driven solutions for modern organizations.</p>
-            <div class="hero-cta">
-                <a href="index.html#contact" class="cta-button cta-primary">Schedule AI Strategy Session</a>
-                <a href="#ai-capabilities" class="cta-button cta-secondary">Explore AI Capabilities</a>
-            </div>
-        </div>
-    </section>
-    
-    <main>
-        <section id="ai-capabilities" class="ai-page-section">
-            <div class="ai-page-container">
-                <div class="section-header">
-                    <span class="section-label">AI Capabilities</span>
-                    <h2 class="section-title">How Montebay Uses AI</h2>
-                    <p class="section-intro">Montebay integrates AI and machine learning into consulting engagements to deliver smarter, more efficient solutions. Our approach is practical and outcome-focused—we use AI where it adds real value, not where it creates complexity.</p>
-                </div>
-                
-                <div class="ai-capabilities-grid">
-                    <div class="ai-capability-card">
-                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-                        <h3 class="ai-capability-title">AI for System Optimization</h3>
-                        <p class="ai-capability-description">Leverage machine learning to identify inefficiencies, predict bottlenecks, and optimize resource allocation across your infrastructure. Move beyond reactive monitoring to proactive optimization.</p>
-                    </div>
-                    
-                    <div class="ai-capability-card">
-                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
-                        <h3 class="ai-capability-title">AI-Powered Automation</h3>
-                        <p class="ai-capability-description">Reduce manual work with intelligent automation that learns from your workflows and adapts to your team's needs. We build automation that gets smarter over time, not more brittle.</p>
-                    </div>
-                    
-                    <div class="ai-capability-card">
-                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg></div>
-                        <h3 class="ai-capability-title">AI-Driven Operational Insights</h3>
-                        <p class="ai-capability-description">Move from reactive monitoring to predictive intelligence. Get insights before issues become problems, with AI-driven visibility into systems, costs, and performance.</p>
-                    </div>
-                    
-                    <div class="ai-capability-card">
-                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
-                        <h3 class="ai-capability-title">Generative AI Support</h3>
-                        <p class="ai-capability-description">Expert guidance on prompt engineering, LLM integration, and building AI-powered workflows that deliver real value. We help you navigate the hype and focus on practical applications.</p>
-                    </div>
-                    
-                    <div class="ai-capability-card">
-                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
-                        <h3 class="ai-capability-title">Intelligent System Monitoring</h3>
-                        <p class="ai-capability-description">Predictive AI that identifies patterns and anomalies before they impact operations. Transform your monitoring from alert fatigue to actionable intelligence.</p>
-                    </div>
-                    
-                    <div class="ai-capability-card">
-                        <div class="ai-capability-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg></div>
-                        <h3 class="ai-capability-title">AI-Assisted Forecasting</h3>
-                        <p class="ai-capability-description">Use AI to predict cloud costs, resource needs, and capacity requirements. Make data-driven decisions about infrastructure investments and optimizations.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="ai-use-cases" class="ai-page-section ai-page-section-alt">
-            <div class="ai-page-container">
-                <div class="section-header">
-                    <span class="section-label">Real-World Applications</span>
-                    <h2 class="section-title">AI in Action</h2>
-                    <p class="section-intro">Here are examples of how Montebay has applied AI to solve real business challenges.</p>
-                </div>
-                
-                <div class="use-cases-grid">
-                    <div class="use-case-card">
-                        <h3 class="use-case-title">Automated Risk Analysis Using ML Signals</h3>
-                        <p class="use-case-description">Built an ML-powered system that analyzes infrastructure patterns, access logs, and configuration changes to identify security and operational risks before they become incidents. The system learns from historical data to improve its predictions over time.</p>
-                        <div class="use-case-outcome">
-                            <strong>Outcome:</strong> Reduced security review time by 60% and identified 3x more potential issues than manual reviews.
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3 class="use-case-title">AI-Assisted Forecasting for Cloud Costs</h3>
-                        <p class="use-case-description">Developed predictive models that analyze usage patterns, seasonal trends, and growth trajectories to forecast cloud spending. The system provides early warnings about cost anomalies and recommends optimization opportunities.</p>
-                        <div class="use-case-outcome">
-                            <strong>Outcome:</strong> Achieved 25% cost reduction through predictive optimization and prevented $50K+ in unexpected spending.
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3 class="use-case-title">Intelligent System Monitoring with Predictive AI</h3>
-                        <p class="use-case-description">Replaced reactive alerting with AI-driven monitoring that identifies patterns and predicts failures. The system correlates signals across multiple systems to provide context-aware insights instead of noise.</p>
-                        <div class="use-case-outcome">
-                            <strong>Outcome:</strong> Reduced false alerts by 80% and improved mean time to resolution by 40% through predictive insights.
-                        </div>
-                    </div>
-                    
-                    <div class="use-case-card">
-                        <h3 class="use-case-title">LLM-Driven Workflow Automation</h3>
-                        <p class="use-case-description">Implemented LLM-powered automation for documentation, code review summaries, and incident response. The system understands context and generates actionable summaries, reducing manual work while maintaining quality.</p>
-                        <div class="use-case-outcome">
-                            <strong>Outcome:</strong> Saved 15+ hours per week on routine documentation and improved consistency across team communications.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="ai-approach" class="ai-page-section">
-            <div class="ai-page-container">
-                <div class="section-header">
-                    <span class="section-label">Our Approach</span>
-                    <h2 class="section-title">Practical AI, Not Hype</h2>
-                </div>
-                
-                <div class="approach-content">
-                    <div class="approach-text">
-                        <p class="about-text">Montebay's approach to AI is grounded in practical application and real outcomes. We don't add AI for the sake of it—we use it where it solves actual problems and delivers measurable value.</p>
-                        
-                        <p class="about-text">Our AI work integrates seamlessly with our existing services. Whether you're getting a Silent AWS Audit, Strategic Cyber Risk Advisory, or ongoing consulting, we can incorporate AI-enhanced analysis and recommendations where appropriate.</p>
-                        
-                        <h3 class="approach-subtitle">What Makes Our AI Approach Different</h3>
-                        
-                        <div class="approach-features">
-                            <div class="approach-feature">
-                                <div class="approach-feature-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
-                                <div class="approach-feature-content">
-                                    <h4 class="approach-feature-title">Outcome-Focused</h4>
-                                    <p class="approach-feature-text">We measure success by business impact, not model accuracy. Every AI solution is designed to solve a specific problem and deliver measurable results.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="approach-feature">
-                                <div class="approach-feature-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
-                                <div class="approach-feature-content">
-                                    <h4 class="approach-feature-title">Practical Integration</h4>
-                                    <p class="approach-feature-text">AI enhances our existing services—it doesn't replace them. We integrate AI tools and insights into workflows you already trust.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="approach-feature">
-                                <div class="approach-feature-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
-                                <div class="approach-feature-content">
-                                    <h4 class="approach-feature-title">No Black Boxes</h4>
-                                    <p class="approach-feature-text">We explain how AI systems work and what they're doing. You understand the insights, not just receive recommendations.</p>
-                                </div>
-                            </div>
-                            
-                            <div class="approach-feature">
-                                <div class="approach-feature-icon"><svg class="mb-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
-                                <div class="approach-feature-content">
-                                    <h4 class="approach-feature-title">Selective Application</h4>
-                                    <p class="approach-feature-text">We use AI where it adds value and skip it where simpler solutions work better. Not every problem needs AI, and we're honest about that.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="ai-enabled-systems" class="ai-page-section ai-page-section-alt">
-            <div class="ai-page-container">
-                <div class="section-header">
-                    <span class="section-label">Intelligent Systems</span>
-                    <h2 class="section-title">AI-Enabled & Intelligent Systems</h2>
-                    <p class="section-intro">Most organizations are surrounded by data but lack usable insight.</p>
-                </div>
-                
-                <div class="approach-content">
-                    <div class="approach-text">
-                        <p class="about-text" style="font-size: 1.125rem; margin-bottom: 1.5rem;">Alerts fire. Dashboards fill up. Reports get generated.</p>
-                        <p class="about-text" style="font-size: 1.125rem; margin-bottom: 1.5rem;">Yet decision-makers still struggle to understand what actually matters.</p>
-                        <p class="about-text" style="font-size: 1.125rem; margin-bottom: 2rem;">Montebay applies intelligent systems to reduce noise, surface meaningful signals, and support better operational decisions.</p>
-                        
-                        <div style="padding: 1.5rem; background: rgba(90, 138, 176, 0.05); border-radius: 8px; border-left: 3px solid #5a8ab0; margin-bottom: 3rem;">
-                            <p style="font-weight: 600; color: #1a2a4a; margin-bottom: 0.5rem;">This is not experimental AI.</p>
-                            <p style="color: #1a2a4a; margin: 0;">It is applied intelligence — used where it improves clarity, consistency, and efficiency.</p>
-                        </div>
-                        
-                        <div style="margin-bottom: 3rem;">
-                            <h3 class="approach-subtitle" style="margin-bottom: 1.5rem;">What We Deliver</h3>
-                            <ul style="list-style: none; padding: 0; margin: 0;">
-                                <li style="padding: 0.75rem 0; border-bottom: 1px solid #e9ecef; color: #333;">AI-assisted system diagnostics that highlight patterns, anomalies, and risk indicators</li>
-                                <li style="padding: 0.75rem 0; border-bottom: 1px solid #e9ecef; color: #333;">Context-aware insights derived from operational data, not raw metrics alone</li>
-                                <li style="padding: 0.75rem 0; border-bottom: 1px solid #e9ecef; color: #333;">Predictive indicators that help teams act earlier, not react later</li>
-                                <li style="padding: 0.75rem 0; color: #333;">Clear summaries designed for human decision-makers, not machines</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="margin-bottom: 3rem;">
-                            <h3 class="approach-subtitle" style="margin-bottom: 1.5rem;">How It's Used</h3>
-                            <ul style="list-style: none; padding: 0; margin: 0;">
-                                <li style="padding: 0.75rem 0; border-bottom: 1px solid #e9ecef; color: #333;">Identifying operational bottlenecks and emerging risks</li>
-                                <li style="padding: 0.75rem 0; border-bottom: 1px solid #e9ecef; color: #333;">Prioritizing issues across complex environments</li>
-                                <li style="padding: 0.75rem 0; border-bottom: 1px solid #e9ecef; color: #333;">Improving reliability without increasing alert volume</li>
-                                <li style="padding: 0.75rem 0; color: #333;">Supporting leadership decisions with concise, structured insight</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="padding: 2rem; background: rgba(90, 138, 176, 0.05); border-radius: 8px; border-left: 3px solid #5a8ab0;">
-                            <h3 class="approach-subtitle" style="margin-bottom: 1.5rem;">Our Philosophy</h3>
-                            <p style="font-weight: 600; color: #1a2a4a; margin-bottom: 1rem;">Intelligence should reduce effort, not add complexity.</p>
-                            <p style="margin-bottom: 1.5rem; color: #333;">We design systems that:</p>
-                            <ul style="list-style: none; padding: 0; margin: 0;">
-                                <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(90, 138, 176, 0.2); color: #333;">Support human judgment</li>
-                                <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(90, 138, 176, 0.2); color: #333;">Favor clarity over volume</li>
-                                <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(90, 138, 176, 0.2); color: #333;">Integrate into existing workflows</li>
-                                <li style="padding: 0.75rem 0; color: #333;">Produce measurable operational value</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e9ecef;">
-                            <p style="font-weight: 600; color: #2C5F8A; font-size: 1.125rem; margin: 0;"><strong>Outcome:</strong> teams that understand their systems, act sooner, and operate with less friction.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="ai-cta" class="services-cta">
-            <div class="ai-page-container">
-                <h3 class="cta-title">Ready to Explore AI-Enhanced Solutions?</h3>
-                <p class="cta-text">Whether you're looking to optimize systems with AI, automate workflows with LLMs, or get strategic guidance on AI adoption, Montebay can help.</p>
-                <p class="cta-text">Start with a focused AI strategy session to understand how AI can enhance your operations.</p>
-                <div class="cta-buttons">
-                    <a href="index.html#contact" class="cta-button cta-primary">Schedule AI Strategy Session</a>
-                    <a href="#ai-readiness-checklist" class="cta-button cta-secondary">Get AI Readiness Checklist</a>
-                </div>
-            </div>
-        </section>
-        
-        <section id="ai-readiness-checklist" class="ai-page-section ai-page-section-alt">
-            <div class="ai-page-container">
-                <div class="section-header">
-                    <span class="section-label">Free Resource</span>
-                    <h2 class="section-title">AI Readiness Checklist</h2>
-                    <p class="section-intro">Not sure if your organization is ready for AI? Download our free checklist to assess your AI readiness and identify opportunities.</p>
-                </div>
-                
-                <div class="checklist-form-container">
-                    <form class="checklist-form" id="aiChecklistForm">
-                        <div class="form-group">
-                            <label for="checklist-name">Name *</label>
-                            <input type="text" id="checklist-name" name="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="checklist-email">Email *</label>
-                            <input type="email" id="checklist-email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="checklist-company">Company (optional)</label>
-                            <input type="text" id="checklist-company" name="company">
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">Download AI Readiness Checklist</button>
-                        
-                        <div class="form-message" id="checklistFormMessage"></div>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Montebay Innovations LLC</h3>
-                    <p>Solving complex problems with clear, practical systems.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#build">About</a></li>
-                        <li><a href="index.html#products">Services</a></li>
-                        <li><a href="ai-intelligent-systems.html">AI</a></li>
-                        <li><a href="index.html#products">Products</a></li>
-                        <li><a href="wordflect.html">Wordflect</a></li>
-                        <li><a href="soteria.html">Soteria</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: <a href="mailto:contact@montebay.io">contact@montebay.io</a></p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Montebay Innovations LLC. All rights reserved.</p>
+            <div>
+                <span class="eyebrow">Where it applies</span>
+                <h2 class="h2-sm">In practice</h2>
+                <ul class="ticks" style="margin-top:var(--s6)">
+                    <li>Finding operational bottlenecks and emerging risk</li>
+                    <li>Prioritising issues across complex environments</li>
+                    <li>Improving reliability without raising alert volume</li>
+                    <li>Backing leadership decisions with concise, structured insight</li>
+                </ul>
             </div>
         </div>
-    </footer>
+    </div>
+</section>
+
+<section class="row">
+    <div class="wrap">
+        <span class="eyebrow">Examples</span>
+        <h2 class="h2-sm">Work we have done</h2>
+        <div class="grid-2" style="margin-top:var(--s8)">
+            <div class="card">
+                <h3>Automated risk analysis from ML signals</h3>
+                <p>A system that reads infrastructure patterns, access logs and configuration changes to surface security risk, then ranks it so the queue reflects real exposure rather than alert volume.</p>
+            </div>
+            <div class="card">
+                <h3>Forecasting cloud cost</h3>
+                <p>Predictive models over usage patterns, seasonal movement and growth, so spend is budgeted ahead of the invoice instead of explained after it.</p>
+            </div>
+            <div class="card">
+                <h3>Monitoring that predicts rather than reports</h3>
+                <p>Reactive alerting replaced with correlation across signals, identifying the conditions that precede a failure so the work happens before the incident.</p>
+            </div>
+            <div class="card">
+                <h3>LLM-driven workflow automation</h3>
+                <p>Documentation, code review summaries and incident write-ups handled by an LLM that understands the context, cutting the manual tail of every task.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row">
+    <div class="wrap">
+        <span class="eyebrow">How we work</span>
+        <h2 class="h2-sm measure-tight">Intelligence should reduce effort, not add complexity</h2>
+        <div class="grid-3" style="margin-top:var(--s8)">
+            <div class="card">
+                <h3>Outcome first</h3>
+                <p>Success is measured by what changed in the business, not by model accuracy.</p>
+            </div>
+            <div class="card">
+                <h3>No black boxes</h3>
+                <p>You get an explanation of how it works and what it is doing, not just an output to trust.</p>
+            </div>
+            <div class="card">
+                <h3>Used selectively</h3>
+                <p>Applied where it earns its place and left out where something simpler is better. Not every problem needs it.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="row" id="contact">
+    <div class="wrap">
+        <span class="eyebrow">Get in touch</span>
+        <h2 class="h2-xs"><a href="mailto:info@montebay.io">info@montebay.io</a></h2>
+        <p class="lede" style="margin-top:var(--s4)">Describe the situation and we will tell you whether this is the right tool for it, including when it is not.</p>
+    </div>
+</section>
+
+</main>
+
+<footer class="foot">
+    <div class="wrap">
+        <span class="meta">&copy; 2026 Montebay Innovations LLC</span>
+    </div>
+</footer>
+
+<script src="theme.js" defer></script>
 </body>
 </html>
